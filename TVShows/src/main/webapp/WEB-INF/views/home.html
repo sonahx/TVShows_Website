@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/home.css}" rel="stylesheet">
+    <link th:href="@{/css/body.css}" rel="stylesheet">
+    
+</head>
+<body>
+<header th:insert="~{header :: header}"></header>
+
+<article>
+<div class="body-wrapper">
+
+    <h1>HOME</h1>
+<!-- <tr th:each="show: ${shows}">
+<div class="col-lg-4 col-md-6 text-center">
+    <div>
+       <td><div class="show-image">
+            <a href="#"><img class="show-img" th:src="${show.imageUrl}" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"></a>
+        </div></td>
+        <a th:href="@{'/show/' + ${show.id}}" th:text="${show.name}"><i class="fas"> alt name</i></a>
+        <p th:text="${show.releaseDate}" class="show-release-date"> alt release date</p>
+        <p th:text="${show.genre}">alt genre</p>
+        <p th:text="${show.description}">alt desc</p>  
+    </div>
+</div>
+</tr> -->
+</div>
+</article>
+
+    <footer th:insert="~{footer :: footer}"></footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

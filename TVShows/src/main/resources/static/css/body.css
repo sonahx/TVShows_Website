@@ -1,0 +1,28 @@
+body {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+	background: repeat url("pictures/background.png");
+	display:flex; 
+	justify-content: space-between;
+	flex-direction:column;
+	z-index: 0;
+}
+article{ flex:1; }
+
+body{ min-height: 100vh; margin:0; }
+
+header{ min-height:50px;}
+footer{ min-height:50px;}
+
+.body-wrapper {
+	width: 85%;
+	min-height: 75vh;
+	margin: 0 auto;
+	background-color: white;
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
+	z-index: 1;
+}

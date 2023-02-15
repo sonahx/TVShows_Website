@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet"> -->
+    <link type="text/css" th:href="@{/css/header.css}" rel="stylesheet">
+    <link type="text/css"  th:href="@{css/footer.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{/css/auth.css}" rel="stylesheet">
+	<link type="text/css" th:href="@{/css/body.css}" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="~{header :: header}"></div>
+    
+    <div class="main auth-form-wrapper">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form th:action="@{/auth/register}" method="post">
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text"  name="username" placeholder="User name" class="auth-input" required="">
+					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
+					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
+					<button>Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form th:action="@{/auth/authenticate}"  method="post">
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
+					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
+					<button>Login</button>
+				</form>
+			</div>
+	</div>
+</body>
+
+    <div th:insert="~{footer :: footer}"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

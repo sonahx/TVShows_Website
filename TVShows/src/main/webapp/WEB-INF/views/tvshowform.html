@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating new TV Show</title>
+    <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/tvshowform.css}" rel="stylesheet">
+    <link th:href="@{/css/body.css}" rel="stylesheet">
+</head>
+
+<body >
+    <div th:insert="~{header :: header}"></div>
+
+
+    <div class="container contact-form">
+        <div class="contact-image">
+            <img th:src="@{/pictures/weatherpen.svg}" class="form-picture" alt="" />
+        </div>
+        <form  th:action="@{/show/add}" th:object="${TVShow}" method="post">
+            <h3>Creating TV Show</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Name"  />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" th:field="*{releaseDate}" name="releaseDate" class="form-control" placeholder="Release date"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" th:field="*{genre}" name="genre" list="genreList" class="form-control" placeholder="Genre"/>        
+                        <datalist id="genreList">
+                            <option value="DRAMA">  
+                            <option value="WESTERN">
+                            <option value="HORROR"></option>
+                          </datalist>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{imageUrl}" name="imageUrl" class="form-control" placeholder="Image URL"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" name="btnSubmit" class="btnContact" value="Create" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <textarea name="description" th:field="*{description}" class="form-control" placeholder="Description"
+                            style="width: 100%; height: 150px;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div th:insert="~{footer :: footer}"></div>
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
