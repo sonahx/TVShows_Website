@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +31,7 @@
 			</div>
 
 			<div class="login">
-				<form th:action="@{/auth/authenticate}"  method="post">
+				<form th:action="@{/login}"  method="post">
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
 					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
