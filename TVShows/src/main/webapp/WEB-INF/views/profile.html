@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${show.name}">Default text</title>
+    <title>this is profile page</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link th:href="@{/css/header.css}" rel="stylesheet">
@@ -12,20 +12,21 @@
     <link th:href="@{/css/body.css}" rel="stylesheet">
 </head>
 <body>
-    <div th:insert="~{header :: header}"></div>
-    <article>
+    <header th:insert="~{header :: header}"></header>
+
+  <article>
 
 
-    <h3>WORKS</h3>
-    <h3 th:text="${show.name}">WORKS</h3>
-    <p th:text="${show.name}">WORKS</p>
-    <p th:text="${show.releaseDate}">WORKS</p>
-    <p th:text="${show.genre}">WORKS</p>
-    <p th:text="${show.description}">WORKS</p>
+ this is profile page.
+ <div>${user.email}</div>
 
+ <div sec:authorize="isAuthenticated()">
+    <div sec:authentication="name"></div>
+    </div>
 
-</article>
-    <div th:insert="~{footer :: footer}"></div>
+  </article>
+
+    <footer th:insert="~{footer :: footer}"></footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

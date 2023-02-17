@@ -17,13 +17,6 @@ public class AuthController {
 
 	private final AuthService service;
 
-//	@PostMapping("/authenticate")
-//	  @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
-//	  public String authenticate(@ModelAttribute AuthRequest request) {
-//	    service.authenticate(request);
-//	    return "home";
-//	  }
-//
 	@PostMapping("/register")
 	public String register(@ModelAttribute RegisterRequest request, Model model) {
 		model.addAttribute("user", request);

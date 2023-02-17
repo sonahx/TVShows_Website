@@ -12,14 +12,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
 	
-	private UserRepo userRepo;
+	private final UserRepo userRepo;
 
 	public User getUserById(Long id) {
 		return userRepo.getReferenceById(id);
 	}
 	
-	public Optional<User> getUserByEmail(String email) {
-		return userRepo.findUserByEmail(email);
+	public Optional<User> getByEmail(String email) {
+		return userRepo.findByEmail(email);
 	}
 	
 	public void createUser(User user) {

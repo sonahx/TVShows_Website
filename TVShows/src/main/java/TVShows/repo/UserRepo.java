@@ -10,6 +10,6 @@ import TVShows.domain.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
 	
-	Optional<User> findUserByEmail(String email);
+	Optional<User> findByEmail(String email);
 
 }

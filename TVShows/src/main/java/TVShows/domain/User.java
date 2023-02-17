@@ -1,7 +1,11 @@
 package TVShows.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,7 +41,7 @@ public class User implements UserDetails{
 	@Column
 	private String password;
 	@Enumerated(EnumType.STRING)
-	private Role role;
+	private Role roles;
 
 	public User(String username, String email, String password) {
 		this.username = username;
@@ -45,9 +49,21 @@ public class User implements UserDetails{
 		this.password = password;
 	}
 	
+	   public List<String> getRoleList(){
+	        if(this.roles.name().length() > 0){
+	            return Arrays.asList(this.roles.name().split(","));
+	        }
+	        return new ArrayList<>();
+	    }
+	
 	  @Override
 	  public Collection<? extends GrantedAuthority> getAuthorities() {
-	    return List.of(new SimpleGrantedAuthority(role.name()));
+		  Set<GrantedAuthority> authorities = new HashSet<>();
+		  getRoleList().forEach(r -> {
+	            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
+	            authorities.add(authority);
+		   });
+		  return authorities;
 	  }
 
 	  @Override

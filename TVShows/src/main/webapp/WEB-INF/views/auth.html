@@ -31,10 +31,13 @@
 			</div>
 
 			<div class="login">
-				<form th:action="@{/login}"  method="post">
+				<form th:action="@{/auth/login}"  method="post">
 					<label for="chk" aria-hidden="true">Login</label>
 					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
 					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
+						<input type="checkbox" class="form-check-input" id="checkRememberMe" name="checkRememberMe">
+						<label class="form-check-label" for="checkRememberMe">Remember me?</label>
+			
 					<button>Login</button>
 				</form>
 			</div>

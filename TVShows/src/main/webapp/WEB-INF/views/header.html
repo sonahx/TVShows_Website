@@ -38,10 +38,10 @@
                                         <li><a href="#">About Six</a></li>
                                     </ul>
                                 </li>
-                                <li><a sec:authorize="isAuthenticated()" th:href="@{/tvshowform}">Create TV Show</a></li>
+                                <li><a th:href="@{/tvshowform}">Create TV Show</a></li>
                                 <li><a href="#">Services</a></li>
                                 <li><a href="#">Gallery</a></li>
-                                <li><a href="#">Contact Us</a></li>
+                                <li><a sec:authorize="hasRole('USER')" href="#">Contact Us</a></li>
                             </ul>
                             <ul class="nav navbar-nav">
                                 <li>
@@ -59,13 +59,13 @@
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a sec:authorize="hasAnyRole('USER', 'ROLE_USER')" href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                                <li><a th:href="@{/auth}" class="dropdown-toggle"><span
+                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile/${authentication.name}}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                                <li><a sec:authorize="isAnonymous()" th:href="@{/auth}" class="dropdown-toggle"><span
                                             class="glyphicon glyphicon-log-in"></span> Login / Sign Up</span></a>
                                 <li>
-            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
-                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
-            </form>
+            <!-- <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}"> -->
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="">Logout</a>
+            <!-- </form> -->
                                 </li>
                             </ul>
                         </div>
@@ -76,7 +76,6 @@
     </div>
 
     <div th:fragment="admin_header">
-        <p>This is for admin</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
