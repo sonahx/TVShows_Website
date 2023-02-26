@@ -1,44 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/home.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
-    
+
 </head>
+
 <body>
-<header th:insert="~{header :: header}"></header>
+    <header th:insert="~{header :: header}"></header>
 
-<article>
-<div class="body-wrapper">
+    <article>
+        <div class="body-wrapper">
 
 
-    <h1>HOME</h1>
-<!-- <tr th:each="show: ${shows}">
-<div class="col-lg-4 col-md-6 text-center">
-    <div>
-       <td><div class="show-image">
-            <a href="#"><img class="show-img" th:src="${show.imageUrl}" alt="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png"></a>
-        </div></td>
-        <a th:href="@{'/show/' + ${show.id}}" th:text="${show.name}"><i class="fas"> alt name</i></a>
-        <p th:text="${show.releaseDate}" class="show-release-date"> alt release date</p>
-        <p th:text="${show.genre}">alt genre</p>
-        <p th:text="${show.description}">alt desc</p>  
-    </div>
-</div>
-</tr> -->
-</div>
-</article>
+            <!-- carousel start -->
+            <div class="block-1">
+                <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
+            <div th:if="${shows != null}" class="container">
+                <div class="arrow-left">
+                  <i class="icon-angle-left"></i>
+                </div>
+                <div th:each="show: ${shows}">
+                    <a th:href="@{'/show/' + ${show.id}}">
+               <div class="item item-1">
+                  <div class="body-item"> 
+                    <div class="title body-item-2">Breaking Bad</div>
+                    <div class="properties body-item-3">
+                      <span class="match">% 98 Match</span>
+                      <span class="year">2012</span>
+                      <span class="age-limit">13+</span>
+                      <span class="time">2h 13m</span>
+                    </div>
+                    <p class="description body-item-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius alias libero..</p>
+                    <!--  Additional details button
+                        <div class="body-item-5">
+                      <i class="details-icon icon-chevron-down"></i>
+                    </div> -->
+                    <div class="icon-set body-item-6">
+                      <!-- <i class="icon-thumbs-up"></i>
+                      <i class="icon-thumbs-down"></i> -->
+                      <i class="icon-plus"></i>
+                    </div>
+                  </div>
+                </div> 
+            </a> 
+            </div> 
+                        
+                <div class="arrow-right">
+                  <i class="icon-angle-right"></i>
+                </div>
+              </div>
+            </div>
+<!-- carousel end -->
+
+<div class="block-2">
+    <div class="subheadline"><a href="#">NEWS</a></div>
+    <div class="container">  
+         <div class="body-item">  
+        <div class="title body-item-2">SOME NEWS TITLE</div>
+        <div class="properties body-item-3">
+          <span class="match">TEXT</span>
+        </div>
+        <p class="description body-item-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius alias libero..</p>
+      </div>
+    </div>  
+</div> 
+ </article>
 
     <footer th:insert="~{footer :: footer}"></footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+
 </html>

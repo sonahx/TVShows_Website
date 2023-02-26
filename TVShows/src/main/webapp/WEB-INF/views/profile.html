@@ -10,20 +10,84 @@
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
+    <link th:href="@{/css/profile.css}" rel="stylesheet">
 </head>
 <body>
     <header th:insert="~{header :: header}"></header>
 
   <article>
-
-
+ <div class="body-wrapper">
+<!-- 
  this is profile page.
- <div>${user.email}</div>
 
  <div sec:authorize="isAuthenticated()">
     <div sec:authentication="name"></div>
-    </div>
+    </div> -->
 
+        <!-- profile widget -->
+        <div class="container emp-profile">
+          <form method="post">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="profile-img">
+                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="profile-head">
+                                  <h5 th:text="${user.username}">
+                                      profile username
+                                  </h5>
+                                  <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                          <ul class="nav nav-tabs" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                  <a class="nav-link active" id="watching-tab" data-toggle="tab" href="#watching" role="tab" aria-controls="watching" aria-selected="true">Watching</a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab" aria-controls="profile" aria-selected="false">Planned to watch</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="else" aria-selected="false">Completed</a>
+                            </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="profile-work">
+                          <p>SCORES</p>
+                          <a href="">Website Link</a><br/>
+                          <a href="">Bootsnipp Profile</a><br/>
+                          <a href="">Bootply Profile</a>
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="tab-content profile-tab" id="myTabContent">
+                          <div class="tab-pane fade show active" id="watching" role="tabpanel" aria-labelledby="watching-tab">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>User Id</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>Kshiti123</p>
+                                          </div>
+                                      </div>
+                          </div>
+                          <div class="tab-pane fade" id="planned" role="tabpanel" aria-labelledby="planned-tab">
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <label>Experience</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <p>Expert</p>
+                                          </div>
+                                      </div>
+         
+<!-- end of profile widget -->
+
+
+  </div>
   </article>
 
     <footer th:insert="~{footer :: footer}"></footer>

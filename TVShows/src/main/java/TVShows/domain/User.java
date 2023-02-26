@@ -11,22 +11,26 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
+@Data @Builder @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode
 public class User implements UserDetails{
 
 	private static final long serialVersionUID = -421092218247224768L;
@@ -42,13 +46,10 @@ public class User implements UserDetails{
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role roles;
-
-	public User(String username, String email, String password) {
-		this.username = username;
-		this.email = email;
-		this.password = password;
-	}
-	
+	 @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@Builder.Default
+	private Set<UsersShows> shows = new HashSet<>();
+	 
 	   public List<String> getRoleList(){
 	        if(this.roles.name().length() > 0){
 	            return Arrays.asList(this.roles.name().split(","));

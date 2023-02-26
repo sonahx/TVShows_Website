@@ -5,3 +5,17 @@
 .logo-link{
 	padding: 0px 30px;
 }
+.header-title-name{
+	font-size: 26px;
+	color: white;
+	padding: 15px 0px;
+	position: relative;
+    top: 7px;
+    left: -20px;
+    cursor: pointer;
+    
+}
+.header-title-name:hover{
+text-decoration: none;
+color: white;
+}

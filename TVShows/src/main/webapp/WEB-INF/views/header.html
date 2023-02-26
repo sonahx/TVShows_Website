@@ -22,12 +22,12 @@
                                     class="icon-bar"></span></button>
                             <a th:href="@{/home}" class="navbar-brand logo-link"><img
                                     th:src="@{/pictures/weatherpen.svg}" class="brand-logo"></a>
+                                    <a th:href="@{/home}" class="header-title-name">WHATEPISODE</a>
                         </div>
 
                         <div class="navbar-collapse collapse" id="mobile_menu">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">About Us <span
+                                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<span
                                             class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">About One</a></li>
@@ -39,9 +39,6 @@
                                     </ul>
                                 </li>
                                 <li><a th:href="@{/tvshowform}">Create TV Show</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Gallery</a></li>
-                                <li><a sec:authorize="hasRole('USER')" href="#">Contact Us</a></li>
                             </ul>
                             <ul class="nav navbar-nav">
                                 <li>
@@ -58,8 +55,11 @@
                                 </li>
                             </ul>
 
+                            <div th:if="${#authentication.principal != null}" th:with="loggedInUser=${#authentication.name}">
+
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile/${authentication.name}}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile(user=${loggedInUser})}" th:text="${loggedInUser}">
+                                    <span class="glyphicon glyphicon-user"></span>Profile</a></li>
                                 <li><a sec:authorize="isAnonymous()" th:href="@{/auth}" class="dropdown-toggle"><span
                                             class="glyphicon glyphicon-log-in"></span> Login / Sign Up</span></a>
                                 <li>
@@ -70,6 +70,7 @@
                             </ul>
                         </div>
                     </div>
+                   </div>
                 </div>
             </div>
         </div>

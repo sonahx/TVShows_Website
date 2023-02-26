@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import TVShows.domain.TVShow;
 import TVShows.domain.User;
@@ -25,11 +25,11 @@ public class MainController {
 		return "redirect:/home";
 	}
 
-//	@GetMapping("/home")
-//	public String home(Model model) {
-//		model.addAttribute("shows", TVshowService.findAllShows());
-//		return "home";
-//	}
+	@GetMapping("/home")
+	public String home(Model model) {
+		model.addAttribute("shows", TVshowService.findAllShows());
+		return "home";
+	}
 
 	@GetMapping("/tvshowform")
 	public String tvShowForm(Model model) {
@@ -43,8 +43,8 @@ public class MainController {
 		return "auth";
 	}
 	
-	@GetMapping("/profile/{email}")
-	public String profile(@PathVariable("email")String email, Model model) {
+	@GetMapping("/profile")
+	public String profile(@RequestParam("user") String email, Model model) {
 		User user = userService.getByEmail(email).orElseThrow(()-> 
 		new UsernameNotFoundException("username not found"));
 		model.addAttribute("user", user);

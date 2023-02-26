@@ -21,7 +21,7 @@ body{
 	width:100%;
 	height: 100%;
 }
-label{
+.auth_label{
 	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
@@ -31,7 +31,7 @@ label{
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
-input{
+/* input{
 	width: 70%;
 	height: 40px;
 	background: #e0dede;
@@ -41,7 +41,7 @@ input{
 	border: none;
 	outline: none;
 	border-radius: 5px;
-}
+}*/
 button{
 	width: 60%;
 	height: 40px;
@@ -74,6 +74,15 @@ button:hover{
 	transform: scale(.6);
 }
 .auth-input {
+    width: 70%;
+	height: 40px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
 	margin: 20px auto;
 }
 .auth-form-wrapper {
@@ -90,3 +99,7 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+input[type=checkbox]{
+	margin-left: 65px;
+}
+

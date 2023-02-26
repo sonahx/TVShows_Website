@@ -7,23 +7,137 @@
     <title th:text="${show.name}">Default text</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
+    <link th:href="@{/css/singleShow.css}" rel="stylesheet">
 </head>
 <body>
     <div th:insert="~{header :: header}"></div>
     <article>
+<div class="body-wrapper">
+   <div class="show-header">
+    <h3 th:text="${show.name}"></h3> 
+</div>
+<div class="show-card">
+    <div class="show-content">
+        <div class="show-general">
+ <div class="show-image">
+     <img src="https://m.media-amazon.com/images/M/MV5BN2VjOTkwMjgtYWEyMy00MzNmLTllMjktNDI1ZmRhYTAwYTg1XkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg"> </img>
+    
+     <!-- <div class="dropdown">
+        <button class="dropbtn">Add to my list</button>
+        <div class="dropdown-content">
+          <a th:href="@{/user/addShow}" th:>Watching</a>
+          <a href="#">Rewatching</a>
+          <a href="#">Planned to watch</a>
+          <a href="#">On hold</a>
+          <a href="#">Dropped</a>
+          <a href="#">Completed</a>
+        </div>
+      </div> -->
+
+      <form th:action="@{/user/addShow}" method="post" class="dropdown">
+        <label for="dropdown">Add to my list:</label>
+        <input name="showId" th:value="${show.id}" type="hidden">
+        <select name="status" id="dropdown">
+          <option th:each="value : ${T(TVShows.domain.ViewerStatus).values()}" th:value="${value}" th:text="${value}"></option>
 
 
-    <h3>WORKS</h3>
-    <h3 th:text="${show.name}">WORKS</h3>
-    <p th:text="${show.name}">WORKS</p>
-    <p th:text="${show.releaseDate}">WORKS</p>
-    <p th:text="${show.genre}">WORKS</p>
-    <p th:text="${show.description}">WORKS</p>
+          <!-- <option value="WATCHING">Watching</option>
+          <option value="REWATCHING">Rewatching</option>
+          <option value="PLANNED_TO_WATCH">Planned to watch</option>
+          <option value="ON_HOLD">On hold</option>
+          <option value="DROPPED">Dropped</option>
+          <option value="COMPLETED">Completed</option> -->
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+
+    </div>
+ <div class="show-info">
+
+    <!-- INFO LEFT -->
+   <div class="info-left">
+    <div class="subheadline">INFORMATION</div>
+
+    <div class="info-column"><label>STATUS</label><p th:text="${show.status}"></p></div>
+    <div class="info-column"><label>GENRE</label><p th:text="${show.genre}"></p></div>
+    <div class="info-column"><label>RELEASE DATE</label><p th:text="${show.releaseDate}"></p></div>
+    <div class="info-column"><label>DIRECTORS</label><p th:text="${show.directors}"></p></div>
+    <div class="info-column"><label>ACTORS</label><p th:text="${show.actors}"></p></div>
+    <div class="info-column"><label>NEXT EPISODE</label><p th:text="${show.nextEpisode}"></p></div>
+    <div class="info-column"><label>EPISODE DURATION</label><p th:text="${show.episodeDuration}"></p></div>
+
+    
+
+   </div>
+   
+   <!-- INFO RIGHT -->
+   <div class="info-right">
+        <div class="subheadline">SCORE</div>
+        <div class="score-wrapper">
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+        </div>
+
+       <div class="subheadline">PRODUCER</div>
+       <div class="show-producer">
+        <img src="https://t3.ftcdn.net/jpg/02/20/22/72/360_F_220227286_CN4h2xcUhg6X9celn7MqkKIPyHJd47b7.jpg" alt="">
+       </div>
+    </div>
+ </div>
+
+<!-- USERS RANKINGS  - FAR RIGHT SECTION -->
+<div class="show-users-rankings"> 
+    <div class="users-scores"><div class="subheadline">USERS SCORES</div>
+    <div class="w3-container">
+        <div class="w3-light-grey w3-round">
+          <div class="w3-container w3-blue w3-round" style="width:25%">25%</div>
+        </div><br>
+      
+        <div class="w3-light-grey w3-round-large">
+          <div class="w3-container w3-blue w3-round-large" style="width:25%">25%</div>
+        </div><br>
+      
+        <div class="w3-light-grey w3-round-xlarge">
+          <div class="w3-container w3-blue w3-round-xlarge" style="width:25%">25%</div>
+        </div>
+      </div>
+
+</div>
+  <div class="users-in-lists"><div class="subheadline">IN LISTS OF USERS</div>
+
+  <div class="w3-light-grey w3-round">
+    <div class="w3-container w3-blue w3-round" style="width:25%">25%</div>
+  </div><br>
+
+</div>
+
+<div class="show-news"><div class="subheadline">NEWS</div>
+<div class="show-new-article"><p> SOME NEWS</p></div>
+</div>
 
 
+ </div>
+ </div>
+ <div class="show-description">
+    <div class="subheadline">Description</div> 
+    <div class="info-column"><p th:text="${show.description}"></p></div>
+</div>
+
+
+ <!-- USERS COMMENTS -->
+ <div class="show-comments">
+    <div class="subheadline">COMMENTS</div> 
+</div>
+
+</div>
 </article>
     <div th:insert="~{footer :: footer}"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

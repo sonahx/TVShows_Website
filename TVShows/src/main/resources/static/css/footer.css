@@ -1,7 +1,9 @@
 .footer-basic {
   padding:15px 0;
-  background-color:#ffffff;
+  background: repeat url("../pictures/background.png");
   color:#4b4c4d;
+  width: 85%;
+  margin: 0 auto;
 }
 
 .footer-basic ul {

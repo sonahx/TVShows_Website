@@ -17,7 +17,7 @@ public class UserService {
 	public User getUserById(Long id) {
 		return userRepo.getReferenceById(id);
 	}
-	
+		
 	public Optional<User> getByEmail(String email) {
 		return userRepo.findByEmail(email);
 	}

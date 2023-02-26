@@ -22,7 +22,7 @@
 
 			<div class="signup">
 				<form th:action="@{/auth/register}" method="post">
-					<label for="chk" aria-hidden="true">Sign up</label>
+					<label class="auth_label" for="chk" aria-hidden="true">Sign up</label>
 					<input type="text"  name="username" placeholder="User name" class="auth-input" required="">
 					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
 					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
@@ -32,7 +32,7 @@
 
 			<div class="login">
 				<form th:action="@{/auth/login}"  method="post">
-					<label for="chk" aria-hidden="true">Login</label>
+					<label for="chk" class="auth_label" aria-hidden="true">Login</label>
 					<input type="email"  name="email" placeholder="Email" class="auth-input" required="">
 					<input type="password"  name="password" placeholder="Password" class="auth-input" required="">
 						<input type="checkbox" class="form-check-input" id="checkRememberMe" name="checkRememberMe">

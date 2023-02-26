@@ -2,10 +2,10 @@ body {
 	box-sizing: border-box;
 	padding: 0px;
 	margin: 0px;
-	background: repeat url("pictures/background.png");
+	background: repeat url("../pictures/background.png");
 	display:flex; 
+	flex-direction: column;
 	justify-content: space-between;
-	flex-direction:column;
 	z-index: 0;
 }
 article{ flex:1; }
@@ -17,12 +17,11 @@ footer{ min-height:50px;}
 
 .body-wrapper {
 	width: 85%;
-	min-height: 75vh;
+	min-height: 80vh;
 	margin: 0 auto;
-	background-color: white;
+	background-color: #efefef;
 	display: flex;
 	flex-wrap: nowrap;
-	align-content: center;
-	justify-content: center;
+	flex-direction: column;
 	z-index: 1;
 }
