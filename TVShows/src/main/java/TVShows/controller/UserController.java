@@ -1,6 +1,6 @@
 package TVShows.controller;
 
-import org.springframework.security.core.Authentication;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import TVShows.DTO.WatchingStatusRequest;
 import TVShows.domain.TVShow;
@@ -26,20 +27,19 @@ public class UserController {
 	private final UserService userService;
 	private final TVShowService showService;
 	private final UsersShowsService usersShowsService;
-//	private final AuthenticationManager authenticationManager;
-	
 	
 	@GetMapping("/get/{id}")
-	public String getUser(@PathVariable Long id, Model model) {
+	public void getUserInfo(@PathVariable Long id, Model model) {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
-		return "home";
+		
+		
 	}
-
+	
 	@PostMapping("/addShow")
-	public String addShowToUser(@ModelAttribute WatchingStatusRequest request, Model model, 
-			Authentication authentication) {
-	    User user = (User) authentication.getPrincipal();
+	@ResponseStatus(value = HttpStatus.OK)
+	public void addShowToUser(@ModelAttribute WatchingStatusRequest request, Model model, 
+			@ModelAttribute("authenticatedUser") User user) {
 	    TVShow show = showService.findShowById(request.getShowId());
 	    UsersShows existingUsersShows = user.getShows().stream()
 	        .filter(s -> s.getTvShow().getId() == request.getShowId())
@@ -57,15 +57,6 @@ public class UserController {
 	        user.getShows().add(newUsersShows);
 	        usersShowsService.save(newUsersShows);
 	    }
-
-	    return "home";
+	   
 	}
-	
-	
-//	private User getUserPrincipal(){
-//		SecurityContext securityContext = SecurityContextHolder.getContext();
-//		 Authentication auth = securityContext.getAuthentication();
-//		User user = (User) auth.getPrincipal();
-//		return user;
-//	}
 }

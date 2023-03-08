@@ -10,7 +10,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 
-
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
@@ -23,7 +22,7 @@ public class SecurityConfig {
 	    http
 	        .authorizeHttpRequests()
 	        .requestMatchers("/home", "/","/auth", "/auth/**","/login", "/css/**", 
-	        		"/pictures/**","/show/**", "/login?logout")
+	        		"/pictures/**","/show/**", "/login?logout", "/js/**")
 	        .permitAll()
 	        
         .and().authorizeHttpRequests()

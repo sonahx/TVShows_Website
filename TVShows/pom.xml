@@ -74,7 +74,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency> 
-
+ 
 	</dependencies>
 
 	<build>
@@ -92,6 +92,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
+		<finalName>tvshows</finalName>
+		
 	</build>
 
 </project>

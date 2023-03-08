@@ -1,97 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>this is profile page</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
     <link th:href="@{/css/profile.css}" rel="stylesheet">
 </head>
+
 <body>
-    <header th:insert="~{header :: header}"></header>
+<header th:insert="~{header :: header}"></header>
 
-  <article>
- <div class="body-wrapper">
-<!-- 
- this is profile page.
-
- <div sec:authorize="isAuthenticated()">
-    <div sec:authentication="name"></div>
-    </div> -->
-
+<article>
+    <div class="body-wrapper">
         <!-- profile widget -->
-        <div class="container emp-profile">
-          <form method="post">
-              <div class="row">
-                  <div class="col-md-4">
-                      <div class="profile-img">
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                      <div class="profile-head">
-                                  <h5 th:text="${user.username}">
-                                      profile username
-                                  </h5>
-                                  <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                          <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              <li class="nav-item">
-                                  <a class="nav-link active" id="watching-tab" data-toggle="tab" href="#watching" role="tab" aria-controls="watching" aria-selected="true">Watching</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab" aria-controls="profile" aria-selected="false">Planned to watch</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="else" aria-selected="false">Completed</a>
+        <div class="emp-profile">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                             alt=""/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 th:text="${user.username}">
+                            profile username
+                        </h5>
+                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="watching-tab" data-toggle="tab" href="#watching"
+                                   role="tab" aria-controls="watching" aria-selected="true">Watching</a>
                             </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-4">
-                      <div class="profile-work">
-                          <p>SCORES</p>
-                          <a href="">Website Link</a><br/>
-                          <a href="">Bootsnipp Profile</a><br/>
-                          <a href="">Bootply Profile</a>
-                      </div>
-                  </div>
-                  <div class="col-md-8">
-                      <div class="tab-content profile-tab" id="myTabContent">
-                          <div class="tab-pane fade show active" id="watching" role="tabpanel" aria-labelledby="watching-tab">
-                                      <div class="row">
-                                          <div class="col-md-6">
-                                              <label>User Id</label>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <p>Kshiti123</p>
-                                          </div>
-                                      </div>
-                          </div>
-                          <div class="tab-pane fade" id="planned" role="tabpanel" aria-labelledby="planned-tab">
-                                      <div class="row">
-                                          <div class="col-md-6">
-                                              <label>Experience</label>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <p>Expert</p>
-                                          </div>
-                                      </div>
-         
-<!-- end of profile widget -->
+                            <li class="nav-item">
+                                <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab"
+                                   aria-controls="planned" aria-selected="false">Planned to watch</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed"
+                                   role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="rewatching-tab" data-toggle="tab" href="#rewatching"
+                                   role="tab" aria-controls="rewatching" aria-selected="false">Rewatching</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="onhold-tab" data-toggle="tab" href="#onhold" role="tab"
+                                   aria-controls="onhold" aria-selected="false">On hold</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="dropped-tab" data-toggle="tab" href="#dropped" role="tab"
+                                   aria-controls="dropped" aria-selected="false">Dropped</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>SCORES</p>
+                        <a href="">Website Link</a><br/>
+                        <a href="">Bootsnipp Profile</a><br/>
+                        <a href="">Bootply Profile</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <!-- watching tab -->
+                        <div class="tab-pane show active" id="watching" role="tabpanel"
+                             aria-labelledby="watching-tab">
+                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'WATCHING'}"
+                                 class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- planned tab -->
+                        <div class="tab-pane" id="planned" role="tabpanel" aria-labelledby="planned-tab">
+                            <div th:each="show: ${user.shows}"
+                                 th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- completed tab -->
+                        <div class="tab-pane" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'COMPLETED'}"
+                                 class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- rewatching tab -->
+                        <div class="tab-pane" id="rewatching" role="tabpanel" aria-labelledby="rewatching-tab">
+                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'REWATCHING'}"
+                                 class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- on-hold tab -->
+                        <div class="tab-pane" id="onhold" role="tabpanel" aria-labelledby="onhold-tab">
+                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'ON_HOLD'}"
+                                 class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
 
-  </div>
-  </article>
+                        <!-- dropped tab -->
+                        <div class="tab-pane" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
+                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'DROPPED'}"
+                                 class="row">
+                                <div class="col-md-6">
+                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <p th:text="${show.status}">Show status</p>
+                                </div>
+                            </div>
+                        </div>
 
-    <footer th:insert="~{footer :: footer}"></footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                        <!-- end of profile widget -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</article>
+
+<footer th:insert="~{footer :: footer}"></footer>
+<script th:src="@{/js/profile.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+
 </html>

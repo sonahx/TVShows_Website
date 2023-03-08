@@ -1,5 +1,6 @@
 package TVShows.domain;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,17 +24,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user")
-@Data @Builder @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class User implements UserDetails{
 
+	@Serial
 	private static final long serialVersionUID = -421092218247224768L;
 	
 	@Id
