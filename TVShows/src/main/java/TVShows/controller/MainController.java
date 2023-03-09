@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainController {
 
-	@SuppressWarnings("unused")
 	private final TVShowService TVshowService;
 	private final UserService userService;
 
@@ -45,7 +44,7 @@ public class MainController {
 	
 	@GetMapping("/profile")
 	public String profile(@RequestParam("user") String email, Model model) {
-		User user = userService.getByEmail(email).orElseThrow(()-> 
+		User user = userService.findByEmail(email).orElseThrow(()->
 		new UsernameNotFoundException("username not found"));
 		model.addAttribute("user", user);
 		return "profile";

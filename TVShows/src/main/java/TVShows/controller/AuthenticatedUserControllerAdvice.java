@@ -25,7 +25,7 @@ public class AuthenticatedUserControllerAdvice {
 			if (principal instanceof User) {
 				return (User) principal;
 			} else if (principal instanceof String email) {
-				Optional<User> optionalUser = userService.getByEmail(email);
+				Optional<User> optionalUser = userService.findByEmail(email);
 				return optionalUser.orElse(null);
 			} else {
 				return null;

@@ -30,7 +30,7 @@ public class UserController {
 	
 	@GetMapping("/get/{id}")
 	public void getUserInfo(@PathVariable Long id, Model model) {
-		User user = userService.getUserById(id);
+		User user = userService.findUserById(id);
 		model.addAttribute("user", user);
 		
 		
