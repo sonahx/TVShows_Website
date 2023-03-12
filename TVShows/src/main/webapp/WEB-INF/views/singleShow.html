@@ -43,7 +43,7 @@
         <label for="dropdown">Add to my list:</label>
         <input name="showId" th:value="${show.id}" type="hidden">
         <select name="status" id="dropdown">
-          <option th:each="value : ${T(TVShows.domain.ViewerStatus).values()}" th:value="${value}" th:text="${value}"></option>
+          <option th:each="value : ${T(com.TVShows.domain.ViewerStatus).values()}" th:value="${value}" th:text="${value}"></option>
 
 
           <!-- <option value="WATCHING">Watching</option>
