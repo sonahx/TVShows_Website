@@ -19,7 +19,7 @@ public class UsersShowsService {
 	
 	public void save(UsersShows usersShows) {
 		logger.info("User {} added to his list - {} - {}",
-				usersShows.getUser().getUsername(),
+				usersShows.getUser().getName(),
 				usersShows.getTvShow().getName(),
 				usersShows.getStatus());
 		repo.save(usersShows);

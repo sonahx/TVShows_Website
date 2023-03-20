@@ -25,7 +25,7 @@ class UserRepoTest {
     @BeforeEach
     void setUp() {
         user = User.builder()
-                .username("JohnDoe")
+                .name("JohnDoe")
                 .email("doe@gmail.com")
                 .password("pass")
                 .roles(Role.USER)

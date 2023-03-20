@@ -29,7 +29,7 @@ public class UserService {
 
     public Optional<User> findByUsername(String username) {
         logger.info("Looking for user with username: {}", username);
-        return userRepo.findByUsername(username);
+        return userRepo.findByName(username);
     }
 
     public void createUser(User user) {
@@ -37,12 +37,12 @@ public class UserService {
     }
 
     public void updateUser(User user) {
-        logger.info("Updating user: {}, email: {}, id: {}", user.getUsername(), user.getEmail(), user.getId());
+        logger.info("Updating user: {}, email: {}, id: {}", user.getName(), user.getEmail(), user.getId());
         userRepo.save(user);
     }
 
     public void removeUser(User user) {
-        logger.info("Removing user: {}, email: {}, id: {}", user.getUsername(), user.getEmail(), user.getId());
+        logger.info("Removing user: {}, email: {}, id: {}", user.getName(), user.getEmail(), user.getId());
         userRepo.delete(user);
     }
 }

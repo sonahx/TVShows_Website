@@ -101,8 +101,8 @@ margin-top: 15px;
 }
 
 .item {
-  width: 18vw;
-  height: 12vw;
+  width: 225px;
+  height: 316px;
   background-size: 100% 100%;
   margin: 0 2px 0 2px;
   border-radius: 1px;
@@ -195,14 +195,14 @@ margin-top: 15px;
   padding: 0 3px 0 3px;
 }
 
-.item-1 {
-  background-image: url(http://www.sickchirpse.com/wp-content/uploads/2017/03/Breaking-Bad.jpg);
-}
 .item-1:hover {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)), url(http://www.storyepic.com/wp-content/uploads/2014/04/breaking_bad_by_motionshowcase-d5l3atm.png);
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)));
   background-size: 100% 100%;
 }
 a:hover{
 	text-decoration: none;
+}
+.show-img{
+width: 100%;
 }
 

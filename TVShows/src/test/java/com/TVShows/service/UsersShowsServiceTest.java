@@ -33,7 +33,7 @@ class UsersShowsServiceTest {
     void shouldSaveUsersShows() {
         // Given
         UsersShows usersShows = new UsersShows();
-        usersShows.setUser(User.builder().username("JohnDoe").email("johndoe@example.com")
+        usersShows.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
         usersShows.setTvShow(new TVShow("showname", "releasedate",
                 Genre.DRAMA, "directors", "descs", "url",
@@ -54,7 +54,7 @@ class UsersShowsServiceTest {
     void shouldFindAllUsersShows() {
         // Given
         UsersShows usersShows1 = new UsersShows();
-        usersShows1.setUser(User.builder().username("JohnDoe").email("johndoe@example.com")
+        usersShows1.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
         usersShows1.setTvShow(new TVShow("showname", "releasedate",
                 Genre.DRAMA, "directors", "descs", "url",
@@ -62,7 +62,7 @@ class UsersShowsServiceTest {
         usersShows1.setStatus(ViewerStatus.WATCHING);
 
         UsersShows usersShows2 = new UsersShows();
-        usersShows2.setUser(User.builder().username("LanaDoe").email("lanadoe@example.com")
+        usersShows2.setUser(User.builder().name("LanaDoe").email("lanadoe@example.com")
                 .password("securepassword").roles(Role.USER).build());
         usersShows2.setTvShow(new TVShow("showname 2", "releasedate 2",
                 Genre.DRAMA, "directors 2", "descs 2", "url 2",

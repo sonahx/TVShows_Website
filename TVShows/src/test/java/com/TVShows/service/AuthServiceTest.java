@@ -46,7 +46,7 @@ class AuthServiceTest {
         verify(userService).createUser(userCaptor.capture());
         User savedUser = userCaptor.getValue();
         assertNotNull(savedUser);
-        assertEquals(request.getUsername(), savedUser.getProfileUsername());
+        assertEquals(request.getUsername(), savedUser.getName());
         assertEquals(request.getEmail(), savedUser.getEmail());
         assertEquals("encodedPassword", savedUser.getPassword());
         assertEquals(Role.USER, savedUser.getRoles());

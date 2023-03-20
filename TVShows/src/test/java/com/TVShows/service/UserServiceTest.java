@@ -32,7 +32,7 @@ public class UserServiceTest {
     public void shouldFindUserById() {
         // given
         Long userId = 1L;
-        User user = User.builder().id(userId).username("JohnDoe").email("johndoe@example.com").password("pass").build();
+        User user = User.builder().id(userId).name("JohnDoe").email("johndoe@example.com").password("pass").build();
 
         // when
         when(userRepo.getReferenceById(userId)).thenReturn(user);
@@ -48,7 +48,7 @@ public class UserServiceTest {
     public void shouldFindByEmail() {
         // given
         String email = "johndoe@example.com";
-        User user = User.builder().id(1L).username("JohnDoe").email(email).password("pass").build();
+        User user = User.builder().id(1L).name("JohnDoe").email(email).password("pass").build();
 
         // when
         when(userRepo.findByEmail(email)).thenReturn(Optional.of(user));
@@ -63,7 +63,7 @@ public class UserServiceTest {
     @DisplayName("Test creating user")
     public void shouldCreateUser() {
         // given
-        User user = User.builder().id(1L).username("JohnDoe").email("johndoe@example.com").password("pass").build();
+        User user = User.builder().id(1L).name("JohnDoe").email("johndoe@example.com").password("pass").build();
 
         // when
         userService.createUser(user);
@@ -77,7 +77,7 @@ public class UserServiceTest {
     @DisplayName("Test updating user")
     public void shouldUpdateUser() {
         // given
-        User user = User.builder().id(1L).username("JohnDoe").email("johndoe@example.com").password("newpass").build();
+        User user = User.builder().id(1L).name("JohnDoe").email("johndoe@example.com").password("newpass").build();
 
         // when
         userService.updateUser(user);
@@ -91,7 +91,7 @@ public class UserServiceTest {
     @DisplayName("Test removing user")
     public void shouldRemoveUser() {
         // given
-        User user = User.builder().id(1L).username("JohnDoe").email("johndoe@example.com").password("pass").build();
+        User user = User.builder().id(1L).name("JohnDoe").email("johndoe@example.com").password("pass").build();
 
         // when
         userService.removeUser(user);

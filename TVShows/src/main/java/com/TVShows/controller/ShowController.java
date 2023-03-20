@@ -1,17 +1,17 @@
 package com.TVShows.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.TVShows.domain.ShowComment;
 import com.TVShows.domain.TVShow;
+import com.TVShows.domain.User;
+import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ShowController {
 
     private final TVShowService showService;
+    private final ShowCommentService commentService;
 
 
     @PostMapping("/add")
@@ -34,7 +35,31 @@ public class ShowController {
         Optional<TVShow> tvShow = showService.findShowById(id);
         if (tvShow.isPresent()) {
             model.addAttribute("show", tvShow.get());
+            model.addAttribute("ShowComment", new ShowComment());
         }
         return "singleShow";
+    }
+
+    @PostMapping("/{id}/comment")
+    public String addComment(@PathVariable("id") Long id, Model model,
+                             @ModelAttribute("ShowComment") ShowComment text) {
+        User user = (User) model.getAttribute("authenticatedUser");
+        Optional<TVShow> show = showService.findShowById(id);
+        if (show.isPresent()) {
+            //create and save comment
+            ShowComment comment = new ShowComment();
+            comment.setText(text.getText());
+            comment.setAuthor(user);
+            comment.setTvShow(show.get());
+            comment.setDate(LocalDateTime.now());
+            commentService.save(comment);
+
+            //update TVShow
+            List<ShowComment> currentComments = show.get().getComments();
+            currentComments.add(comment);
+            show.get().setComments(currentComments);
+            showService.updateShow(show.get());
+        }
+        return "home";
     }
 }

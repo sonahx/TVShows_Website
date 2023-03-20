@@ -22,11 +22,11 @@ public class SecurityConfig {
 	    http
 	        .authorizeHttpRequests()
 	        .requestMatchers("/home", "/","/auth", "/auth/**","/login", "/css/**", 
-	        		"/pictures/**","/show/**", "/login?logout", "/js/**")
+	        		"/profile","/pictures/**","/show/**", "/login?logout", "/js/**")
 	        .permitAll()
-	        
-        .and().authorizeHttpRequests()
-        .requestMatchers("/profile").hasRole("USER")
+
+		.and().authorizeHttpRequests()
+		.requestMatchers("/show/{id}/comment").hasRole("USER")
 	        
 	        .anyRequest()
 	        .authenticated()

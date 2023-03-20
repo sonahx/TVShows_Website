@@ -32,8 +32,9 @@
                 <div th:each="show: ${shows}">
                     <a th:href="@{'/show/' + ${show.id}}">
                <div class="item item-1">
+                <img th:src="${show.imageUrl}" class="show-img"></img>
                   <div class="body-item"> 
-                    <div class="title body-item-2">Breaking Bad</div>
+                    <div class="title body-item-2">Show name</div>
                     <div class="properties body-item-3">
                       <span class="match">% 98 Match</span>
                       <span class="year">2012</span>

@@ -35,9 +35,11 @@
                     <div class="form-group">
                         <input type="text" th:field="*{genre}" name="genre" list="genreList" class="form-control" placeholder="Genre"/>        
                         <datalist id="genreList">
-                            <option value="DRAMA">  
+                            <option th:each="value : ${T(com.TVShows.domain.Genre).values()}" th:value="${value}"
+                    th:text="${value}"></option>
+                            <!-- <option value="DRAMA">  
                             <option value="WESTERN">
-                            <option value="HORROR"></option>
+                            <option value="HORROR"></option> -->
                           </datalist>
                     </div>
 

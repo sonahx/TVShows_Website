@@ -35,7 +35,7 @@ public class AuthService {
         // Create new user
         logger.info("Registering user {}, {}", requestedUsername, requestedEmail);
         var user = User.builder()
-                .username(requestedUsername)
+                .name(requestedUsername)
                 .email(requestedEmail)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(Role.USER)
