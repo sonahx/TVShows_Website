@@ -15,15 +15,19 @@ public class ShowComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     @Lob
     @Column(name = "text", length = 1000, nullable = false)
     private String text;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tv_show_id")
     private TVShow tvShow;
+
     @Column
     private LocalDateTime date;
 

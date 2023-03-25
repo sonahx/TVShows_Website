@@ -19,30 +19,42 @@ public class TVShow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column
     private String name;
+
     @Column
     private String releaseDate;
+
     @Enumerated(EnumType.STRING)
     private Genre genre;
+
     @Lob
     private String directors;
+
     @Lob
     @Column(name = "description", length = 1000)
     private String description;
+
     @Column
     private String imageUrl;
+
     @Column
     private String nextEpisode;
+
     @Enumerated(EnumType.STRING)
     private ShowStatus status;
+
     @Column
     private String episodeDuration;
+
     @Lob
     @Column(name = "actors", length = 1000)
     private String actors;
+
     @OneToMany(mappedBy = "tvShow", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<UsersShows> shows = new HashSet<>();
+
     @OneToMany(mappedBy = "tvShow", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ShowComment> comments = new ArrayList<>();
 

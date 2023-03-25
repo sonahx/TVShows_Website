@@ -165,26 +165,28 @@
          
               <div th:each="comment: ${show.comments}" class="comments-wrapper">
                    <div class="comment-header">
-                   <img class="comment-author-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU"></img>
-                     <a class="comment-author-name" th:href="@{/profile(user=${comment.author.email})}" th:text="${comment.author.name}">author username</a>
-
-                  <div class="comment-body">
-                    <p class="comment-text" th:text="${comment.text}">comment text...</p>
-                  </div>
+                    <div class="comment-info">
+                  <img th:if="${comment.author.image != null}" th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img"> </img>
+                  <img th:if="${comment.author.image == null}" class="comment-author-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU"></img>
+                  <div class="comment-author-info">  
+                  <a class="comment-author-name" th:href="@{/profile(user=${comment.author.email})}" th:text="${comment.author.name}">author username</a>
+                  <p class="comment-timestamp" th:text="${comment.date}"></p>
+                    </div>
               </div>
-            </div>
-
-              <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
-                <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
-                  <div class="form-group">
-                    <textarea th:field="${ShowComment.text}" name="text" class="form-control"
-                      placeholder="Enter your comment here.."></textarea>
-                  </div>
-                  <button type="submit">Submit</button>
-                </form>
+              <div class="comment-body">
+                <p class="comment-text" th:text="${comment.text}">comment text...</p>
               </div>
+            </div>   
+          </div>
 
-          
+          <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
+            <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
+              <div class="form-group">
+                <textarea th:field="${ShowComment.text}" name="text" class="form-control"
+                  placeholder="Enter your comment here.."></textarea>
+              </div>
+              <button type="submit">Submit</button>
+            </form>
           </div>
 
         </div>

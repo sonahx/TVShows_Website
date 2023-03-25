@@ -1,14 +1,12 @@
 package com.TVShows.controller;
 
+import com.TVShows.DTO.ImageEncoder;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.TVShows.DTO.WatchingStatusRequest;
 import com.TVShows.domain.TVShow;
@@ -18,7 +16,10 @@ import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
 import com.TVShows.service.UsersShowsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -34,8 +35,15 @@ public class UserController {
     public void getUserInfo(@PathVariable Long id, Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
+    }
 
-
+    @PostMapping("/image/upload")
+    public void uploadImage(@ModelAttribute("image") ImageEncoder image, Model model,
+                            HttpServletResponse response, HttpServletRequest request) throws IOException {
+        User user = (User) model.getAttribute("authenticatedUser");
+        User toUpdate = image.encodeImage(user);
+        userService.updateUser(toUpdate);
+        response.sendRedirect(request.getHeader("Referer"));
     }
 
     @PostMapping("/addShow")
@@ -61,6 +69,5 @@ public class UserController {
                 usersShowsService.save(newUsersShows);
             }
         }
-
     }
 }

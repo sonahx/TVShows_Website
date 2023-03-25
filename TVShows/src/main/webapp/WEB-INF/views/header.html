@@ -55,10 +55,10 @@
                                 </li>
                             </ul>
 
-                            <div th:if="${#authentication.principal != null}" th:with="loggedInUser=${#authentication.name}">
+                            <div th:if="${#authentication.principal != null}">
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile(user=${loggedInUser})}" th:text="${loggedInUser}">
+                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile(user=${authenticatedUser.name})}" th:text="${authenticatedUser.name}">
                                     <span class="glyphicon glyphicon-user"></span>Profile</a></li>
                                 <li><a sec:authorize="isAnonymous()" th:href="@{/auth}" class="dropdown-toggle"><span
                                             class="glyphicon glyphicon-log-in"></span> Login / Sign Up</span></a>
@@ -75,10 +75,6 @@
             </div>
         </div>
     </div>
-
-    <div th:fragment="admin_header">
-    </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

@@ -26,9 +26,6 @@
             <div class="block-1">
                 <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
             <div th:if="${shows != null}" class="container">
-                <div class="arrow-left">
-                  <i class="icon-angle-left"></i>
-                </div>
                 <div th:each="show: ${shows}">
                     <a th:href="@{'/show/' + ${show.id}}">
                <div class="item item-1">
@@ -54,11 +51,7 @@
                   </div>
                 </div> 
             </a> 
-            </div> 
-                        
-                <div class="arrow-right">
-                  <i class="icon-angle-right"></i>
-                </div>
+            </div>                    
               </div>
             </div>
 <!-- carousel end -->

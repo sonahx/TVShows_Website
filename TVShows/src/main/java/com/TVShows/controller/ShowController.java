@@ -5,11 +5,14 @@ import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +44,8 @@ public class ShowController {
     }
 
     @PostMapping("/{id}/comment")
-    public String addComment(@PathVariable("id") Long id, Model model,
-                             @ModelAttribute("ShowComment") ShowComment text) {
+    public void addComment(@PathVariable("id") Long id, Model model,
+                           @ModelAttribute("ShowComment") ShowComment text){
         User user = (User) model.getAttribute("authenticatedUser");
         Optional<TVShow> show = showService.findShowById(id);
         if (show.isPresent()) {
@@ -60,6 +63,5 @@ public class ShowController {
             show.get().setComments(currentComments);
             showService.updateShow(show.get());
         }
-        return "home";
     }
 }

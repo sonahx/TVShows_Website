@@ -111,11 +111,7 @@ margin-top: 15px;
   color: white;
 }
 .item:hover {
-  width: 28vw;
-  height: 18vw;
-  transition: 0.5s;
-  opacity: 1;
-  transition-delay: 0.3s;
+size: 25%;
 }
 .item:hover .body-item {
   visibility: visible;

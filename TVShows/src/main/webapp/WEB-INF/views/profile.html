@@ -12,157 +12,186 @@
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
     <link th:href="@{/css/profile.css}" rel="stylesheet">
+    <link th:href="@{/css/image.css}" rel="stylesheet">
 </head>
 
 <body>
-<header th:insert="~{header :: header}"></header>
+    <header th:insert="~{header :: header}"></header>
 
-<article>
-    <div class="body-wrapper">
-        <!-- profile widget -->
-        <div class="emp-profile">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                             alt=""/>
+    <article>
+        <div class="body-wrapper">
+            <!-- profile widget -->
+            <div class="emp-profile">
+                <div class="row">
+                    <div class="col-md-4 profile-img-wrapper">
+                        <div class="profile-img">
+                            <img th:if="${user.image != null}" th:src="@{'data:image/jpeg;base64,' + ${user.image}}">
+                            <img th:if="${user.image == null}"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU">
+                        </div>
+
+                            <!-- Photo upload -->
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <form id="uploadForm" th:action="@{/user/image/upload}" th:object="${ImageEncoder}"
+                                    method="post" enctype="multipart/form-data">
+                                    <span class="btn btn-primary btn-file"><span class="fileupload-new">Select
+                                            file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input id="fileInput" type="file" name="image" />
+                                    </span>
+                                    <span class="fileupload-preview"></span>
+                                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload"
+                                        style="float: none">×</a>
+                                </form>
+                            </div>
+                            <!-- Photo upload END-->
+
                     </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <h5 th:text="${user.name}">
+                                profile username
+                            </h5>
+
+
+
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="watching-tab" data-toggle="tab" href="#watching"
+                                        role="tab" aria-controls="watching" aria-selected="true">Watching</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab"
+                                        aria-controls="planned" aria-selected="false">Planned to watch</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed"
+                                        role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="rewatching-tab" data-toggle="tab" href="#rewatching"
+                                        role="tab" aria-controls="rewatching" aria-selected="false">Rewatching</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="onhold-tab" data-toggle="tab" href="#onhold" role="tab"
+                                        aria-controls="onhold" aria-selected="false">On hold</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="dropped-tab" data-toggle="tab" href="#dropped" role="tab"
+                                        aria-controls="dropped" aria-selected="false">Dropped</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <vdi class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <!-- watching tab -->
+                            <div class="tab-pane show active" id="watching" role="tabpanel"
+                                aria-labelledby="watching-tab">
+                                <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'WATCHING'}"
+                                    class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- planned tab -->
+                            <div class="tab-pane" id="planned" role="tabpanel" aria-labelledby="planned-tab">
+                                <div th:each="show: ${user.shows}"
+                                    th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- completed tab -->
+                            <div class="tab-pane" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'COMPLETED'}"
+                                    class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- rewatching tab -->
+                            <div class="tab-pane" id="rewatching" role="tabpanel" aria-labelledby="rewatching-tab">
+                                <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'REWATCHING'}"
+                                    class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- on-hold tab -->
+                            <div class="tab-pane" id="onhold" role="tabpanel" aria-labelledby="onhold-tab">
+                                <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'ON_HOLD'}"
+                                    class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- dropped tab -->
+                            <div class="tab-pane" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
+                                <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'DROPPED'}"
+                                    class="row">
+                                    <div class="col-md-6">
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.status}">Show status</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- end of profile widget -->
+                        </div>
+                    </div>
+
+
                 </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5 th:text="${user.name}">
-                            profile username
-                        </h5>
-                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="watching-tab" data-toggle="tab" href="#watching"
-                                   role="tab" aria-controls="watching" aria-selected="true">Watching</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab"
-                                   aria-controls="planned" aria-selected="false">Planned to watch</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed"
-                                   role="tab" aria-controls="completed" aria-selected="false">Completed</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="rewatching-tab" data-toggle="tab" href="#rewatching"
-                                   role="tab" aria-controls="rewatching" aria-selected="false">Rewatching</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="onhold-tab" data-toggle="tab" href="#onhold" role="tab"
-                                   aria-controls="onhold" aria-selected="false">On hold</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="dropped-tab" data-toggle="tab" href="#dropped" role="tab"
-                                   aria-controls="dropped" aria-selected="false">Dropped</a>
-                            </li>
-                        </ul>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>SCORES</p>
+                            <a href="">Website Link</a><br />
+                            <a href="">Bootsnipp Profile</a><br />
+                            <a href="">Bootply Profile</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-work">
-                        <p>SCORES</p>
-                        <a href="">Website Link</a><br/>
-                        <a href="">Bootsnipp Profile</a><br/>
-                        <a href="">Bootply Profile</a>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <!-- watching tab -->
-                        <div class="tab-pane show active" id="watching" role="tabpanel"
-                             aria-labelledby="watching-tab">
-                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'WATCHING'}"
-                                 class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- planned tab -->
-                        <div class="tab-pane" id="planned" role="tabpanel" aria-labelledby="planned-tab">
-                            <div th:each="show: ${user.shows}"
-                                 th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- completed tab -->
-                        <div class="tab-pane" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'COMPLETED'}"
-                                 class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- rewatching tab -->
-                        <div class="tab-pane" id="rewatching" role="tabpanel" aria-labelledby="rewatching-tab">
-                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'REWATCHING'}"
-                                 class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- on-hold tab -->
-                        <div class="tab-pane" id="onhold" role="tabpanel" aria-labelledby="onhold-tab">
-                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'ON_HOLD'}"
-                                 class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- dropped tab -->
-                        <div class="tab-pane" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
-                            <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'DROPPED'}"
-                                 class="row">
-                                <div class="col-md-6">
-                                    <a th:text="${show.tvShow.name}" href="#">Show name</a>
-                                </div>
-                                <div class="col-md-6">
-                                    <p th:text="${show.status}">Show status</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- end of profile widget -->
-                    </div>
-                </div>
-            </div>
         </div>
+    </article>
 
-    </div>
-</article>
 
-<footer th:insert="~{footer :: footer}"></footer>
-<script th:src="@{/js/profile.js}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <footer th:insert="~{footer :: footer}"></footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/image.js}"></script>
+    <script th:src="@{/js/profile.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>

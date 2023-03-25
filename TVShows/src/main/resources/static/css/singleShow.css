@@ -137,3 +137,15 @@ width: 100%;
 margin-top: 30px;
 padding: 20px;
 }
+.comment-timestamp{
+font-size: 10px;
+display: inline;
+}
+.comment-info{
+display: flex;
+}
+.comment-author-info{
+display:flex;
+flex-direction: column;
+margin-left: 10px;
+}

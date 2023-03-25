@@ -1,5 +1,6 @@
 package com.TVShows.controller;
 
+import com.TVShows.DTO.ImageEncoder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,10 +44,11 @@ public class MainController {
 	}
 	
 	@GetMapping("/profile")
-	public String profile(@RequestParam("user") String email, Model model) {
-		User user = userService.findByEmail(email).orElseThrow(()->
+	public String profile(@RequestParam("user") String name, Model model) {
+		User user = userService.findByUsername(name).orElseThrow(()->
 		new UsernameNotFoundException("username not found"));
 		model.addAttribute("user", user);
+		model.addAttribute("image", new ImageEncoder());
 		return "profile";
 	}
 }
