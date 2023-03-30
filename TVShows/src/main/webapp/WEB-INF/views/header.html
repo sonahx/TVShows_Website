@@ -38,7 +38,7 @@
                                         <li><a href="#">About Six</a></li>
                                     </ul>
                                 </li>
-                                <li><a th:href="@{/tvshowform}">Create TV Show</a></li>
+                                <li><a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" th:href="@{/tvshowform}">Create TV Show</a></li>
                             </ul>
                             <ul class="nav navbar-nav">
                                 <li>
@@ -58,10 +58,10 @@
                             <div th:if="${#authentication.principal != null}">
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a sec:authorize="hasRole('ROLE_USER')" th:href="@{/profile(user=${authenticatedUser.name})}" th:text="${authenticatedUser.name}">
+                                <li><a sec:authorize="isAuthenticated()" th:href="@{/profile(user=${authenticatedUser.name})}" th:text="${authenticatedUser.name}">
                                     <span class="glyphicon glyphicon-user"></span>Profile</a></li>
                                 <li><a sec:authorize="isAnonymous()" th:href="@{/auth}" class="dropdown-toggle"><span
-                                            class="glyphicon glyphicon-log-in"></span> Login / Sign Up</span></a>
+                                            class="glyphicon glyphicon-log-in"></span> Login / Sign Up</a>
                                 <li>
             <!-- <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}"> -->
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="">Logout</a>

@@ -2,6 +2,7 @@ package com.TVShows.service;
 
 import java.util.Optional;
 
+import com.TVShows.DTO.RegisterRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class UserService {
     public void removeUser(User user) {
         logger.info("Removing user: {}, email: {}, id: {}", user.getName(), user.getEmail(), user.getId());
         userRepo.delete(user);
+    }
+
+    public void enableUser(String email){
+        logger.info("Enabling user with email: {}", email);
+        userRepo.enableUser(email);
     }
 }

@@ -21,15 +21,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public WebMvcConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
-    
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("home");
-		registry.addViewController("/home").setViewName("home");
-		registry.addViewController("/tvshowform").setViewName("tvshowform");
-		registry.addViewController("/error").setViewName("error");
-	}
-
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -37,7 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setTemplateMode("HTML");
         return templateResolver;
     }
     

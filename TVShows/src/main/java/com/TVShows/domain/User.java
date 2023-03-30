@@ -16,13 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class User implements UserDetails {
-
     @Serial
     private static final long serialVersionUID = -421092218247224768L;
 
@@ -41,6 +36,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role roles;
+
+    @Column
+    private Boolean enabled = false;
 
     @Lob
     @Column(columnDefinition="blob")
@@ -94,6 +92,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

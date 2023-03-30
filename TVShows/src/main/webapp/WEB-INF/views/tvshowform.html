@@ -19,9 +19,6 @@
 <article>
 
     <div class="container contact-form">
-        <div class="contact-image">
-            <img th:src="@{/pictures/weatherpen.svg}" class="form-picture" alt="" />
-        </div>
         <form  th:action="@{/show/add}" th:object="${TVShow}" method="post">
             <h3>Creating TV Show</h3>
             <div class="row">

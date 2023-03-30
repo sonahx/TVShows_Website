@@ -1,0 +1,15 @@
+.content{
+min-height: 50vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: white;
+border-radius: 10px;
+}
+
+.content > a{
+margin-top: 20px;
+font-size: 30px;
+}
+

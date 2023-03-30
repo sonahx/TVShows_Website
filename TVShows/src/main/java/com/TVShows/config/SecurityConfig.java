@@ -21,12 +21,14 @@ public class SecurityConfig {
 	  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeHttpRequests()
-	        .requestMatchers("/home", "/","/auth", "/auth/**","/login", "/css/**", 
-	        		"/profile","/pictures/**","/show/**", "/login?logout", "/js/**")
+	        .requestMatchers("/home", "/","/auth", "/auth/**","/login", "/verification", "/css/**",
+	        		"/success","/profile","/pictures/**","/show/**", "/login?logout", "/js/**")
 	        .permitAll()
 
-		.and().authorizeHttpRequests()
-		.requestMatchers("/show/{id}/comment").hasRole("USER")
+				.and().authorizeHttpRequests()
+				.requestMatchers("/show/{id}/comment").hasRole("USER")
+				.and().authorizeHttpRequests()
+				.requestMatchers("/tvshowform").hasRole("ADMINISTRATOR")
 	        
 	        .anyRequest()
 	        .authenticated()

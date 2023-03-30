@@ -28,14 +28,19 @@ public class DataInitializer implements CommandLineRunner {
                 .name("A Random User")
                 .email("test@gmail.com")
                 .password(encoder.encode("pass"))
-                .roles(Role.USER).build();
+                .roles(Role.USER)
+                .enabled(true)
+                .build();
+
 
         User user2 = User.builder()
                 .id(2L)
                 .name("Administrator account")
                 .email("admin@gmail.com")
                 .password(encoder.encode("pass"))
-                .roles(Role.ADMINISTRATOR).build();
+                .roles(Role.ADMINISTRATOR)
+                .enabled(true)
+                .build();
 
         userService.createUser(user1);
         userService.createUser(user2);
