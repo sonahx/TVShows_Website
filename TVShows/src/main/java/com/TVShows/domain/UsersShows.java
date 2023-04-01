@@ -1,5 +1,6 @@
 package com.TVShows.domain;
 
+import com.TVShows.enums.ViewerStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,9 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "users_shows")
@@ -45,6 +43,4 @@ public class UsersShows {
         this.tvShow = tvShow;
         this.status = status;
     }
-
-
 }

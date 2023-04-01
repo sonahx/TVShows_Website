@@ -3,9 +3,8 @@ package com.TVShows.service;
 import com.TVShows.DTO.EmailBuilder;
 import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
-import com.TVShows.domain.Role;
+import com.TVShows.enums.Role;
 import com.TVShows.domain.User;
-import com.TVShows.repo.ConfirmationTokenRepo;
 import com.TVShows.repo.EmailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

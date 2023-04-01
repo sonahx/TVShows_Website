@@ -20,82 +20,47 @@
   <div th:insert="~{header :: header}"></div>
   <article>
     <div class="body-wrapper">
-      <div class="show-header">
-        <h3 th:text="${show.name}"></h3>
-      </div>
+
       <div class="show-card">
         <div class="show-content">
           <div class="show-general">
             <div class="show-image">
-              <img th:src="${show.imageUrl}">
-              </img>
+              <div class="show-header">
+                <h3 th:text="${show.name}"></h3>
+              </div>
+              <img th:src="${show.imageUrl}"></img>
 
-              <!-- <div class="dropdown">
-        <button class="dropbtn">Add to my list</button>
-        <div class="dropdown-content">
-          <a th:href="@{/user/addShow}" th:>Watching</a>
-          <a href="#">Rewatching</a>
-          <a href="#">Planned to watch</a>
-          <a href="#">On hold</a>
-          <a href="#">Dropped</a>
-          <a href="#">Completed</a>
-        </div>
-      </div> -->
-
-              <form th:action="@{/user/addShow}" method="post" class="dropdown">
+      <!-- MEDIAPLAYER TRAILER MODAL START-->
+      <button th:if="${show.trailerUrl != null}" id="myBtn" class="trailer-button">Watch trailer</button>
+      <div id="myModal" class="modal">
+      <div class="content-modal">
+        <div class="player-wrapper">
+        <span class="close">&times;</span>
+        <iframe class="mediaPlayer" th:src="${show.trailerUrl}">
+        </iframe>
+      </div>
+      </div>
+    </div>
+       <!-- MEDIAPLAYER TRAILER MODAL END-->
+      
+              <form sec:authorize="isAuthenticated()" th:action="@{/user/addShow}" method="post" id="viewerStatusForm" class="dropdown">
                 <label for="dropdown">Add to my list:</label>
                 <input name="showId" th:value="${show.id}" type="hidden">
-                <select name="status" id="dropdown">
-                  <option th:each="value : ${T(com.TVShows.domain.ViewerStatus).values()}" th:value="${value}"
-                    th:text="${value}"></option>
-
-
-                  <!-- <option value="WATCHING">Watching</option>
-          <option value="REWATCHING">Rewatching</option>
-          <option value="PLANNED_TO_WATCH">Planned to watch</option>
-          <option value="ON_HOLD">On hold</option>
-          <option value="DROPPED">Dropped</option>
-          <option value="COMPLETED">Completed</option> -->
+                <select name="status" id="viewerStatus">
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'WATCHING'}" value="WATCHING">Watching</option>
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'REWATCHING'}" value="REWATCHING">Rewatching</option>
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'PLANNED_TO_WATCH'}" value="PLANNED_TO_WATCH">Planned to watch</option>
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'ON_HOLD'}" value="ON_HOLD">On hold</option>
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'DROPPED'}" value="DROPPED">Dropped</option>
+                  <option th:selected="${usersShows.isPresent() and usersShows.get().getStatus().toString() == 'COMPLETED'}" value="COMPLETED">Completed</option>
+                  <option th:if="${!usersShows.isPresent()}" th:selected="${!usersShows.isPresent()}" value="">Add to list</option>
                 </select>
-                <button type="submit">Submit</button>
               </form>
-
             </div>
-            <div class="show-info">
 
+            <div class="show-info">
               <!-- INFO LEFT -->
               <div class="info-left">
-                <div class="subheadline">INFORMATION</div>
-
-                <div class="info-column"><label>STATUS</label>
-                  <p th:text="${show.status}"></p>
-                </div>
-                <div class="info-column"><label>GENRE</label>
-                  <p th:text="${show.genre}"></p>
-                </div>
-                <div class="info-column"><label>RELEASE DATE</label>
-                  <p th:text="${show.releaseDate}"></p>
-                </div>
-                <div class="info-column"><label>DIRECTORS</label>
-                  <p th:text="${show.directors}"></p>
-                </div>
-                <div class="info-column"><label>ACTORS</label>
-                  <p th:text="${show.actors}"></p>
-                </div>
-                <div class="info-column"><label>NEXT EPISODE</label>
-                  <p th:text="${show.nextEpisode}"></p>
-                </div>
-                <div class="info-column"><label>EPISODE DURATION</label>
-                  <p th:text="${show.episodeDuration}"></p>
-                </div>
-
-
-
-              </div>
-
-              <!-- INFO RIGHT -->
-              <div class="info-right">
-                <div class="subheadline">SCORE</div>
                 <div class="score-wrapper">
                   <span class="fa fa-star checked"></span>
                   <span class="fa fa-star checked"></span>
@@ -104,54 +69,35 @@
                   <span class="fa fa-star"></span>
                 </div>
 
-                <div class="subheadline">PRODUCER</div>
-                <div class="show-producer">
-                  <img src="https://t3.ftcdn.net/jpg/02/20/22/72/360_F_220227286_CN4h2xcUhg6X9celn7MqkKIPyHJd47b7.jpg"
-                    alt="">
+                <div class="info-column"><label>STATUS: </label>
+                  <p th:text="${show.status}"></p>
                 </div>
-              </div>
-            </div>
-
-            <!-- USERS RANKINGS  - FAR RIGHT SECTION -->
-            <div class="show-users-rankings">
-              <div class="users-scores">
-                <div class="subheadline">USERS SCORES</div>
-                <div class="w3-container">
-                  <div class="w3-light-grey w3-round">
-                    <div class="w3-container w3-blue w3-round" style="width:25%">25%</div>
-                  </div><br>
-
-                  <div class="w3-light-grey w3-round-large">
-                    <div class="w3-container w3-blue w3-round-large" style="width:25%">25%</div>
-                  </div><br>
-
-                  <div class="w3-light-grey w3-round-xlarge">
-                    <div class="w3-container w3-blue w3-round-xlarge" style="width:25%">25%</div>
-                  </div>
+                <div class="info-column"><label>GENRE: </label>
+                  <p th:text="${show.genre}"></p>
+                </div>
+                <div class="info-column"><label>RELEASE DATE: </label>
+                  <p th:text="${show.releaseDate}"></p>
+                </div>
+                <div class="info-column"><label>DIRECTORS: </label>
+                  <p th:text="${show.directors}"></p>
+                </div>
+                <div class="info-column"><label>ACTORS: </label>
+                  <p th:text="${show.actors}"></p>
+                </div>
+                <div th:if="${show.nextEpisode != null}" class="info-column"><label>NEXT EPISODE: </label>
+                  <p th:text="${show.nextEpisode}"></p>
+                </div>
+                <div class="info-column"><label>EPISODE DURATION: </label>
+                  <p th:text="${show.episodeDuration}"></p>
                 </div>
 
-              </div>
-              <div class="users-in-lists">
-                <div class="subheadline">IN LISTS OF USERS</div>
 
-                <div class="w3-light-grey w3-round">
-                  <div class="w3-container w3-blue w3-round" style="width:25%">25%</div>
-                </div><br>
 
               </div>
-
-              <div class="show-news">
-                <div class="subheadline">NEWS</div>
-                <div class="show-new-article">
-                  <p> SOME NEWS</p>
-                </div>
-              </div>
-
-
             </div>
           </div>
           <div class="show-description">
-            <div class="subheadline">Description</div>
+            <div class="subheadline">DESCRIPTION</div>
             <div class="info-column description-text-block">
               <p th:text="${show.description}"></p>
             </div>
@@ -162,37 +108,40 @@
           <div class="show-comments">
             <div class="subheadline">COMMENTS</div>
 
-         
-              <div th:each="comment: ${show.comments}" class="comments-wrapper">
-                   <div class="comment-header">
-                    <div class="comment-info">
-                  <img th:if="${comment.author.image != null}" th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img"> </img>
-                  <img th:if="${comment.author.image == null}" class="comment-author-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU"></img>
-                  <div class="comment-author-info">  
-                  <a class="comment-author-name" th:href="@{/profile(user=${comment.author.email})}" th:text="${comment.author.name}">author username</a>
-                  <p class="comment-timestamp" th:text="${comment.date}"></p>
-                    </div>
-              </div>
-              <div class="comment-body">
-                <p class="comment-text" th:text="${comment.text}">comment text...</p>
-              </div>
-            </div>   
-          </div>
 
-          <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
-            <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
-              <div class="form-group">
-                <textarea th:field="${ShowComment.text}" name="text" class="form-control"
-                  placeholder="Enter your comment here.."></textarea>
+            <div th:each="comment: ${show.comments}" class="comments-wrapper">
+              <div class="comment-header">
+                <div class="comment-info">
+                  <img th:if="${comment.author.image != null}"
+                    th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img"> </img>
+                  <img th:if="${comment.author.image == null}" class="comment-author-img"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU"></img>
+                  <div class="comment-author-info">
+                    <a class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
+                      th:text="${comment.author.name}">author username</a>
+                    <p class="comment-timestamp" th:text="${comment.date}"></p>
+                  </div>
+                </div>
+                <div class="comment-body">
+                  <p class="comment-text" th:text="${comment.text}">comment text...</p>
+                </div>
               </div>
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+            </div>
 
-        </div>
+            <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
+              <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
+                <div class="form-group">
+                  <textarea required th:field="${ShowComment.text}" name="text" class="form-control"
+                    placeholder="Enter your comment here.."></textarea>
+                </div>
+                <button id="commentButton" type="submit">Submit</button>
+              </form>
+            </div>
+
+          </div>
   </article>
   <div th:insert="~{footer :: footer}"></div>
-  <script th:src="@{/js/formSubmit.js}"></script>
+  <script th:src="@{/js/singleShow.js}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

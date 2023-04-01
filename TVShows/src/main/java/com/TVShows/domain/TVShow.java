@@ -1,5 +1,7 @@
 package com.TVShows.domain;
 
+import com.TVShows.enums.Genre;
+import com.TVShows.enums.ShowStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,6 +40,9 @@ public class TVShow {
 
     @Column
     private String imageUrl;
+
+    @Column
+    private String trailerUrl;
 
     @Column
     private String nextEpisode;

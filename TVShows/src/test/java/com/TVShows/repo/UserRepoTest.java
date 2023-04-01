@@ -1,6 +1,6 @@
 package com.TVShows.repo;
 
-import com.TVShows.domain.Role;
+import com.TVShows.enums.Role;
 import com.TVShows.domain.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

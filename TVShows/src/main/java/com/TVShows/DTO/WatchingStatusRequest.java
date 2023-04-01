@@ -1,6 +1,6 @@
 package com.TVShows.DTO;
 
-import com.TVShows.domain.ViewerStatus;
+import com.TVShows.enums.ViewerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

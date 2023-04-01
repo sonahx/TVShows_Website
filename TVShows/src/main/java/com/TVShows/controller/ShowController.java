@@ -3,16 +3,15 @@ package com.TVShows.controller;
 import com.TVShows.domain.ShowComment;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShows;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.TVShows.service.UsersShowsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +23,7 @@ public class ShowController {
 
     private final TVShowService showService;
     private final ShowCommentService commentService;
-
+    private final UsersShowsService usersShowsService;
 
     @PostMapping("/add")
     public String addShow(@ModelAttribute TVShow tvShow, Model model) {
@@ -36,19 +35,24 @@ public class ShowController {
     @GetMapping("/{id}")
     public String singleShow(@PathVariable("id") Long id, Model model) {
         Optional<TVShow> tvShow = showService.findShowById(id);
+      User user = (User) model.getAttribute("authenticatedUser");
         if (tvShow.isPresent()) {
             model.addAttribute("show", tvShow.get());
             model.addAttribute("ShowComment", new ShowComment());
+            if(user != null) {
+                Optional<UsersShows> usersShows = usersShowsService.findByShowAndUser(tvShow.get(), user);
+                model.addAttribute("usersShows", usersShows);
+            }
         }
         return "singleShow";
     }
 
     @PostMapping("/{id}/comment")
-    public void addComment(@PathVariable("id") Long id, Model model,
+    public String addComment(@PathVariable("id") Long id, Model model,
                            @ModelAttribute("ShowComment") ShowComment text){
         User user = (User) model.getAttribute("authenticatedUser");
         Optional<TVShow> show = showService.findShowById(id);
-        if (show.isPresent()) {
+        if (show.isPresent() && text.getText().trim().length() >= 1) {
             //create and save comment
             ShowComment comment = new ShowComment();
             comment.setText(text.getText());
@@ -63,5 +67,6 @@ public class ShowController {
             show.get().setComments(currentComments);
             showService.updateShow(show.get());
         }
+        return "redirect:/show/" + show.get().getId();
     }
 }

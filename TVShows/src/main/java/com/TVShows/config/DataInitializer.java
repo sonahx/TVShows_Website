@@ -1,6 +1,9 @@
 package com.TVShows.config;
 
 import com.TVShows.domain.*;
+import com.TVShows.enums.Genre;
+import com.TVShows.enums.Role;
+import com.TVShows.enums.ShowStatus;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
@@ -62,6 +65,7 @@ public class DataInitializer implements CommandLineRunner {
                 ShowStatus.FINISHED,
                 "60 minutes",
                 "Peter Dinklage, Lena Headey, Nikolaj Coster-Waldau, Emilia Clarke, others");
+        show1.setTrailerUrl("https://www.youtube.com/embed/KPLWWIOCOOQ");
 
         TVShow show2 = new TVShow(
                 "Breaking bad",
@@ -74,6 +78,7 @@ public class DataInitializer implements CommandLineRunner {
                 ShowStatus.FINISHED,
                 "60 minutes",
                 "Bryan Cranston, Aaron Paul, Anna Gunn, others");
+        show2.setTrailerUrl("https://www.youtube.com/embed/HhesaQXLuRY");
 
         TVShow show3 = new TVShow(
                 "True Detective",
@@ -89,6 +94,7 @@ public class DataInitializer implements CommandLineRunner {
                 ShowStatus.FINISHED,
                 "60 minutes",
                 "Matthew McConaughey, Woody Harrelson, Michelle Monaghan, others");
+        show3.setTrailerUrl("https://www.youtube.com/embed/fVQUcaO4AvE");
 
         TVShow show4 = new TVShow(
                 "Twin Peaks",
@@ -103,6 +109,7 @@ public class DataInitializer implements CommandLineRunner {
                 ShowStatus.FINISHED,
                 "60 minutes",
                 "Kyle MacLachlan, Michael Ontkean, Mädchen Amick, others");
+        show4.setTrailerUrl("https://www.youtube.com/embed/Zwn9ou_nf-I");
 
         showService.createShow(show1);
         showService.createShow(show2);

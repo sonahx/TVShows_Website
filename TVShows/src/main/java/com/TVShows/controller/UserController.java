@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -47,9 +49,10 @@ public class UserController {
     }
 
     @PostMapping("/addShow")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void addShowToUser(@ModelAttribute WatchingStatusRequest request, Model model,
+    @ResponseBody
+    public Map<String, String> addShowToUser(@ModelAttribute WatchingStatusRequest request, Model model,
                               @ModelAttribute("authenticatedUser") User user) {
+        Map<String, String> response = new HashMap<>();
         Optional<TVShow> show = showService.findShowById(request.getShowId());
         UsersShows existingUsersShows = user.getShows().stream()
                 .filter(s -> s.getTvShow().getId() == request.getShowId())
@@ -69,5 +72,7 @@ public class UserController {
                 usersShowsService.save(newUsersShows);
             }
         }
+        response.put("status", "success");
+        return response;
     }
 }

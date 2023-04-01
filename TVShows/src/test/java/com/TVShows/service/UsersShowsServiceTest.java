@@ -1,6 +1,10 @@
 package com.TVShows.service;
 
 import com.TVShows.domain.*;
+import com.TVShows.enums.Genre;
+import com.TVShows.enums.Role;
+import com.TVShows.enums.ShowStatus;
+import com.TVShows.enums.ViewerStatus;
 import com.TVShows.repo.UsersShowsRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

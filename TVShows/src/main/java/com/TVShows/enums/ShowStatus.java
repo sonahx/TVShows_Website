@@ -1,4 +1,4 @@
-package com.TVShows.domain;
+package com.TVShows.enums;
 
 public enum ShowStatus {
 FINISHED, AIRING, ANNOUNCED

@@ -1,7 +1,10 @@
 package com.TVShows.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.TVShows.domain.TVShow;
+import com.TVShows.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,5 +29,9 @@ public class UsersShowsService {
 	}
 	public List<UsersShows> findAll() {
 		return repo.findAll();
+	}
+
+	public Optional<UsersShows> findByShowAndUser(TVShow tvShow, User user){
+		return repo.findByTvShowAndUser(tvShow, user);
 	}
 }
