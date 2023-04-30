@@ -1,13 +1,12 @@
 package com.TVShows.controller;
 
 import com.TVShows.DTO.RegisterRequest;
+import com.TVShows.service.AuthService;
 import com.TVShows.service.ConfirmationTokenService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.TVShows.service.AuthService;
-import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/auth")

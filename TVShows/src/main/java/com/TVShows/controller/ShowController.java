@@ -3,10 +3,10 @@ package com.TVShows.controller;
 import com.TVShows.domain.ShowComment;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
-import com.TVShows.domain.UsersShows;
+import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
-import com.TVShows.service.UsersShowsService;
+import com.TVShows.service.UsersShowProgressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class ShowController {
 
     private final TVShowService showService;
     private final ShowCommentService commentService;
-    private final UsersShowsService usersShowsService;
+    private final UsersShowProgressService usersShowsService;
 
     @PostMapping("/add")
     public String addShow(@ModelAttribute TVShow tvShow, Model model) {
@@ -40,8 +40,8 @@ public class ShowController {
             model.addAttribute("show", tvShow.get());
             model.addAttribute("ShowComment", new ShowComment());
             if(user != null) {
-                Optional<UsersShows> usersShows = usersShowsService.findByShowAndUser(tvShow.get(), user);
-                model.addAttribute("usersShows", usersShows);
+                Optional<UsersShowProgress> usersShowProgress = usersShowsService.findByShowAndUser(tvShow.get(), user);
+                model.addAttribute("usersShowProgress", usersShowProgress);
             }
         }
         return "singleShow";

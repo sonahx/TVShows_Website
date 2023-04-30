@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head xmlns:th="https://thymeleaf.org">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,6 @@
 
 <body>
     <header th:insert="~{header :: header}"></header>
-
     <article>
         <div class="body-wrapper">
             <!-- profile widget -->
@@ -27,12 +26,11 @@
                         <div class="profile-img">
                             <img th:if="${user.image != null}" th:src="@{'data:image/jpeg;base64,' + ${user.image}}">
                             <img th:if="${user.image == null}"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXKdLelHe1_gJEBeYCCl21kZD9yuetlxC3zDqtf4_JBsLxIMsNIL6sPHGeliTTSRB7g7s&usqp=CAU">
+                                src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png">
                         </div>
-
                             <!-- Photo upload -->
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <form id="uploadForm" th:action="@{/user/image/upload}" th:object="${ImageEncoder}"
+                            <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}" class="fileupload fileupload-new" data-provides="fileupload">
+                                <form id="uploadForm" th:action="@{'/user/' + ${user.id} + '/image/upload'}" th:object="${ImageEncoder}"
                                     method="post" enctype="multipart/form-data">
                                     <span class="btn btn-primary btn-file"><span class="fileupload-new">Select
                                             file</span>
@@ -52,8 +50,6 @@
                             <h5 th:text="${user.name}">
                                 profile username
                             </h5>
-
-
 
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -96,7 +92,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +104,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +117,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +129,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +141,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -158,15 +154,14 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status}">Show status</p>
+                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- end of profile widget -->
+
                         </div>
                     </div>
-
 
                 </div>
 
@@ -185,13 +180,12 @@
         </div>
     </article>
 
-
     <footer th:insert="~{footer :: footer}"></footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/formCustomSubmission.js}"></script>
     <script th:src="@{/js/image.js}"></script>
     <script th:src="@{/js/profile.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-
 </html>

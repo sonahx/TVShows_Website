@@ -1,8 +1,8 @@
 package com.TVShows.service;
 
+import com.TVShows.domain.TVShow;
 import com.TVShows.enums.Genre;
 import com.TVShows.enums.ShowStatus;
-import com.TVShows.domain.TVShow;
 import com.TVShows.repo.TVShowRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -88,17 +88,24 @@ public class TVShowServiceTest {
     }
 
     private TVShow createTVShow() {
-        return new TVShow("Breaking Bad", "date", Genre.DRAMA, "Vince Gilligan",
-                "desc", "jpeg", "12.02", ShowStatus.AIRING, "60m", "some actors");
-
+        TVShow show = new TVShow();
+        show.setName("Breaking Bad");
+        show.setReleaseDate("date");
+        show.setGenre(Genre.DRAMA);
+        show.setDirectors("Vince Gilligan");
+        show.setDescription("desc");
+        show.setImageUrl("jpeg");
+        show.setNextEpisode("12.02");
+        show.setStatus(ShowStatus.AIRING);
+        show.setEpisodeDuration("60m");
+        show.setActors("some actors");
+        return show;
     }
 
     private List<TVShow> createTVShowList() {
         return List.of(
                 createTVShow(),
-                new TVShow("Game of Thrones", "date", Genre.DRAMA, "David Benioff, D. B. Weiss",
-                        "desc", "jpeg",
-                        "12.02", ShowStatus.AIRING, "60 minutes", "some actors")
+                createTVShow()
         );
     }
 }

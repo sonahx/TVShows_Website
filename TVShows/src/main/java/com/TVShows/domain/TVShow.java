@@ -3,9 +3,7 @@ package com.TVShows.domain;
 import com.TVShows.enums.Genre;
 import com.TVShows.enums.ShowStatus;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,9 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TVShow")
-@Data
-@NoArgsConstructor
-@EqualsAndHashCode
+@NoArgsConstructor @Getter @Setter @EqualsAndHashCode
 public class TVShow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +20,9 @@ public class TVShow {
 
     @Column
     private String name;
+
+    @Column
+    private Integer episodesNumber;
 
     @Column
     private String releaseDate;
@@ -38,7 +37,8 @@ public class TVShow {
     @Column(name = "description", length = 1000)
     private String description;
 
-    @Column
+    @Lob
+    @Column(name = "imageUrl", length = 1000)
     private String imageUrl;
 
     @Column
@@ -58,22 +58,8 @@ public class TVShow {
     private String actors;
 
     @OneToMany(mappedBy = "tvShow", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<UsersShows> shows = new HashSet<>();
+    private Set<UsersShowProgress> userProgress = new HashSet<>();
 
     @OneToMany(mappedBy = "tvShow", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ShowComment> comments = new ArrayList<>();
-
-    public TVShow(String name, String releaseDate, Genre genre, String directors, String description,
-                  String imageUrl, String nextEpisode, ShowStatus status, String episodeDuration, String actors) {
-        this.name = name;
-        this.releaseDate = releaseDate;
-        this.genre = genre;
-        this.directors = directors;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.nextEpisode = nextEpisode;
-        this.status = status;
-        this.episodeDuration = episodeDuration;
-        this.actors = actors;
-    }
 }

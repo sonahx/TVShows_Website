@@ -1,15 +1,13 @@
 package com.TVShows.service;
 
-import java.util.Optional;
-
-import com.TVShows.DTO.RegisterRequest;
+import com.TVShows.domain.User;
+import com.TVShows.repo.UserRepo;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.TVShows.domain.User;
-import com.TVShows.repo.UserRepo;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,12 +17,10 @@ public class UserService {
     private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public User findUserById(Long id) {
-        logger.info("Looking for user with id: {}", id);
         return userRepo.getReferenceById(id);
     }
 
     public Optional<User> findByEmail(String email) {
-        logger.info("Looking for user with email: {}", email);
         return userRepo.findByEmail(email);
     }
 

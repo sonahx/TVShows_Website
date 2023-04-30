@@ -1,5 +1,6 @@
 package com.TVShows.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -7,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import lombok.RequiredArgsConstructor;
 
 @EnableWebSecurity
 @Configuration
@@ -19,16 +18,25 @@ public class SecurityConfig {
 
 	  @Bean
 	  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http
-	        .authorizeHttpRequests()
-	        .requestMatchers("/home", "/","/auth", "/auth/**","/login", "/verification", "/css/**",
-	        		"/success","/profile","/pictures/**","/show/**", "/login?logout", "/js/**")
-	        .permitAll()
+		  http
+	        .authorizeHttpRequests().requestMatchers(
+					"/home", "/page", "/shows", "/",
+					"/auth", "/auth/**",  "/login", "/verification",
+					"/success","/profile","/show/**", "", "/login?logout",
+					"/pictures/**", "/css/**", "/js/**")
+				  .permitAll()
 
-				.and().authorizeHttpRequests()
-				.requestMatchers("/show/{id}/comment").hasRole("USER")
-				.and().authorizeHttpRequests()
-				.requestMatchers("/tvshowform").hasRole("ADMINISTRATOR")
+				  .and().authorizeHttpRequests().requestMatchers(
+						  "/show/{id}/comment",
+						  "/user/{id}/decrement",
+						  "/user/{id}/increment",
+						  "/user/addShow",
+						  "/user/image/upload")
+				  .hasRole("USER")
+
+				  .and().authorizeHttpRequests().requestMatchers(
+						  "/tvshowform")
+				  .hasRole("ADMINISTRATOR")
 	        
 	        .anyRequest()
 	        .authenticated()

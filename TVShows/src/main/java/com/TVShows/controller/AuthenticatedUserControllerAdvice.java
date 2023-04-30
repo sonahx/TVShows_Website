@@ -1,15 +1,14 @@
 package com.TVShows.controller;
 
-import java.util.Optional;
-
+import com.TVShows.domain.User;
+import com.TVShows.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.TVShows.domain.User;
-import com.TVShows.service.UserService;
-import lombok.RequiredArgsConstructor;
+import java.util.Optional;
 
 @ControllerAdvice
 @RequiredArgsConstructor

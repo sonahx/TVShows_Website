@@ -1,17 +1,22 @@
 package com.TVShows.controller;
 
 import com.TVShows.DTO.ImageEncoder;
+import com.TVShows.domain.TVShow;
+import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShowProgress;
+import com.TVShows.service.TVShowService;
+import com.TVShows.service.UserService;
+import com.TVShows.service.UsersShowProgressService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.TVShows.domain.TVShow;
-import com.TVShows.domain.User;
-import com.TVShows.service.TVShowService;
-import com.TVShows.service.UserService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,6 +24,7 @@ public class MainController {
 
 	private final TVShowService TVshowService;
 	private final UserService userService;
+	private final UsersShowProgressService usersShowProgressService;
 
 	@GetMapping("/")
 	public String rootPage() {
@@ -27,8 +33,23 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		model.addAttribute("shows", TVshowService.findAllShows());
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 5);
+		model.addAttribute("page", page);
 		return "home";
+	}
+
+	@GetMapping("/shows")
+	public String shows(Model model) {
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		model.addAttribute("page", page);
+		return "redirect:/page?page=0&size=10";
+	}
+
+	@GetMapping("/page")
+	public String switchPage(@RequestParam int page, @RequestParam int size, Model model) {
+		Page<TVShow> pageAttr = TVshowService.findAllShowsWithPagination(page, size);
+		model.addAttribute("page", pageAttr);
+		return "shows";
 	}
 
 	@GetMapping("/tvshowform")
@@ -45,9 +66,9 @@ public class MainController {
 	
 	@GetMapping("/profile")
 	public String profile(@RequestParam("user") String name, Model model) {
-		User user = userService.findByUsername(name).orElseThrow(()->
+		User profileUser = userService.findByUsername(name).orElseThrow(()->
 		new UsernameNotFoundException("username not found"));
-		model.addAttribute("user", user);
+		model.addAttribute("user", profileUser);
 		model.addAttribute("image", new ImageEncoder());
 		return "profile";
 	}

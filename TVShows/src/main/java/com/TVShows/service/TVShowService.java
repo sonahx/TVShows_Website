@@ -1,15 +1,16 @@
 package com.TVShows.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 import com.TVShows.domain.TVShow;
 import com.TVShows.repo.TVShowRepo;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,11 @@ public class TVShowService {
     public List<TVShow> findAllShows() {
         logger.info("Looking for all the shows");
         return showRepo.findAll();
+    }
+
+    public Page<TVShow> findAllShowsWithPagination(int page, int size) {
+        logger.info("Looking for all the shows with pagination");
+        return showRepo.findAll(PageRequest.of(page,size));
     }
 
     public void updateShow(TVShow show) {

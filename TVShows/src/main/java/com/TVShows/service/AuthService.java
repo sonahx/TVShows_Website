@@ -3,15 +3,14 @@ package com.TVShows.service;
 import com.TVShows.DTO.EmailBuilder;
 import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
+import com.TVShows.domain.User;
+import com.TVShows.enums.Role;
 import com.TVShows.repo.EmailSender;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.TVShows.enums.Role;
-import com.TVShows.domain.User;
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

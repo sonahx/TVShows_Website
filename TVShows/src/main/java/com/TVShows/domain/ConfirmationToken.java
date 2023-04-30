@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @NoArgsConstructor
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class ConfirmationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

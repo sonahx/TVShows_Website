@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,48 +21,33 @@
     <article>
         <div class="body-wrapper">
 
-
-            <!-- carousel start -->
             <div class="block-1">
                 <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
-            <div th:if="${shows != null}" class="container">
-                <div th:each="show: ${shows}">
-                    <a th:href="@{'/show/' + ${show.id}}">
+            <div th:if="${page != null}" class="show-container">
+                <div th:each="show: ${page}">        
                <div class="item item-1">
+                <a th:href="@{'/show/' + ${show.id}}">
                 <img th:src="${show.imageUrl}" class="show-img"></img>
-                  <div class="body-item"> 
-                    <div class="title body-item-2">Show name</div>
-                    <div class="properties body-item-3">
-                      <span class="match">% 98 Match</span>
-                      <span class="year">2012</span>
-                      <span class="age-limit">13+</span>
-                      <span class="time">2h 13m</span>
-                    </div>
-                    <p class="description body-item-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius alias libero..</p>
-                    <!--  Additional details button
-                        <div class="body-item-5">
-                      <i class="details-icon icon-chevron-down"></i>
-                    </div> -->
-                    <div class="icon-set body-item-6">
-                      <!-- <i class="icon-thumbs-up"></i>
-                      <i class="icon-thumbs-down"></i> -->
-                      <i class="icon-plus"></i>
-                    </div>
-                  </div>
+              </a>
                 </div> 
-            </a> 
             </div>                    
               </div>
             </div>
-<!-- carousel end -->
+
+              <form th:action="@{'/shows'}">
+                <input type="submit" class="showsBtn" value="all shows" />
+             </form>
+
+
 
 <div class="block-2">
     <div class="subheadline"><a href="#">NEWS</a></div>
+
     <div class="container">  
          <div class="body-item">  
-        <div class="title body-item-2">SOME NEWS TITLE</div>
+        <div class="title body-item-2">TO:DO</div>
         <div class="properties body-item-3">
-          <span class="match">TEXT</span>
+          <span class="match"></span>
         </div>
         <p class="description body-item-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius alias libero..</p>
       </div>

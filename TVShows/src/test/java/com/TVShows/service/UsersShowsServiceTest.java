@@ -1,11 +1,13 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.*;
+import com.TVShows.domain.TVShow;
+import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.Genre;
 import com.TVShows.enums.Role;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.enums.ViewerStatus;
-import com.TVShows.repo.UsersShowsRepo;
+import com.TVShows.repo.UsersShowProgressRepo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,22 +28,20 @@ import static org.mockito.Mockito.when;
 class UsersShowsServiceTest {
 
     @Mock
-    private UsersShowsRepo repo;
+    private UsersShowProgressRepo repo;
     @InjectMocks
-    private UsersShowsService service;
+    private UsersShowProgressService service;
     @Captor
-    private ArgumentCaptor<UsersShows> usersShowsCaptor;
+    private ArgumentCaptor<UsersShowProgress> usersShowsCaptor;
 
     @Test
     @DisplayName("Test save method")
     void shouldSaveUsersShows() {
         // Given
-        UsersShows usersShows = new UsersShows();
+        UsersShowProgress usersShows = new UsersShowProgress();
         usersShows.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
-        usersShows.setTvShow(new TVShow("showname", "releasedate",
-                Genre.DRAMA, "directors", "descs", "url",
-                "nextepi", ShowStatus.AIRING, "duration", "actors"));
+        usersShows.setTvShow(createTVShow());
         usersShows.setStatus(ViewerStatus.WATCHING);
 
         // When
@@ -49,7 +49,7 @@ class UsersShowsServiceTest {
 
         // Then
         verify(repo).save(usersShowsCaptor.capture());
-        UsersShows savedUsersShows = usersShowsCaptor.getValue();
+        UsersShowProgress savedUsersShows = usersShowsCaptor.getValue();
         assertEquals(usersShows, savedUsersShows);
     }
 
@@ -57,30 +57,41 @@ class UsersShowsServiceTest {
     @DisplayName("Test findAll method")
     void shouldFindAllUsersShows() {
         // Given
-        UsersShows usersShows1 = new UsersShows();
+        UsersShowProgress usersShows1 = new UsersShowProgress();
         usersShows1.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
-        usersShows1.setTvShow(new TVShow("showname", "releasedate",
-                Genre.DRAMA, "directors", "descs", "url",
-                "nextepi", ShowStatus.AIRING, "duration", "actors"));
+        usersShows1.setTvShow(createTVShow());
         usersShows1.setStatus(ViewerStatus.WATCHING);
 
-        UsersShows usersShows2 = new UsersShows();
+        UsersShowProgress usersShows2 = new UsersShowProgress();
         usersShows2.setUser(User.builder().name("LanaDoe").email("lanadoe@example.com")
                 .password("securepassword").roles(Role.USER).build());
-        usersShows2.setTvShow(new TVShow("showname 2", "releasedate 2",
-                Genre.DRAMA, "directors 2", "descs 2", "url 2",
-                "nextepi 2", ShowStatus.AIRING, "duration 2", "actors 2"));
+        usersShows2.setTvShow(createTVShow());
         usersShows2.setStatus(ViewerStatus.DROPPED);
 
-        List<UsersShows> usersShowsList = Arrays.asList(usersShows1, usersShows2);
+        List<UsersShowProgress> usersShowsList = Arrays.asList(usersShows1, usersShows2);
 
         // When
         when(repo.findAll()).thenReturn(usersShowsList);
-        List<UsersShows> result = service.findAll();
+        List<UsersShowProgress> result = service.findAll();
 
         // Then
         assertEquals(usersShowsList, result);
         verify(repo).findAll();
+    }
+
+    private TVShow createTVShow() {
+        TVShow show = new TVShow();
+        show.setName("Breaking Bad");
+        show.setReleaseDate("date");
+        show.setGenre(Genre.DRAMA);
+        show.setDirectors("Vince Gilligan");
+        show.setDescription("desc");
+        show.setImageUrl("jpeg");
+        show.setNextEpisode("12.02");
+        show.setStatus(ShowStatus.AIRING);
+        show.setEpisodeDuration("60m");
+        show.setActors("some actors");
+        return show;
     }
 }

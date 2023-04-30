@@ -83,3 +83,44 @@ const form = document.getElementById('commentButton').addEventListener("click", 
     }, 1000);
   }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const incrementBtn = document.getElementById('increment');
+  const decrementBtn = document.getElementById('decrement');
+  const progress = document.getElementById('progress');
+  const maxValue = document.getElementById('episodeMaxValue');
+
+function updateButtonState() {
+  const currentProgress = Number(progress.textContent);
+  const maxProgress = Number(maxValue.textContent);
+  if (currentProgress === 0) {
+    decrementBtn.classList.add('hidden');
+    incrementBtn.classList.remove('hidden');
+  } else if (currentProgress === maxProgress) {
+    incrementBtn.classList.add('hidden');
+    decrementBtn.classList.remove('hidden');
+  } else {
+    incrementBtn.classList.remove('hidden');
+    decrementBtn.classList.remove('hidden');
+  }
+}
+
+incrementBtn.addEventListener("click", function(event) {
+  const currentProgress = Number(progress.textContent);
+  const maxProgress = Number(maxValue.textContent);
+  if (currentProgress < maxProgress) {
+    progress.textContent = currentProgress + 1;
+  }
+  updateButtonState();
+});
+
+  decrementBtn.addEventListener("click", function(event) {
+    const currentProgress = Number(progress.textContent);
+    if (currentProgress > 0) {
+      progress.textContent = currentProgress - 1;
+    }
+  updateButtonState();
+  });
+   updateButtonState(); // initial state
+});
+
