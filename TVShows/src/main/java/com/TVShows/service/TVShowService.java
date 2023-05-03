@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,11 @@ public class TVShowService {
     public List<TVShow> findAllShows() {
         logger.info("Looking for all the shows");
         return showRepo.findAll();
+    }
+
+    public List<TVShow> findShowsByKeyword(String keyword){
+        logger.info("Looking for show by keyword '{}'", keyword);
+        return showRepo.findShowsByKeyword(keyword);
     }
 
     public Page<TVShow> findAllShowsWithPagination(int page, int size) {

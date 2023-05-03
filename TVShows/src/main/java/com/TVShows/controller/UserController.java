@@ -31,7 +31,7 @@ public class UserController {
     private final UsersShowProgressService usersShowProgressService;
     private final UsersShowProgressRepo usersShowProgressRepo;
 
-    @GetMapping("/user/get/{id}")
+    @GetMapping("/get/{id}")
     public void getUserInfo(@PathVariable Long id, Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
@@ -49,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/addShow")
+    @PostMapping("/addShow")
     public String addShowToUser(@ModelAttribute WatchingStatusRequest request, Model model,
                                 @ModelAttribute("authenticatedUser") User user) {
         Optional<TVShow> show = showService.findShowById(request.getShowId());
@@ -69,7 +69,7 @@ public class UserController {
         return "home";
     }
 
-    @PostMapping("/user/{show}/{operation}")
+    @PostMapping("/{show}/{operation}")
     public String changeEpisodeProgress(@PathVariable TVShow show, @PathVariable String operation, Model model) {
         User user = (User) model.getAttribute("authenticatedUser");
         Optional<UsersShowProgress> progress = usersShowProgressService.findByShowAndUser(show, user);

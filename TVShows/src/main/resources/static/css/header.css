@@ -19,3 +19,31 @@
 text-decoration: none;
 color: white;
 }
+.search-results > div {
+background: white;
+border: 1px solid black;
+}
+
+.search-results > div > a{
+display: flex;
+    flex-flow: column nowrap;
+    place-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.search-box{
+width: 300px;
+}
+#search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: 10px; /* Change this value to adjust the spacing between results */
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 9999;
+}

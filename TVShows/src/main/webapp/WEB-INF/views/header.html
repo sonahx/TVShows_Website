@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -42,16 +43,18 @@
                             </ul>
                             <ul class="nav navbar-nav">
                                 <li>
+
+                                    <!-- SEARCH START -->
                                     <form action="" class="navbar-form">
                                         <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="search" name="search" id=""
-                                                    placeholder="Search Anything Here..." class="form-control">
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-search"></span></span>
+                                            <div class="input-group search-box">
+                                                <input type="search" name="search" id="search"
+                                                    placeholder="Search for a show..." class="form-control">
                                             </div>
-                                        </div>
+                                        </div>     
+                                        <div id="search-results" class="dropdown search-results"></div>  
                                     </form>
+                                     <!-- SEARCH END -->
                                 </li>
                             </ul>
 
@@ -73,10 +76,10 @@
                    </div>
                 </div>
             </div>
-        </div>
+        </div>  
+        <script th:src="@{/js/search.js}"></script> 
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-
 </html>

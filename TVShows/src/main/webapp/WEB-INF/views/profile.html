@@ -13,6 +13,7 @@
     <link th:href="@{/css/body.css}" rel="stylesheet">
     <link th:href="@{/css/profile.css}" rel="stylesheet">
     <link th:href="@{/css/image.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -92,7 +93,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +105,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +118,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +130,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +142,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +155,7 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.status} + ' ' + ${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
+                                        <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +186,6 @@
     <script th:src="@{/js/image.js}"></script>
     <script th:src="@{/js/profile.js}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

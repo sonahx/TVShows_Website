@@ -2,12 +2,14 @@ package com.TVShows.domain;
 
 import com.TVShows.enums.ViewerStatus;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users_shows")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode(exclude = "user")
 public class UsersShowProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

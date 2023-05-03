@@ -19,14 +19,7 @@ public class SecurityConfig {
 	  @Bean
 	  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		  http
-	        .authorizeHttpRequests().requestMatchers(
-					"/home", "/page", "/shows", "/",
-					"/auth", "/auth/**",  "/login", "/verification",
-					"/success","/profile","/show/**", "", "/login?logout",
-					"/pictures/**", "/css/**", "/js/**")
-				  .permitAll()
-
-				  .and().authorizeHttpRequests().requestMatchers(
+				  .authorizeHttpRequests().requestMatchers(
 						  "/show/{id}/comment",
 						  "/user/{id}/decrement",
 						  "/user/{id}/increment",
@@ -37,7 +30,15 @@ public class SecurityConfig {
 				  .and().authorizeHttpRequests().requestMatchers(
 						  "/tvshowform")
 				  .hasRole("ADMINISTRATOR")
-	        
+
+				  .and().authorizeHttpRequests().requestMatchers(
+					"/home", "/page", "/shows", "/",
+					"/auth", "/auth/**",  "/login", "/verification", "/show/search/**",
+					"/success","/profile", "/show/**","/search/**","/search", "", "/login?logout",
+					"/pictures/**", "/css/**", "/js/**")
+				  .permitAll()
+
+
 	        .anyRequest()
 	        .authenticated()
 	        .and()
