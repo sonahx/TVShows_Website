@@ -34,13 +34,13 @@ public class ShowController {
 
     @GetMapping("/{id}")
     public String singleShow(@PathVariable("id") Long id, Model model) {
-        Optional<TVShow> tvShow = showService.findShowById(id);
-      User user = (User) model.getAttribute("authenticatedUser");
-        if (tvShow.isPresent()) {
-            model.addAttribute("show", tvShow.get());
+        TVShow tvShow = showService.findShowById(id).orElse(null);
+        User user = (User) model.getAttribute("authenticatedUser");
+        if (tvShow != null) {
+            model.addAttribute("show", tvShow);
             model.addAttribute("ShowComment", new ShowComment());
-            if(user != null) {
-                Optional<UsersShowProgress> usersShowProgress = usersShowsService.findByShowAndUser(tvShow.get(), user);
+            if (user != null) {
+                Optional<UsersShowProgress> usersShowProgress = usersShowsService.findByShowAndUser(tvShow, user);
                 model.addAttribute("usersShowProgress", usersShowProgress);
             }
         }
@@ -49,24 +49,24 @@ public class ShowController {
 
     @PostMapping("/{id}/comment")
     public String addComment(@PathVariable("id") Long id, Model model,
-                           @ModelAttribute("ShowComment") ShowComment text){
+                             @ModelAttribute("ShowComment") ShowComment text) {
         User user = (User) model.getAttribute("authenticatedUser");
-        Optional<TVShow> show = showService.findShowById(id);
-        if (show.isPresent() && text.getText().trim().length() >= 1) {
+        TVShow show = showService.findShowById(id).orElse(null);
+        if (show != null && text.getText().trim().length() >= 1) {
             //create and save comment
             ShowComment comment = new ShowComment();
             comment.setText(text.getText());
             comment.setAuthor(user);
-            comment.setTvShow(show.get());
+            comment.setTvShow(show);
             comment.setDate(LocalDateTime.now());
             commentService.save(comment);
 
             //update TVShow
-            List<ShowComment> currentComments = show.get().getComments();
+            List<ShowComment> currentComments = show.getComments();
             currentComments.add(comment);
-            show.get().setComments(currentComments);
-            showService.updateShow(show.get());
+            show.setComments(currentComments);
+            showService.updateShow(show);
         }
-        return "redirect:/show/" + show.get().getId();
+        return "redirect:/show/" + show.getId();
     }
 }
