@@ -159,6 +159,10 @@
               </div>
             </div>
 
+            <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comment-body">
+              <p class="comment-text">No comments posted yet.</p>
+            </div>
+
             <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
               <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
                 <div class="form-group">

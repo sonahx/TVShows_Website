@@ -1,8 +1,10 @@
 package com.TVShows.controller;
 
 import com.TVShows.DTO.ImageEncoder;
+import com.TVShows.domain.NewsArticle;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
+import com.TVShows.service.NewsArticleService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
 import com.TVShows.service.UsersShowProgressService;
@@ -20,7 +22,7 @@ public class MainController {
 
 	private final TVShowService TVshowService;
 	private final UserService userService;
-	private final UsersShowProgressService usersShowProgressService;
+	private final NewsArticleService newsArticleService;
 
 	@GetMapping("/")
 	public String rootPage() {
@@ -29,8 +31,11 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 5);
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		Page<NewsArticle> newsPage = newsArticleService.findAllShowsWithPagination(0, 5);
+
 		model.addAttribute("page", page);
+		model.addAttribute("newsPage", newsPage);
 		return "home";
 	}
 

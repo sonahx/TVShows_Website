@@ -90,7 +90,7 @@
                                 <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'WATCHING'}"
                                     class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
@@ -102,7 +102,7 @@
                                 <div th:each="show: ${user.shows}"
                                     th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
@@ -115,7 +115,7 @@
                                 <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'COMPLETED'}"
                                     class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
@@ -127,7 +127,7 @@
                                 <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'REWATCHING'}"
                                     class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
@@ -139,7 +139,7 @@
                                 <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'ON_HOLD'}"
                                     class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>
@@ -152,7 +152,7 @@
                                 <div th:each="show: ${user.shows}" th:if="${show.status.toString() == 'DROPPED'}"
                                     class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.episodeProgress} + ' / ' + ${show.tvShow.episodesNumber}">Show status</p>

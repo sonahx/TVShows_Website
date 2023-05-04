@@ -50,6 +50,7 @@ display: flex;
 	color: black;
 	margin: 0px auto;
 	margin-top: 15px;
+	box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
 .subheadline > p {

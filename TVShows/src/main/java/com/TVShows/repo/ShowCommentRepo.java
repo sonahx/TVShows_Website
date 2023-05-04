@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ShowCommentRepo extends JpaRepository<ShowComment,Long>{
+public interface ShowCommentRepo extends JpaRepository<ShowComment, Long>{
 
     List<ShowComment> findAllShowCommentsByTvShowId(Long showId);
 }

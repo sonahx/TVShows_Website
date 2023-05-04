@@ -28,7 +28,7 @@
                 <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
-               <div class="item item-1">
+               <div class="item item-1 item-shadow">
                 <a th:href="@{'/show/' + ${show.id}}">
                 <img th:src="${show.imageUrl}" class="show-img"></img>
               </a>
@@ -42,24 +42,24 @@
              </form>
 
 
-
+<!-- NEWS -->
 <div class="block-2">
     <div class="subheadline"><a href="#">NEWS</a></div>
 
-    <div class="container">  
-         <div class="body-item">  
-        <div class="title body-item-2">TO:DO</div>
-        <div class="properties body-item-3">
-          <span class="match"></span>
-        </div>
-        <p class="description body-item-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius alias libero..</p>
-      </div>
-    </div>  
+    <div th:if="${newsPage != null}" class="show-container">
+      <div th:each="newsArticle: ${newsPage}">        
+     <div class="item item-1">
+      <a th:href="@{'/news/' + ${newsArticle.id}}">
+      <img th:src="${newsArticle.imageUrl}" class="newsArticle-img"></img>
+      <p class="newsArticle-title" th:text="${newsArticle.name}"></p>
+    </a>
+      </div> 
+  </div>                    
+    </div> 
 </div> 
  </article>
 
     <footer th:insert="~{footer :: footer}"></footer>
-    <!-- <script th:src="@{/js/search.js}"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

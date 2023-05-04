@@ -1,9 +1,6 @@
 package com.TVShows.controller;
 
-import com.TVShows.domain.ShowComment;
-import com.TVShows.domain.TVShow;
-import com.TVShows.domain.User;
-import com.TVShows.domain.UsersShowProgress;
+import com.TVShows.domain.*;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UsersShowProgressService;
@@ -52,7 +49,7 @@ public class ShowController {
                              @ModelAttribute("ShowComment") ShowComment text) {
         User user = (User) model.getAttribute("authenticatedUser");
         TVShow show = showService.findShowById(id).orElse(null);
-        if (show != null && text.getText().trim().length() >= 1) {
+        if (show != null && user != null && text.getText().trim().length() >= 1) {
             //create and save comment
             ShowComment comment = new ShowComment();
             comment.setText(text.getText());
@@ -67,6 +64,6 @@ public class ShowController {
             show.setComments(currentComments);
             showService.updateShow(show);
         }
-        return "redirect:/show/" + show.getId();
+        return "redirect:/show/" + id;
     }
 }

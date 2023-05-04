@@ -33,7 +33,7 @@ public class SecurityConfig {
 
 				  .and().authorizeHttpRequests().requestMatchers(
 					"/home", "/page", "/shows", "/",
-					"/auth", "/auth/**",  "/login", "/verification", "/show/search/**",
+					"/auth", "/auth/**",  "/login", "/verification", "/show/search/**","/news", "/news/**",
 					"/success","/profile", "/show/**","/search/**","/search", "", "/login?logout",
 					"/pictures/**", "/css/**", "/js/**")
 				  .permitAll()
