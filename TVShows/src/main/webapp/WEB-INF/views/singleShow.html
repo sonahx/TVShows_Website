@@ -150,7 +150,7 @@
                   <div class="comment-author-info">
                     <a class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
                       th:text="${comment.author.name}">author username</a>
-                    <p class="comment-timestamp" th:text="${comment.date}"></p>
+                    <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
                   </div>
                 </div>
                 <div class="comment-body">

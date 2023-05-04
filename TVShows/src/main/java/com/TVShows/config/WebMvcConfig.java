@@ -39,5 +39,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         .mediaType("xml", MediaType.APPLICATION_XML)
         .mediaType("form", MediaType.APPLICATION_FORM_URLENCODED);
     }
-
 }

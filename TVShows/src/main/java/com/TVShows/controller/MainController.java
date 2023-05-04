@@ -3,7 +3,6 @@ package com.TVShows.controller;
 import com.TVShows.DTO.ImageEncoder;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
-import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
 import com.TVShows.service.UsersShowProgressService;
@@ -14,9 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

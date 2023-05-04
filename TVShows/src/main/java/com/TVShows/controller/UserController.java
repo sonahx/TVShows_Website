@@ -1,16 +1,8 @@
 package com.TVShows.controller;
 
 import com.TVShows.DTO.ImageEncoder;
-import com.TVShows.DTO.WatchingStatusRequest;
-import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
-import com.TVShows.domain.UsersShowProgress;
-import com.TVShows.enums.ViewerStatus;
-import com.TVShows.exceptions.WrongOperationException;
-import com.TVShows.repo.UsersShowProgressRepo;
-import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
-import com.TVShows.service.UsersShowProgressService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
