@@ -25,6 +25,15 @@ public class AuthService {
     public void register(RegisterRequest request) {
         String requestedUsername = request.getUsername();
         String requestedEmail = request.getEmail();
+        String requestedPassword = request.getPassword();
+
+        if (requestedUsername.length() < 6
+                || requestedUsername.length() > 20
+                || requestedEmail.length() < 6
+                || !requestedEmail.contains("@")
+                || requestedPassword.length() < 6) {
+            throw new IllegalArgumentException("Registration credentials doesn't meet the requirements");
+        }
 
         // Check if user with requested username already exists
         if (userService.findByUsername(requestedUsername).isPresent()) {
