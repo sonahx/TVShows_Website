@@ -163,7 +163,7 @@
               <p class="comment-text">No comments posted yet.</p>
             </div>
 
-            <div sec:authorize="hasRole('ROLE_USER')" class="comment-form">
+            <div sec:authorize="isAuthenticated()" class="comment-form">
               <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
                 <div class="form-group">
                   <textarea required th:field="${ShowComment.text}" name="text" class="form-control"

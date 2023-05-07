@@ -25,10 +25,10 @@ public class SecurityConfig {
 						  "/user/{id}/increment",
 						  "/user/addShow",
 						  "/user/image/upload")
-				  .hasRole("USER")
+				  .hasAnyRole("USER", "ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(
-						  "/tvshowform")
+						  "/tvshowform", "/news/create")
 				  .hasRole("ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(

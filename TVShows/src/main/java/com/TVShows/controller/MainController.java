@@ -36,6 +36,7 @@ public class MainController {
 
 		model.addAttribute("page", page);
 		model.addAttribute("newsPage", newsPage);
+		model.addAttribute("NewsArticle", new NewsArticle());
 		return "home";
 	}
 

@@ -42,6 +42,14 @@
                     </div>
 
                     <div class="form-group">
+                        <input type="number" th:field="*{episodesNumber}" name="episodesNumber" class="form-control" placeholder="Episodes number"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" th:field="*{trailerUrl}" name="trailerUrl" class="form-control" placeholder="Trailer url"/>
+                    </div>
+
+                    <div class="form-group">
                         <input type="text" th:field="*{directors}" name="directors" class="form-control" placeholder="Directors"/>
                     </div>
 
@@ -72,7 +80,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <textarea name="description" th:field="*{description}" class="form-control" placeholder="Description"
-                            style="width: 100%; height: 150px;"></textarea>
+                            style="width: 100%; height: 525px;"></textarea>
                     </div>
                 </div>
             </div>

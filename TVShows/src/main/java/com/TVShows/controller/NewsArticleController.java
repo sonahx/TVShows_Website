@@ -53,4 +53,21 @@ public class NewsArticleController {
         }
         return "redirect:/news/" + id;
     }
+
+    @PostMapping("/create")
+    public String createNewsArticle(@ModelAttribute NewsArticle newsArticle, Model model) {
+        User user = (User) model.getAttribute("authenticatedUser");
+
+        if (newsArticle != null && user != null) {
+    NewsArticle createArticle = new NewsArticle();
+            createArticle.setName(newsArticle.getName());
+            createArticle.setRelatedTo(newsArticle.getRelatedTo());
+            createArticle.setAuthor(user);
+            createArticle.setText(newsArticle.getText());
+            createArticle.setImageUrl(newsArticle.getImageUrl());
+            createArticle.setDate(LocalDateTime.now());
+            newsArticleService.save(createArticle);
+        }
+        return "redirect:/home";
+    }
 }

@@ -26,7 +26,7 @@ public class ShowController {
     public String addShow(@ModelAttribute TVShow tvShow, Model model) {
         showService.createShow(tvShow);
         model.addAttribute("show", tvShow);
-        return "tvshowform";
+        return "redirect:/show/" + tvShow.getId();
     }
 
     @GetMapping("/{id}")

@@ -35,7 +35,8 @@ public class NewsArticle {
     @Column(nullable = false)
     private LocalDateTime date;
 
-    @Column
+    @Lob
+    @Column(name = "imageUrl", length = 200, nullable = false)
     private String imageUrl;
 
     @OneToMany(mappedBy = "newsArticle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

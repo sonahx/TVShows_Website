@@ -1,9 +1,10 @@
 package com.TVShows.service;
 
 import com.TVShows.domain.NewsArticle;
-import com.TVShows.domain.TVShow;
 import com.TVShows.repo.NewsArticleRepo;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,14 @@ import java.util.Optional;
 public class NewsArticleService {
 
     private final NewsArticleRepo newsArticleRepo;
+    private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public Optional<NewsArticle> findById(Long id){
         return newsArticleRepo.findById(id);
     }
 
     public NewsArticle save(NewsArticle newsArticle){
+        logger.info("Creating new News Article: {}, tag: {}", newsArticle.getName(), newsArticle.getRelatedTo());
         return newsArticleRepo.save(newsArticle);
     }
 
