@@ -5,6 +5,7 @@
     align-content: space-around;
 }
 .show-content{
+    margin-top: 100px;
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
@@ -214,11 +215,6 @@ text-align: center;
 
 .fa{
 font-size: 28px;
-}
-
-/* SEASON MODAL */
-.container {
-  padding: 2rem 0rem;
 }
 
 h4 {

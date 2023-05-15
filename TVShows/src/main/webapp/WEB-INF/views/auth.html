@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Log in</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link type="text/css" th:href="@{/css/header.css}" rel="stylesheet">
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div th:insert="~{header :: header}"></div> 
-	<div class="container" id="container">
+	<div class="wrapper" id="wrapper">
         <div class="form-container sign-up-container">
             <form th:action="@{/auth/register}" method="post">
                 <h1>Create Account</h1>

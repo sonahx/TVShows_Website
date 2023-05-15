@@ -19,7 +19,7 @@
     <div th:insert="~{header :: header}"></div>
 <article>
 
-    <div class="container contact-form">
+    <div class="container show-form">
         <form  th:action="@{/show/add}" th:object="${TVShow}" method="post">
             <h3>Creating TV Show</h3>
             <div class="row">
@@ -35,9 +35,6 @@
                         <datalist id="genreList">
                             <option th:each="value : ${T(com.TVShows.enums.Genre).values()}" th:value="${value}"
                     th:text="${value}"></option>
-                            <!-- <option value="DRAMA">  
-                            <option value="WESTERN">
-                            <option value="HORROR"></option> -->
                           </datalist>
                     </div>
 

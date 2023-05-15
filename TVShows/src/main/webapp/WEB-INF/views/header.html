@@ -12,71 +12,72 @@
 
 <body>
     <div th:fragment="header">
-        <div class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
+        <body id="page-top" class="index" data-pinterest-extension-installed="cr1.3.4">
 
-                        <div class="navbar-header">
-                            <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
-                                    class="icon-bar"></span><span class="icon-bar"></span><span
-                                    class="icon-bar"></span></button>
-                            <a th:href="@{/home}" class="navbar-brand logo-link"><img
-                                    th:src="@{/pictures/weatherpen.svg}" class="brand-logo"></a>
-                                    <a th:href="@{/home}" class="header-title-name">WHATEPISODE</a>
-                        </div>
-
-                        <div class="navbar-collapse collapse" id="mobile_menu">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<span
-                                            class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">About One</a></li>
-                                        <li><a href="#">About Two</a></li>
-                                        <li><a href="#">About Three</a></li>
-                                        <li><a href="#">About Four</a></li>
-                                        <li><a href="#">About Five</a></li>
-                                        <li><a href="#">About Six</a></li>
-                                    </ul>
-                                </li>
-                                <li><a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" th:href="@{/tvshowform}">Create TV Show</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav">
-                                <li>
-
-                                    <!-- SEARCH START -->
-                                    <form action="" class="navbar-form">
-                                        <div class="form-group">
-                                            <div class="input-group search-box">
-                                                <input type="search" name="search" id="search"
-                                                    placeholder="Search for a show..." class="form-control">
-                                            </div>
-                                        </div>     
-                                        <div id="search-results" class="dropdown search-results"></div>  
-                                    </form>
-                                     <!-- SEARCH END -->
-                                </li>
-                            </ul>
-
-                            <div th:if="${#authentication.principal != null}">
-
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a sec:authorize="isAuthenticated()" th:href="@{/profile(user=${authenticatedUser.name})}" th:text="${authenticatedUser.name}">
-                                    <span class="glyphicon glyphicon-user"></span>Profile</a></li>
-                                <li><a sec:authorize="isAnonymous()" th:href="@{/auth}" class="dropdown-toggle"><span
-                                            class="glyphicon glyphicon-log-in"></span> Login / Sign Up</a>
-                                <li>
-            <!-- <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}"> -->
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="">Logout</a>
-            <!-- </form> -->
-                                </li>
-                            </ul>
-                        </div>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand page-scroll" th:href="@{/home}">WhatEpisode</a>
                     </div>
-                   </div>
+        
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden active">
+                                <a href="#page-top"></a>
+                            </li>
+
+                            <li>
+                                <!-- SEARCH START -->
+                                <form action="" class="navbar-form">
+                                    <div class="form-group">
+                                        <div class="input-group search-box">
+                                            <input type="search" name="search" id="search"
+                                                placeholder="Search for a show..." class="form-control">
+                                        </div>
+                                    </div>     
+                                    <div id="search-results" class="dropdown search-results"></div>  
+                                </form>
+                                 <!-- SEARCH END -->
+                            </li>
+
+                            <li class="">
+                                <a class="page-scroll" th:href="@{'/shows'}">Shows</a>
+                            </li>
+                            <li class="">
+                                <a class="page-scroll" href="#about">About</a>
+                            </li>
+                            <li class="">
+                                <a class="page-scroll" href="#team">Team</a>
+                            </li>
+                            <li class="">
+                                <a class="page-scroll" href="#contact">Contact</a>
+                            </li>
+                            <li class="">
+                                <a a sec:authorize="isAnonymous()" th:href="@{/auth}" class="page-scroll">Login</a>
+                            </li>
+                            <li class="">
+                                <a class="page-scroll" sec:authorize="isAuthenticated()" th:href="@{/profile(user=${authenticatedUser.name})}" th:text="${authenticatedUser.name}">Profile</a>
+                            </li>
+                            <li class="">
+                                <a class="page-scroll" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-            </div>
-        </div>  
+                <!-- /.container-fluid -->
+            </nav>
+    
+        <span style="height: 20px; width: 40px; min-height: 20px; min-width: 40px; position: absolute; opacity: 0.85; z-index: 8675309; display: none; cursor: pointer; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAADU0lEQVR42s2WXUhTYRjHz0VEVPRFUGmtVEaFUZFhHxBhsotCU5JwBWEf1EWEEVHQx4UfFWYkFa2biPJiXbUta33OXFtuUXMzJ4bK3Nqay7m5NeZq6h/tPQ+xU20zugjOxR/+7/O8539+5znnwMtNTExwJtMb3L/fiLv3botCSmUjeCaejTOb39AiFothfHxcFIrHY8RksZjBsckJcOIRMfFsHD/SsbExUYpnI8DR0dGUGjSb0byhEJp5Uqg5CTSzc2CQleJbMEj9/ywBcGRkJEk9DQqouEVQT1sK444yWI9UonmTjGqauVLEIlHa9x8lAMbj8SSpp0rwKGMVvg8P46vbg0C7na8z8JsMcgHe7jlEa+edRhiLy8n/TUMfu6EvLElk+U0WtGwrTrdfAGQf5J8iiK4LVzDU28t8JtMSocf8E+l68myaNFXm/6rXslLK7ay5TOunuRvZWpJuvwAYjUaTpOIWoquuAZ219RTaxKYp9BbjycoN5FvL9qH9TBX5rvoGdJythvXYSTxdtRnWylO/ZdqrLsGwszzhWQ593z2KlAwCYCQSSZJ6ehZ0W7bD9VBLgN0NCqr3qR7R2rBrL3pu3Sb/7nDlz2uy6cG0OXk0GTbZXzNp8trsPAQdTj6frlWzN2DcXZGKQQAMh8NJ6rpyHe+PnkCr/CAFdZyvpfpjuvkifLF9wIt1Wwlo0OHie1RvWrKa93RjzfzliTzPKz3ltB0/Tevmwp14wGUgHAzSOoUEwFAolFaaBSuhnslPRkJexUJtZ6v5HtUeLswl33n1BgEY5fvhs9sJ3FAiT+QYyyvoAQJuD0KBAFRTJNAuz5/s3gJgMBhMJwrVFRThM5tY5zUF/A4X1f2fvQTRLCuBreoim0YmAbqNJryvPEXeeq46kaNdkQ/1HCncbJKPs9ZSv2VHGfWsZ2hfkhKAfr8/pdxWKx4wwD69PmVfNSOL+lr2w+gYqHpWDtXt1xQ8AMlWU0e1lqLd/APRHoP8AJqWrQG9gYxcPMsvSJUvAA4MDKTUJ7MZLaVy8v+qT21tcDx/OemePr0RTkNrur4A6PP5xCgBsL+/X4wiQDpuuVxOeL1eMYmYeDY6sOp0z+B0OuHxeEQhxkJMFosJiSO/UinOI/8Pc+l7KKArAT8AAAAASUVORK5CYII=);"></span></body>
         <script th:src="@{/js/search.js}"></script> 
     </div>
 

@@ -18,9 +18,9 @@ header{ min-height:50px;}
 footer{ min-height:50px;}
 
 .body-wrapper {
-	width: 85%;
+/*	width: 85%;*/
 	min-height: 80vh;
-	margin: 0 auto;
+	margin: 80px auto;
 	background-color: #efefef;
 	display: flex;
 	flex-wrap: nowrap;
