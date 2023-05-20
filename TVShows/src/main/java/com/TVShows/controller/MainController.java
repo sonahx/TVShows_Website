@@ -74,4 +74,24 @@ public class MainController {
 		model.addAttribute("image", new ImageEncoder());
 		return "profile";
 	}
+
+	@GetMapping("/about")
+	public String about() {
+		return "about";
+	}
+
+	@GetMapping("/team")
+	public String team() {
+		return "team";
+	}
+
+	@GetMapping("/contact")
+	public String contact() {
+		return "contact";
+	}
+
+	@GetMapping("/policy")
+	public String policy() {
+		return "policy";
+	}
 }
