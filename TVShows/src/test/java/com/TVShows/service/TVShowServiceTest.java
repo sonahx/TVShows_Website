@@ -1,7 +1,6 @@
 package com.TVShows.service;
 
 import com.TVShows.domain.TVShow;
-import com.TVShows.enums.Genre;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.repo.TVShowRepo;
 import org.junit.jupiter.api.DisplayName;
@@ -91,7 +90,6 @@ public class TVShowServiceTest {
         TVShow show = new TVShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
-        show.setGenre(Genre.DRAMA);
         show.setDirectors("Vince Gilligan");
         show.setDescription("desc");
         show.setImageUrl("jpeg");

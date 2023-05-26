@@ -1,12 +1,12 @@
 package com.TVShows.domain;
 
-import com.TVShows.enums.Genre;
 import com.TVShows.enums.ShowStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.*;
 
@@ -22,13 +22,27 @@ public class TVShow {
     private String name;
 
     @Column
+    private String originCountry;
+
+    @Column
+    private String originalName;
+
+    @Column
+    @ColumnDefault("0")
     private Integer episodesNumber;
 
     @Column
     private String releaseDate;
 
-    @Enumerated(EnumType.STRING)
-    private Genre genre;
+    @ManyToMany
+    @JoinColumn(name = "Genre_id", nullable = false)
+    private List<Genre> genre;
+
+    @Column
+    private Double voteAverage;
+
+    @Column
+    private Integer voteCount;
 
     @Lob
     private String directors;

@@ -1,6 +1,9 @@
 package com.TVShows.controller;
 
-import com.TVShows.domain.*;
+import com.TVShows.domain.ShowComment;
+import com.TVShows.domain.TVShow;
+import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.service.ShowCommentService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UsersShowProgressService;

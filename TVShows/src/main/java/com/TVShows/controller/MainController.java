@@ -7,7 +7,6 @@ import com.TVShows.domain.User;
 import com.TVShows.service.NewsArticleService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
-import com.TVShows.service.UsersShowProgressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -3,7 +3,6 @@ package com.TVShows.service;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
-import com.TVShows.enums.Genre;
 import com.TVShows.enums.Role;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.enums.ViewerStatus;
@@ -84,7 +83,6 @@ class UsersShowsServiceTest {
         TVShow show = new TVShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
-        show.setGenre(Genre.DRAMA);
         show.setDirectors("Vince Gilligan");
         show.setDescription("desc");
         show.setImageUrl("jpeg");
