@@ -9,9 +9,11 @@ import com.TVShows.service.TVShowService;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import lombok.RequiredArgsConstructor;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,9 @@ public class ShowsInitializer implements CommandLineRunner {
     private final Moshi moshi = new Moshi.Builder().build();
     private final JsonAdapter<TVShowResponse> adapter = moshi.adapter(TVShowResponse.class);
 
+    @Value("${themoviedb.token}")
+    private String token;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -35,7 +40,7 @@ public class ShowsInitializer implements CommandLineRunner {
                 .url("https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1")
                 .get()
                 .addHeader("accept", "application/json")
-                .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNmMzOGM1NDlkZTM2YTNlOWZmYTQ5YzYyN2IzMTU5NSIsInN1YiI6IjY0NjkxZDlkMDA2YjAxMDEwNThhMzU3MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x7CRoCF6kNGo6l0w5DHYNGwl5eYhIlKzlHs7T9pN7R0")
+                .addHeader("Authorization", token)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -49,7 +54,6 @@ public class ShowsInitializer implements CommandLineRunner {
                 results.forEach(result -> {
                     TVShow show = new TVShow();
                     List<Genre> genres = genreService.mapIdsToGenres(result.getGenre_ids());
-
                     show.setStatus(ShowStatus.AIRING);
                     show.setName(result.getName());
                     show.setEpisodesNumber(10); // TODO: - IMPLEMENT SEASONS AND EPISODE NUMBERS FETCHING

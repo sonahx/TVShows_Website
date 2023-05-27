@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,9 @@ public class GenresInitializer implements CommandLineRunner {
     private final Moshi moshi = new Moshi.Builder().build();
     private final JsonAdapter<GenreResponse> adapter = moshi.adapter(GenreResponse.class);
 
+    @Value("${themoviedb.token}")
+    private String token;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -31,7 +35,7 @@ public class GenresInitializer implements CommandLineRunner {
                 .url("https://api.themoviedb.org/3/genre/tv/list?language=en")
                 .get()
                 .addHeader("accept", "application/json")
-                .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNmMzOGM1NDlkZTM2YTNlOWZmYTQ5YzYyN2IzMTU5NSIsInN1YiI6IjY0NjkxZDlkMDA2YjAxMDEwNThhMzU3MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x7CRoCF6kNGo6l0w5DHYNGwl5eYhIlKzlHs7T9pN7R0")
+                .addHeader("Authorization", token)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
