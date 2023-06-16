@@ -11,10 +11,10 @@ viewing experience. Users are able to organize their favorite shows and keep tra
 progress. Interactive community features allows users to connect with other users and 
 engage in discussions.
 
+<h1> </h1>
 
-![image](https://github.com/peles-taras/TVShows_Website/assets/92885035/7f56a832-ce14-4e2b-9eee-f6bc4ec86e91)
+![image](https://github.com/peles-taras/TVShows_Website/assets/92885035/a94995f6-2d50-4a34-a54c-ab141bc2c129)
 
-<br>
 
 ## Connect with Me <img src="https://github.com/peles-taras/peles-taras/assets/92885035/524e4e12-adf9-4ea2-8133-cc61ca2b4db6" alt="Shop Icon" style="height: 20px; width: 20px; vertical-align: middle; margin-right: 5px;">
 Feel free to reach out to me or connect with me on the following platforms:
