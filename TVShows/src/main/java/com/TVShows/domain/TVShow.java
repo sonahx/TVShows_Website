@@ -1,6 +1,7 @@
 package com.TVShows.domain;
 
 import com.TVShows.enums.ShowStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class TVShow {
     @Column
     private String releaseDate;
 
+    @JsonIgnore
     @ManyToMany
     @JoinColumn(name = "Genre_id", nullable = false)
     private List<Genre> genre;
