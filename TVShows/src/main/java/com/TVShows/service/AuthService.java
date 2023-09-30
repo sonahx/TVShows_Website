@@ -5,7 +5,6 @@ import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
-import com.TVShows.repo.EmailSender;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final ConfirmationTokenService tokenService;
-    private final EmailSender emailSender;
+//    private final EmailSender emailSender;
+    private final MailSenderService mailSenderService;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     public void register(RegisterRequest request) {
@@ -58,6 +58,11 @@ public class AuthService {
         // Create and send confirmation link
         ConfirmationToken token = tokenService.generateToken(user);
         String link = "http://localhost:8080/auth/confirm?token=" + token.getToken();
-        emailSender.send(requestedEmail, EmailBuilder.build(requestedUsername, link));
+//        emailSender.send(requestedEmail, EmailBuilder.build(requestedUsername, link));
+        mailSenderService.sendEmail(
+                requestedEmail,
+                "confirm your email",
+                EmailBuilder.build(requestedUsername, link)
+                );
     }
 }

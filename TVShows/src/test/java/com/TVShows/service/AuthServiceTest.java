@@ -5,7 +5,6 @@ import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
-import com.TVShows.repo.EmailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ class AuthServiceTest {
     @Mock
     private ConfirmationTokenService tokenService;
     @Mock
-    private EmailSender emailSender;
+    private MailSenderService mailSenderService;
     @InjectMocks
     private AuthService authService;
     @Captor
@@ -72,7 +71,11 @@ class AuthServiceTest {
         assertEquals("encoded_password", createdUser.getPassword());
         assertEquals(Role.USER, createdUser.getRoles());
         verify(tokenService).generateToken(createdUser);
-        verify(emailSender).send(request.getEmail(), EmailBuilder.build(request.getUsername(), "http://localhost:8080/auth/confirm?token=token"));
+        verify(mailSenderService).sendEmail(
+                request.getEmail(),
+                "confirm your email",
+                EmailBuilder.build(request.getUsername(), "http://localhost:8080/auth/confirm?token=token")
+                );
     }
 
     @Test
@@ -87,7 +90,7 @@ class AuthServiceTest {
         // Verify that no user was created
         verify(userService, never()).createUser(any());
         verify(tokenService, never()).save(any());
-        verify(emailSender, never()).send(any(), any());
+        verify(mailSenderService, never()).sendEmail(any(), any(),any());
     }
 
     @Test
@@ -102,6 +105,6 @@ class AuthServiceTest {
         // Verify that no user was created
         verify(userService, never()).createUser(any());
         verify(tokenService, never()).save(any());
-        verify(emailSender, never()).send(any(), any());
+        verify(mailSenderService, never()).sendEmail(any(), any(),any());
     }
 }
