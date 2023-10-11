@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/home.css}" rel="stylesheet">
+    <link th:href="@{/css/body.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <header th:insert="~{header :: header}"></header>
+
+    <article>
+        <div class="body-wrapper">
+
+            <div class="block-1">
+                <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
+            <div th:if="${page != null}" class="show-container">
+                <div th:each="show: ${page}">        
+               <div class="item item-1">
+                <a th:href="@{'/show/' + ${show.id}}">
+                <img th:src="${show.imageUrl}" class="show-img"></img>
+              </a>
+                </div> 
+            </div>                    
+              </div>
+            </div>
+
+        <div class="pagination">
+          <ul class="pagination-list">
+              <li th:class="${page.number == 0} ? disabled">
+                  <span>&laquo;</span>
+              </li>
+              <li th:class="${pageNumber == 0}? active" th:each="pageNumber : ${#numbers.sequence(0, page.totalPages-1)}">
+                  <a th:if="${pageNumber != page.number}" th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}" th:text="${pageNumber + 1}"></a>
+                  <span th:if="${pageNumber == page.number}" th:text="${pageNumber + 1}"></span>
+              </li>
+              <li th:class="${page.number == page.totalPages - 1} ? disabled">
+                  <span>&raquo;</span>
+              </li>
+          </ul>
+      </div>     
+ </article>
+
+    <footer th:insert="~{footer :: footer}"></footer>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -11,10 +11,12 @@
 	<groupId>TVShows</groupId>
 	<artifactId>TVShows </artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>TVShows </name>
 	<description>Demo project for TVShows application</description>
 	<properties>
 		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
