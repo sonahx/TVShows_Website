@@ -57,7 +57,7 @@ public class AuthService {
 
         // Create and send confirmation link
         ConfirmationToken token = tokenService.generateToken(user);
-        String link = "http://localhost:8080/auth/confirm?token=" + token.getToken();
+        String link = "https://whatepisode.online/auth/confirm?token=" + token.getToken();
 //        emailSender.send(requestedEmail, EmailBuilder.build(requestedUsername, link));
         mailSenderService.sendEmail(
                 requestedEmail,
