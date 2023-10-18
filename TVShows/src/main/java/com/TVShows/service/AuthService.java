@@ -8,6 +8,7 @@ import com.TVShows.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,10 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final ConfirmationTokenService tokenService;
-//    private final EmailSender emailSender;
     private final MailSenderService mailSenderService;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
+    @Value("${domain.prod.url}")
+    private String url;
 
     public void register(RegisterRequest request) {
         String requestedUsername = request.getUsername();
@@ -57,7 +59,7 @@ public class AuthService {
 
         // Create and send confirmation link
         ConfirmationToken token = tokenService.generateToken(user);
-        String link = "https://whatepisode.online/auth/confirm?token=" + token.getToken();
+        String link = url + "/auth/confirm?token=" + token.getToken();
 //        emailSender.send(requestedEmail, EmailBuilder.build(requestedUsername, link));
         mailSenderService.sendEmail(
                 requestedEmail,

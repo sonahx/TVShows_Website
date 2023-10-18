@@ -74,7 +74,7 @@ class AuthServiceTest {
         verify(mailSenderService).sendEmail(
                 request.getEmail(),
                 "confirm your email",
-                EmailBuilder.build(request.getUsername(), "https://whatepisode.online/auth/confirm?token=token")
+                EmailBuilder.build(request.getUsername(), "http://localhost:8080/auth/confirm?token=token")
                 );
     }
 
