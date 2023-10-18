@@ -14,6 +14,7 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -39,6 +40,9 @@ class AuthServiceTest {
     private ArgumentCaptor<User> userCaptor;
 
     private RegisterRequest registerRequest;
+
+    @Value("${domain.prod.url}")
+    private String url;
 
     @BeforeEach
     void setUp() {
@@ -74,7 +78,7 @@ class AuthServiceTest {
         verify(mailSenderService).sendEmail(
                 request.getEmail(),
                 "confirm your email",
-                EmailBuilder.build(request.getUsername(), "http://localhost:8080/auth/confirm?token=token")
+                EmailBuilder.build(request.getUsername(), url + "/auth/confirm?token=token")
                 );
     }
 
