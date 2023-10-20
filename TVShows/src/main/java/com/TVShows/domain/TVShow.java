@@ -1,5 +1,6 @@
 package com.TVShows.domain;
 
+import com.TVShows.enums.ShowStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class TVShow {
 
     @Column
     private Integer voteCount;
+
+    @Enumerated(EnumType.STRING)
+    private ShowStatus status;
 
     @Lob
     @Column(name = "imageUrl", length = 1000)

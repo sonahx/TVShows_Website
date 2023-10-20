@@ -127,7 +127,7 @@
                 <div sec:authorize="isAuthenticated()" class="info-column progress-column"><label>Progress</label>
                   <p id="progress" class="progressValue" th:if="${usersShowProgress.isPresent()}" th:text="${usersShowProgress.get().getEpisodeProgress()}">0</p>
                   <p id="progress" class="progressValue" th:if="${!usersShowProgress.isPresent()}" th:text="'0'">0</p>
-                  <p  th:text= " '/ ' + ${show.episodesNumber}"></p>
+                  <p  th:text= " '/ ' + ${show.number_of_episodes}"></p>
 
                     <!-- EPISODE TRACKING -->
                     <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} + '/increment'}" method="post">
