@@ -8,7 +8,8 @@ import java.util.List;
 
 @Entity
 @Table
-@Getter @Setter
+@Getter
+@Setter
 public class Genre {
     @Id
     private Long id;
@@ -17,5 +18,5 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genre")
-  private List<TVShow> shows;
+    private List<TVShow> shows;
 }

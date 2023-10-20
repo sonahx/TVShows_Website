@@ -35,7 +35,7 @@ public class ShowProgressController {
         // The show is already in the user's shows, so update the status
         if (existingProgress != null) {
             if(request.getStatus().equals(ViewerStatus.COMPLETED)){
-                existingProgress.setEpisodeProgress(existingProgress.getTvShow().getEpisodesNumber());
+                existingProgress.setEpisodeProgress(existingProgress.getTvShow().getNumber_of_episodes());
             }
             existingProgress.setStatus(request.getStatus());
             usersShowProgressService.update(existingProgress);
@@ -44,7 +44,7 @@ public class ShowProgressController {
         else {
             UsersShowProgress newUsersShows = new UsersShowProgress(user, show, 0, request.getStatus());
             if(request.getStatus().equals(ViewerStatus.COMPLETED)){
-                newUsersShows.setEpisodeProgress(newUsersShows.getTvShow().getEpisodesNumber());
+                newUsersShows.setEpisodeProgress(newUsersShows.getTvShow().getNumber_of_episodes());
             }
             user.getShows().add(newUsersShows);
             usersShowProgressService.save(newUsersShows);
@@ -60,11 +60,11 @@ public class ShowProgressController {
 
         switch (operation) {
             case "increment" -> {
-                if (progress != null && show.getEpisodesNumber() > progress.getEpisodeProgress()) {
+                if (progress != null && show.getNumber_of_episodes() > progress.getEpisodeProgress()) {
                     progress.setEpisodeProgress(progress.getEpisodeProgress() + 1);
 
                     // Set status COMPLETED if reached max value
-                    if (progress.getEpisodeProgress().equals(show.getEpisodesNumber())) {
+                    if (progress.getEpisodeProgress().equals(show.getNumber_of_episodes())) {
                         progress.setStatus(ViewerStatus.COMPLETED);
                     }
                     usersShowProgressService.update(progress);

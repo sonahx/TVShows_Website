@@ -83,8 +83,8 @@
                   <span class="fa fa-star"></span>
                 </div>
 
-                <div th:if="${show.status != null}" class="info-column"><label>STATUS: </label>
-                  <p th:text="${show.status}"></p>
+                <div th:if="${show.show_status != null}" class="info-column"><label>STATUS: </label>
+                  <p th:text="${show.show_status}"></p>
                 </div>
                 <div th:if="${show.genre != null}" class="info-column"><label>GENRE: </label>
                   <p>
@@ -93,35 +93,36 @@
                     <span th:if="${!iterStat.last}">,</span>
                   </p>
                 </div>
-                <div th:if="${show.originCountry != null}" class="info-column"><label>COUNTRY: </label>
-                  <p th:text="${show.originCountry}"></p>
-                </div>
-                <div th:if="${!show.originalName.equals(show.name)}" class="info-column"><label>ORIGINAL NAME: </label>
-                  <p th:text="${show.originalName}"></p>
-                </div>
                 <div th:if="${show.voteAverage != null}" class="info-column"><label>SCORE:</label>
-                  <p th:text="${show.voteAverage}"></p>
+                  <p th:text="${show.voteAverage}" formatDecimal="1"></p>
                 </div>
                 <div th:if="${show.voteCount != null}" class="info-column"><label>VOTES:</label>
                   <p th:text="${show.voteCount}"></p>
                 </div>
+                <div th:if="${show.languages != null}" class="info-column"><label>LANGUAGES: </label>
+                  <p> 
+                    <span th:each="language, iterStat : ${show.languages}">
+                      <span th:utext="${language}"></span>
+                      <span th:if="${!iterStat.last}">,</span>
+                  </p>
+                </div>
+                <div th:if="${show.origin_country != null}" class="info-column"><label>COUNTRY: </label>
+                  <p th:text="${show.origin_country}"></p>
+                </div>
+                <div th:if="${!show.originalName.equals(show.name)}" class="info-column"><label>ORIGINAL NAME: </label>
+                  <p th:text="${show.originalName}"></p>
+                </div>
                 <div th:if="${show.releaseDate != null}" class="info-column"><label>RELEASE DATE: </label>
                   <p th:text="${show.releaseDate}"></p>
                 </div>
-                <div th:if="${show.directors != null}" class="info-column"><label>DIRECTORS: </label>
-                  <p th:text="${show.directors}"></p>
+                <div th:if="${show.last_air_date != null}" class="info-column"><label>LAST AIR: </label>
+                  <p th:text="${show.last_air_date}"></p>
                 </div>
-                <div th:if="${show.actors != null}" class="info-column"><label>ACTORS: </label>
-                  <p th:text="${show.actors}"></p>
+                <div th:if="${show.number_of_episodes != null}" class="info-column"><label>EPISODES: </label>
+                  <p id="episodeMaxValue" th:text="${show.number_of_episodes}">0</p>
                 </div>
-                <div th:if="${show.nextEpisode != null}" class="info-column"><label>NEXT EPISODE: </label>
-                  <p th:text="${show.nextEpisode}"></p>
-                </div>
-                <div th:if="${show.episodeDuration != null}" class="info-column"><label>EPISODE DURATION: </label>
-                  <p th:text="${show.episodeDuration}"></p>
-                </div>
-                <div th:if="${show.episodesNumber != null}" class="info-column"><label>EPISODES: </label>
-                  <p id="episodeMaxValue" th:text="${show.episodesNumber}">0</p>
+                <div th:if="${show.number_of_seasons != null}" class="info-column"><label>SEASONS: </label>
+                  <p th:text="${show.number_of_seasons}"></p>
                 </div>
                 <div sec:authorize="isAuthenticated()" class="info-column progress-column"><label>Progress</label>
                   <p id="progress" class="progressValue" th:if="${usersShowProgress.isPresent()}" th:text="${usersShowProgress.get().getEpisodeProgress()}">0</p>
@@ -145,9 +146,9 @@
             </div>
           </div>
           <div class="show-description">
-            <div class="subheadline">DESCRIPTION</div>
+            <div class="subheadline">OVERVIEW</div>
             <div class="info-column description-text-block">
-              <p th:text="${show.description}"></p>
+              <p th:text="${show.overview}"></p>
             </div>
           </div>
 
