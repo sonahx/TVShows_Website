@@ -13,7 +13,7 @@ import java.util.List;
 public class ShowResponse {
     private Integer id;
     private Boolean adult;
-    private String backdrop_path;
+    private String poster_path;
     private List<Author> created_by;
     private String first_air_date;
     private List<Genre> genres;

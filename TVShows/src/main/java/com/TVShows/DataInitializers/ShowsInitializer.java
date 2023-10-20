@@ -66,7 +66,7 @@ public class ShowsInitializer implements CommandLineRunner {
                     show.setName(showResponse.getName());
                     show.setNumber_of_episodes(showResponse.getNumber_of_episodes());
                     show.setNumber_of_seasons(showResponse.getNumber_of_seasons());
-                    show.setImageUrl("https://image.tmdb.org/t/p/original" + showResponse.getBackdrop_path());
+                    show.setImageUrl("https://image.tmdb.org/t/p/original" + showResponse.getPoster_path());
                     show.setReleaseDate(showResponse.getFirst_air_date());
                     show.setOrigin_country(showResponse.getOrigin_country().toString().substring(1, showResponse.getOrigin_country().toString().length() - 1));
                     show.setOriginalName(showResponse.getOriginal_name());
