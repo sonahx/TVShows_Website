@@ -41,7 +41,7 @@ class AuthServiceTest {
 
     private RegisterRequest registerRequest;
 
-    @Value("${domain.prod.url}")
+    @Value("${domain.test.url}")
     private String url;
 
     @BeforeEach

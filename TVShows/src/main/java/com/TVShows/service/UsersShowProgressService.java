@@ -44,7 +44,7 @@ public class UsersShowProgressService {
 				progress.getUser().getName(),
 				progress.getTvShow().getName(),
 				progress.getStatus(),
-				(progress.getEpisodeProgress() + "/" + progress.getTvShow().getEpisodesNumber()));
+				(progress.getEpisodeProgress() + "/" + progress.getTvShow().getNumber_of_episodes()));
 		repo.save(progress);
 	}
 }
