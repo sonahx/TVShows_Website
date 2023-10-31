@@ -5,12 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table
 @NoArgsConstructor @Getter @Setter
 public class Season {
     @Id
-    private Integer id;
+    private Long id;
 
     @Column
     private String name;
@@ -30,4 +33,7 @@ public class Season {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
     private TVShow tvShow;
+
+    @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<SeasonProgress> seasonProgress = new ArrayList<>();
 }

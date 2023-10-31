@@ -45,9 +45,12 @@
 
               <form sec:authorize="isAuthenticated()" th:action="@{/user/addShow}" method="post" id="viewerStatusForm"
                class="dropdown">
-                <label for="dropdown">Add to my list:</label>
+                <label for="dropdown" class="dropdown-label">Status:</label>
                 <input name="showId" th:value="${show.id}" type="hidden">
                 <select name="status" id="viewerStatus">
+                  <option
+                  th:selected="${usersShowProgress.isPresent() and usersShowProgress.get().getStatus().toString() == 'DEFAULT'}"
+                  value="WATCHING">Add to list</option>
                   <option
                     th:selected="${usersShowProgress.isPresent() and usersShowProgress.get().getStatus().toString() == 'WATCHING'}"
                     value="WATCHING">Watching</option>
@@ -124,21 +127,32 @@
                 <div th:if="${show.number_of_seasons != null}" class="info-column"><label>SEASONS: </label>
                   <p th:text="${show.number_of_seasons}"></p>
                 </div>
-                <div sec:authorize="isAuthenticated()" class="info-column progress-column"><label>Progress</label>
-                  <p id="progress" class="progressValue" th:if="${usersShowProgress.isPresent()}" th:text="${usersShowProgress.get().getEpisodeProgress()}">0</p>
-                  <p id="progress" class="progressValue" th:if="${!usersShowProgress.isPresent()}" th:text="'0'">0</p>
-                  <p  th:text= " '/ ' + ${show.number_of_episodes}"></p>
 
-                    <!-- EPISODE TRACKING -->
-                    <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} + '/increment'}" method="post">
-                      <button type="submit" class="trackingButton" id="increment">+</button>
-                    </form>
-  
-                    <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} + '/decrement'}" method="post">
-                      <button type="submit" class="trackingButton" id="decrement">-</button>
-                    </form>
-                    <!-- EPISODE TRACKING END -->
-                </div>
+    <!-- Loop through the seasons and display progress for each -->
+    <div class="season-wrapper">
+      <div th:each="season : ${show.seasons}"> 
+        <div class="season-block">
+          <p class="season-name" th:text="${'Season ' + season.season_number + ' - '}"></p>  
+          <input type="hidden" id="episodeMaxValue" th:value="${season.episode_count}" />    
+          <p class="progressValue" th:each="seasonProgress: ${seasonProgressList}" th:if="${seasonProgress.season.id == season.id}">
+            <span id="progressValue" class="progressValue" th:text="${seasonProgress.progress + ' ' + '/' + ' '}" data-progress="${seasonProgress.progress}"></span>
+          </p>
+        <p class="episode-count" th:text="' ' + ${season.episode_count}"></p>
+        <!-- TRACKING BUTTONS-->
+          <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} +'/'+ ${season.id} +'/increment'}" method="post">
+            <button type="submit" class="trackingButton" id="increment">+</button>
+          </form>
+    
+          <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} +'/' + ${season.id} + '/decrement'}" method="post">
+            <button type="submit" class="trackingButton" id="decrement">-</button>
+          </form>
+          <!--TRACKING BUTTONS END -->
+        </div>
+      </div>
+    </div>
+
+
+
 
 
 

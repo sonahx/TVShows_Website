@@ -42,7 +42,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Builder.Default
-    private Set<UsersShowProgress> shows = new HashSet<>();
+    private Set<UsersShowProgress> showProgresses = new HashSet<>();
 
     public List<String> getRoleList() {
         if (this.roles.name().length() > 0) {

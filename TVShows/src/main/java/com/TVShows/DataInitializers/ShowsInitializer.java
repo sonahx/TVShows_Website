@@ -1,10 +1,8 @@
 package com.TVShows.DataInitializers;
 
 import com.TVShows.apiResponse.ShowResponse;
-import com.TVShows.domain.Author;
-import com.TVShows.domain.Genre;
-import com.TVShows.domain.Network;
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.*;
+import com.TVShows.service.SeasonService;
 import com.TVShows.service.TVShowService;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -26,6 +24,7 @@ import java.util.List;
 public class ShowsInitializer implements CommandLineRunner {
 
     private final TVShowService showService;
+    private final SeasonService seasonService;
     private final OkHttpClient client = new OkHttpClient();
     private final Moshi moshi = new Moshi.Builder().add(new LocalDateTimeAdapter()).build();
     private final JsonAdapter<ShowResponse> adapter = moshi.adapter(ShowResponse.class);
@@ -41,7 +40,7 @@ public class ShowsInitializer implements CommandLineRunner {
 
         for (int i = 1; i < ids.length; i++) {
             Request request = new Request.Builder()
-//
+
                     .url("https://api.themoviedb.org/3/tv/" + ids[i] + "?language=en-US")
                     .get()
                     .addHeader("accept", "application/json")
@@ -62,6 +61,7 @@ public class ShowsInitializer implements CommandLineRunner {
                     List<Genre> genres = showResponse.getGenres();
                     List<Author> authors = showResponse.getCreated_by();
                     List<Network> networks = showResponse.getNetworks();
+                    List<Season> seasons = showResponse.getSeasons();
                     show.setOverview(showResponse.getOverview());
                     show.setName(showResponse.getName());
                     show.setNumber_of_episodes(showResponse.getNumber_of_episodes());
@@ -77,13 +77,17 @@ public class ShowsInitializer implements CommandLineRunner {
                     show.setIn_production(showResponse.getIn_production());
                     show.setLanguages(showResponse.getLanguages());
                     show.setLast_air_date(showResponse.getLast_air_date());
-                    show.setSeasons(showResponse.getSeasons());
                     show.setShow_status(showResponse.getStatus());
                     show.setNetworks(networks);
                     show.setAuthors(authors);
                     show.setGenre(genres);
 
                     showService.createShow(show);
+
+                    for (Season season : seasons) {
+                        season.setTvShow(show);
+                        seasonService.save(season);
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -91,4 +95,5 @@ public class ShowsInitializer implements CommandLineRunner {
         }
     }
 }
+
 

@@ -1,5 +1,6 @@
 package com.TVShows.service;
 
+import com.TVShows.domain.Season;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
@@ -40,11 +41,14 @@ public class UsersShowProgressService {
 	}
 
 	public void update(UsersShowProgress progress) {
-		logger.info("User {} updated - {} - {} - {}",
+		logger.info("User {} updated - {} - {} ",
 				progress.getUser().getName(),
 				progress.getTvShow().getName(),
-				progress.getStatus(),
-				(progress.getEpisodeProgress() + "/" + progress.getTvShow().getNumber_of_episodes()));
+				progress.getStatus());
 		repo.save(progress);
+	}
+
+	public Optional<UsersShowProgress> findByTvShowAndUser(TVShow show, User user){
+		return repo.findByTvShowAndUser(show, user);
 	}
 }

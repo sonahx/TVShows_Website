@@ -17,6 +17,7 @@
 	display: flex;
 	justify-content: space-evenly;
     align-content: space-evenly;
+    overflow: auto;
 }
 .show-image{
 	width: 280px;
@@ -48,22 +49,28 @@ display: flex;
 	font-size: 20px;
 	display: block;
 	width: 95%;
-	background-color: #e8ebef;
-	color: black;
 	margin: 0px auto;
 	margin-top: 15px;
-	box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+	color: #0896ff;
+	font-weight: 700;
 }
 
 .subheadline > p {
+	color: white;
 	padding: 20px;
 	margin: 0 auto;
 	text-align: center;
 }
 
-.info-column > p, label {
+.info-column > p{
 	display: inline;
 	font-size: 22px;
+	color: white;
+}
+.info-column > label {
+	display: inline;
+	font-size: 22px;
+	color: #0896ff;
 }
 .checked {
   color: orange;
@@ -144,6 +151,8 @@ margin-left: 20px;
 
 .comment-text{
 width: 100%;
+color:white;
+font-size: 22px;
 }
 .comment-form{
 margin-top: 30px;
@@ -212,6 +221,7 @@ margin-top: 5px;
 
 .show-header > h3{
 text-align: center;
+color: white;
 }
 
 .fa{
@@ -288,8 +298,30 @@ border-radius: 6px;
 border: 1px solid;
 }
 .progressValue{
-margin-left: 7px;
+font-size: 20px;
+color: white;
 }
 .show-description {
 margin-top: 30px;
  }
+.season-block{
+display: flex;
+}
+.season-wrapper{
+width: 100%;
+display: flex;
+flex-direction: column;
+}
+.season-name{
+font-weight: 700;
+font-size: 20px;
+margin-right: 10px;
+color: #999999;
+}
+.episode-count{
+font-size: 20px;
+color: white;
+}
+.dropdown-label{
+color: white;
+}

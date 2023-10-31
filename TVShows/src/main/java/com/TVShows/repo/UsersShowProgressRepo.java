@@ -1,5 +1,6 @@
 package com.TVShows.repo;
 
+import com.TVShows.domain.Season;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;

@@ -28,31 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
-//var modal = document.getElementById("myModal");
+const form = document.getElementById('commentButton').addEventListener("click", function(event) {
+  const textarea = document.querySelector('textarea[name="text"]');
+  if (textarea.value.trim() !== '') {
+    setTimeout(() => {
+      location.reload(true);
+    }, 1000);
+  }
+});
 
-// Get the button that opens the modal
-//var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-//var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-//btn.onclick = function() {
-//  modal.style.display = "block";
-//}
-
-// When the user clicks on <span> (x), close the modal
-//span.onclick = function() {
-//  modal.style.display = "none";
-//}
-
-// When the user clicks anywhere outside of the modal, close it
-//window.onclick = function(event) {
-//  if (event.target == modal) {
-//    modal.style.display = "none";
-//  }
-//}
-
+// STATUS CHANGING
 document.getElementById("viewerStatus").addEventListener("change", function() {
     const form = document.getElementById("viewerStatusForm");
     const formData = new FormData(form);
@@ -75,53 +60,56 @@ document.getElementById("viewerStatus").addEventListener("change", function() {
     });
 });
 
-const form = document.getElementById('commentButton').addEventListener("click", function(event) {
-  const textarea = document.querySelector('textarea[name="text"]');
-  if (textarea.value.trim() !== '') {
-    setTimeout(() => {
-      location.reload(true);
-    }, 1000);
-  }
+// SEASON TRACKING
+const trackingButtons = document.querySelectorAll(".trackingButton");
+
+trackingButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    const seasonBlock = button.closest(".season-block");
+    const progressValue = seasonBlock.querySelector(".progressValue");
+    const episodeMaxValue = seasonBlock.querySelector("#episodeMaxValue");
+
+    let currentValue = progressValue ? parseInt(progressValue.textContent) : 0;
+    let maxEpisodeCount = episodeMaxValue ? parseInt(episodeMaxValue.value) : 0; // Define maxEpisodeCount here
+
+    if (button.id === 'increment') {
+      currentValue = Math.min(currentValue + 1, maxEpisodeCount);
+    } else if (button.id === 'decrement') {
+      currentValue = Math.max(currentValue - 1, 0);
+    }
+
+    if (progressValue) {
+      progressValue.textContent = currentValue + " / ";
+    }
+
+    updateButtonState(seasonBlock, currentValue, maxEpisodeCount);
+  });
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  const incrementBtn = document.getElementById('increment');
-  const decrementBtn = document.getElementById('decrement');
-  const progress = document.getElementById('progress');
-  const maxValue = document.getElementById('episodeMaxValue');
+  const seasonBlocks = document.querySelectorAll(".season-block");
 
-  function updateButtonState() {
-    const currentProgress = Number(progress.textContent);
-    const maxProgress = Number(maxValue.textContent);
-    console.log(`Current Progress: ${currentProgress}, Max Progress: ${maxProgress}`);
-    if (currentProgress === 0) {
-      decrementBtn.classList.add('hidden');
-      incrementBtn.classList.remove('hidden');
-    } else if (currentProgress === maxProgress) {
-      incrementBtn.classList.add('hidden');
-      decrementBtn.classList.remove('hidden');
-    } else {
-      incrementBtn.classList.remove('hidden');
-      decrementBtn.classList.remove('hidden');
-    }
-  }
-
-  incrementBtn.addEventListener("click", function(event) {
-    const currentProgress = Number(progress.textContent);
-    const maxProgress = Number(maxValue.textContent);
-    if (currentProgress < maxProgress) {
-      progress.textContent = currentProgress + 1;
-    }
-    updateButtonState();
+  seasonBlocks.forEach((seasonBlock) => {
+    const progressValue = seasonBlock.querySelector(".progressValue");
+    const episodeMaxValue = seasonBlock.querySelector("#episodeMaxValue");
+    const currentValue = progressValue ? parseInt(progressValue.textContent) : 0;
+    const maxEpisodeCount = episodeMaxValue ? parseInt(episodeMaxValue.value) : 0;
+    updateButtonState(seasonBlock, currentValue, maxEpisodeCount);
   });
-
-  decrementBtn.addEventListener("click", function(event) {
-    const currentProgress = Number(progress.textContent);
-    if (currentProgress > 0) {
-      progress.textContent = currentProgress - 1;
-    }
-    updateButtonState();
-  });
-
-  updateButtonState(); // initial state
 });
+
+function updateButtonState(seasonBlock, currentValue, maxEpisodeCount) {
+  const incrementButton = seasonBlock.querySelector("#increment");
+  const decrementButton = seasonBlock.querySelector("#decrement");
+
+  if (currentValue === 0) {
+    incrementButton.classList.remove('hidden');
+    decrementButton.classList.add('hidden');
+  } else if (currentValue === maxEpisodeCount) {
+    incrementButton.classList.add('hidden');
+    decrementButton.classList.remove('hidden');
+  } else {
+    incrementButton.classList.remove('hidden');
+    decrementButton.classList.remove('hidden');
+  }
+}
