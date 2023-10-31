@@ -9,7 +9,7 @@ width: 65%;
 height: 700px;
 margin: 2.5% auto;
 display: flex;
-box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 .news-article-title{
 display: flex;
@@ -21,6 +21,7 @@ display: flex;
 .news-article-title > p {
 width: 60%;
 text-align: center;
+color: white;
 }
 
 .news-article-title > a {
@@ -32,16 +33,23 @@ text-align: center;
 font-size: 50px;
 text-align: center;
 font-weight: bold;
+color: white;
 }
 
 .news-article-title-relatedTo{
 font-size: 30px;
+color: white;
 }
 .news-article-text{
     font-size: 24px;
     width: 65%;
     margin: 50px auto;
+    color: white;
 }
 .news-article-title-author{
 font-weight: bold;
+color: white;
+}
+.news-article-title-timestamp{
+color:white;
 }

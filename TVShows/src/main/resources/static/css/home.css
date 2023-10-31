@@ -8,11 +8,9 @@
 font-size: 20px;
 display: block;
 width: 95%;
-background-color: #e8ebef;
 color: black;
 margin: 0px auto;
 margin-top: 15px;
-box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
 .show-container {
@@ -77,16 +75,16 @@ margin-left: 15px;
 }
 .showsBtn{
 border-radius: 20px;
-    border: 1px solid;
-    background: #1ee2e7;
-    color: #fff;
+    border: 0px solid;
+    background: #0896ff;
+    color: white;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
-    margin: 0 auto;
+    margin: 15px auto;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -101,7 +99,7 @@ box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0
 }
 .newsArticle-title{
 font-size: 18px;
-color: black;
+color: white;
 text-align: center;
 margin-top: 10px;
 font-weight: bold;
@@ -263,7 +261,8 @@ box-shadow: none;
   }
 }
 .subheadline > a {
-color: black;
+color: #0896ff;
+font-weight: 700;
 }
 .pagination-list > li > a {
 color: black;

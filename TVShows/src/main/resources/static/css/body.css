@@ -20,8 +20,7 @@ footer{ min-height:50px;}
 .body-wrapper {
 /*	width: 85%;*/
 	min-height: 80vh;
-	margin: 80px auto;
-	background-color: #efefef;
+	margin: 0px auto;
 	display: flex;
 	flex-wrap: nowrap;
 	flex-direction: column;
