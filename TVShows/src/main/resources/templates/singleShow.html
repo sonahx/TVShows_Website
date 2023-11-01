@@ -30,19 +30,6 @@
               </div>
               <img th:src="${show.imageUrl}"></img>
 
-              <!-- MEDIAPLAYER TRAILER MODAL START-->
-              <button th:if="${show.trailerUrl != null}" id="myBtn" class="trailer-button">Watch trailer</button>
-              <div id="myModal" class="modal">
-                <div class="content-modal">
-                  <div class="player-wrapper">
-                    <span class="close">&times;</span>
-                    <iframe class="mediaPlayer" th:src="${show.trailerUrl}">
-                    </iframe>
-                  </div>
-                </div>
-              </div>
-              <!-- MEDIAPLAYER TRAILER MODAL END-->
-
               <form sec:authorize="isAuthenticated()" th:action="@{/user/addShow}" method="post" id="viewerStatusForm"
                class="dropdown">
                 <label for="dropdown" class="dropdown-label">Status:</label>

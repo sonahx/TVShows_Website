@@ -74,6 +74,10 @@ public class ShowProgressController {
                 if (showProgress != null && seasonProgress != null && seasonProgress.getProgress() < season.getEpisode_count()) {
                     seasonProgress.setProgress(seasonProgress.getProgress() + 1);
                     seasonProgressService.update(seasonProgress);
+
+                    //set status to WATCHING
+                    showProgress.setStatus(ViewerStatus.WATCHING);
+                    usersShowProgressService.update(showProgress);
                 } else {
                     throw new WrongOperationException("Wrong operation credentials for increment");
                 }

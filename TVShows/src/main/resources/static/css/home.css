@@ -265,5 +265,11 @@ color: #0896ff;
 font-weight: 700;
 }
 .pagination-list > li > a {
-color: black;
+color: white;
+}
+.disabled{
+color: white;
+}
+.active{
+color:white;
 }

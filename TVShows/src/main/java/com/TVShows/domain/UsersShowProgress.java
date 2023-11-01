@@ -26,6 +26,8 @@ public class UsersShowProgress {
     @JoinColumn(name = "show_id")
     private TVShow tvShow;
 
+    private Integer totalProgress;
+
     @OneToMany(mappedBy = "usersShowProgress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SeasonProgress> seasonProgress = new ArrayList<>();
 
@@ -36,5 +38,13 @@ public class UsersShowProgress {
         this.user = user;
         this.tvShow = tvShow;
         this.status = status;
+    }
+
+    public Integer getTotalProgress(){
+        int summedSeasonProgresses = 0;
+        for (SeasonProgress progress : seasonProgress) {
+            summedSeasonProgresses = summedSeasonProgresses + progress.getProgress();
+        }
+        return summedSeasonProgresses;
     }
 }

@@ -50,14 +50,18 @@
     color: #6c757d;
     cursor: pointer;
 }
-.proile-rating{
-    font-size: 12px;
+.profile-username{
+text-align: center;
+}
+.collection-size{
+    font-size: 18px;
     color: #818182;
     margin-top: 5%;
+    text-align: center;
 }
-.proile-rating span{
+.collection-size span{
     color: #495057;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
 }
 .profile-head .nav-tabs{

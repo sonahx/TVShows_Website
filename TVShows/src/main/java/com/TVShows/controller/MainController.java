@@ -4,6 +4,7 @@ import com.TVShows.DTO.ImageEncoder;
 import com.TVShows.domain.NewsArticle;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
+import com.TVShows.enums.ViewerStatus;
 import com.TVShows.service.NewsArticleService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
@@ -69,6 +70,12 @@ public class MainController {
 	public String profile(@RequestParam("user") String name, Model model) {
 		User profileUser = userService.findByUsername(name).orElseThrow(()->
 		new UsernameNotFoundException("username not found"));
+
+		long nonDefaultProgressCount = profileUser.getShowProgresses().stream()
+				.filter(progress -> progress.getStatus() != ViewerStatus.DEFAULT)
+				.count();
+
+		model.addAttribute("nonDefaultProgressCount", nonDefaultProgressCount);
 		model.addAttribute("user", profileUser);
 		model.addAttribute("image", new ImageEncoder());
 		return "profile";

@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private Boolean enabled = false;
 
     @Lob
-    @Column(columnDefinition="blob")
+    @Column(columnDefinition="mediumblob")
     private String image;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -45,7 +45,7 @@ public class User implements UserDetails {
     private Set<UsersShowProgress> showProgresses = new HashSet<>();
 
     public List<String> getRoleList() {
-        if (this.roles.name().length() > 0) {
+        if (!this.roles.name().isEmpty()) {
             return Arrays.asList(this.roles.name().split(","));
         }
         return new ArrayList<>();
