@@ -34,7 +34,7 @@
                class="dropdown">
                 <label for="dropdown" class="dropdown-label">Status:</label>
                 <input name="showId" th:value="${show.id}" type="hidden">
-                <select name="status" id="viewerStatus">
+                <select name="status" class="status-input" id="viewerStatus">
                   <option
                   th:selected="${usersShowProgress.isPresent() and usersShowProgress.get().getStatus().toString() == 'DEFAULT'}"
                   value="WATCHING">Add to list</option>
@@ -117,15 +117,16 @@
 
     <!-- Loop through the seasons and display progress for each -->
     <div class="season-wrapper">
-      <div th:each="season : ${show.seasons}"> 
-        <div class="season-block">
-          <p class="season-name" th:text="${'Season ' + season.season_number + ' - '}"></p>  
-          <input type="hidden" id="episodeMaxValue" th:value="${season.episode_count}" />    
+      <div th:each="season, iterStat : ${show.seasons}">
+        <div class="season-block" th:classappend="${iterStat.index > 4} ? 'hidden-season' : ''">
+          <p class="season-name" th:text="${'Season ' + season.season_number + ' - '}"></p>
+          <input type="hidden" id="episodeMaxValue" th:value="${season.episode_count}" />
           <p class="progressValue" th:each="seasonProgress: ${seasonProgressList}" th:if="${seasonProgress.season.id == season.id}">
-            <span id="progressValue" class="progressValue" th:text="${seasonProgress.progress + ' ' + '/' + ' '}" data-progress="${seasonProgress.progress}"></span>
+            <span id="progressValue" class="progressValue" th:text="${seasonProgress.progress + '/'}" data-progress="${seasonProgress.progress}"></span>
           </p>
-        <p class="episode-count" th:text="' ' + ${season.episode_count}"></p>
-        <!-- TRACKING BUTTONS-->
+          <p class="episode-count" th:text="${season.episode_count}"></p>
+        
+          <!-- TRACKING BUTTONS -->
           <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} +'/'+ ${season.id} +'/increment'}" method="post">
             <button type="submit" class="trackingButton" id="increment">+</button>
           </form>
@@ -133,9 +134,14 @@
           <form sec:authorize="isAuthenticated()" th:action="@{'/user/' + ${show.id} +'/' + ${season.id} + '/decrement'}" method="post">
             <button type="submit" class="trackingButton" id="decrement">-</button>
           </form>
-          <!--TRACKING BUTTONS END -->
         </div>
       </div>
+          <!-- TRACKING BUTTONS END -->
+      
+      <button id="expand-button" class="expand-button" onclick="toggleSeasons()" th:if="${show.seasons.size() > 5}">
+        <span class="text">Expand</span>
+        <span class="arrow">&#8595;</span>
+      </button>
     </div>
 
 
@@ -186,14 +192,16 @@
                   <textarea required th:field="${ShowComment.text}" name="text" class="form-control"
                     placeholder="Enter your comment here.."></textarea>
                 </div>
-                <button id="commentButton" type="submit">Submit</button>
+                <button id="commentButton" class="comment-button" type="submit">Submit</button>
               </form>
             </div>
           </div>
   </article>
   <div th:insert="~{footer :: footer}"></div>
 
+  <script th:src="@{/js/comment.js}"></script>
   <script th:src="@{/js/formCustomSubmission.js}"></script>
+  <script th:src="@{/js/showPage.js}"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

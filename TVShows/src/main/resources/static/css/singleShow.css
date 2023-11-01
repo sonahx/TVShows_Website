@@ -14,20 +14,21 @@
 .show-general{
 	width: 100%;
 	display: flex;
-	justify-content: space-evenly;
-    align-content: space-evenly;
+/*	justify-content: space-evenly;
+    align-content: space-evenly;*/
     /*overflow: auto;*/
 }
 .show-image{
-	width: 280px;
+	width: 50%;
 	height: 380px;
 	display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 }
 .show-image > img{
-	width: 100%;
+	width: 280px;
 	height: 100%;
+	margin: 0 auto;
 	object-fit: cover;
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
@@ -37,6 +38,7 @@
 	background-color: gray;
 }
 .show-info{
+width: 50%;
 margin-top: 42px;
 display: flex;
 }
@@ -299,8 +301,12 @@ display: flex;
 width: 25px;
 height: 25px;
 margin: 5px;
-border-radius: 6px;
-border: 1px solid;
+border-radius: 12px;
+border: 0px solid;
+background: #0896ff;
+color: white;
+text-align: center;
+font-size: 16px;
 }
 .progressValue{
 font-size: 20px;
@@ -329,4 +335,41 @@ color: white;
 }
 .dropdown-label{
 color: white;
+text-align: center;
+}
+.hidden-season {
+display: none;
+  }
+.expand-button{
+width: 140px;
+background: #0896ff;
+cursor: pointer;
+border-radius: 20px;
+border: 0px solid;
+color: white;
+font-size: 12px;
+font-weight: bold;
+letter-spacing: 1px;
+}
+.comment-button{
+width: 140px;
+background: #0896ff;
+cursor: pointer;
+border-radius: 20px;
+border: 0px solid;
+color: white;
+font-size: 14px;
+font-weight: bold;
+letter-spacing: 1px;
+}
+.status-input{
+border: 0px solid;
+background: #0896ff;
+color: white;
+cursor: pointer;
+border-radius: 20px;
+font-size: 14px;
+text-align: center;
+font-weight: bold;
+letter-spacing: 1px;
 }
