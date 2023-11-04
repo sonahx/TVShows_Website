@@ -11,7 +11,7 @@ import org.hibernate.Hibernate;
 import java.util.*;
 
 @Entity
-@Table(name = "TvShow")
+@Table(name = "TVShow")
 @NoArgsConstructor @Getter @Setter
 public class TVShow {
     @Id
