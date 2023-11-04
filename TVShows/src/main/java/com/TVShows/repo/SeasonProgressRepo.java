@@ -18,5 +18,5 @@ public interface SeasonProgressRepo extends JpaRepository<SeasonProgress, Long> 
            "JOIN usp.tvShow show " +
            "WHERE show = :tvShow " +
            "AND usp.user = :user")
-   List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user);
+   List<SeasonProgress> findSeasonProgressForShowAndUser(TvShow tvShow, User user);
 }

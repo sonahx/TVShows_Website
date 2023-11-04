@@ -2,7 +2,7 @@ package com.TVShows.service;
 
 
 import com.TVShows.domain.ShowComment;
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.TvShow;
 import com.TVShows.domain.User;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.repo.ShowCommentRepo;
@@ -69,17 +69,14 @@ public class ShowCommentServiceTest {
         return User.builder().id(1L).name("JohnDoe").email("johndoe@example.com").password("pass").build();
     }
 
-    public TVShow getShow() {
-        TVShow show = new TVShow();
+    public TvShow getShow() {
+        TvShow show = new TvShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
-        show.setDirectors("Vince Gilligan");
-        show.setDescription("desc");
+        show.setOverview("desc");
         show.setImageUrl("jpeg");
-        show.setNextEpisode("12.02");
+        show.setLast_air_date("12.02");
         show.setStatus(ShowStatus.AIRING);
-        show.setEpisodeDuration("60m");
-        show.setActors("some actors");
         return show;
     }
 }

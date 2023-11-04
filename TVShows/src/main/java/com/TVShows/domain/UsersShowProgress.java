@@ -24,7 +24,7 @@ public class UsersShowProgress {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
-    private TVShow tvShow;
+    private TvShow tvShow;
 
     private Integer totalProgress;
 
@@ -34,7 +34,7 @@ public class UsersShowProgress {
     @Enumerated(EnumType.STRING)
     private ViewerStatus status;
 
-    public UsersShowProgress(User user, TVShow tvShow, ViewerStatus status) {
+    public UsersShowProgress(User user, TvShow tvShow, ViewerStatus status) {
         this.user = user;
         this.tvShow = tvShow;
         this.status = status;

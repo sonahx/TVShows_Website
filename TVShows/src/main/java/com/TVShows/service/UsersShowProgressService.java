@@ -1,7 +1,6 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.Season;
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.TvShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.repo.UsersShowProgressRepo;
@@ -36,7 +35,7 @@ public class UsersShowProgressService {
 		return repo.findByUser(user);
 	}
 
-	public Optional<UsersShowProgress> findByShowAndUser(TVShow tvShow, User user){
+	public Optional<UsersShowProgress> findByShowAndUser(TvShow tvShow, User user){
 		return repo.findByTvShowAndUser(tvShow, user);
 	}
 
@@ -48,7 +47,7 @@ public class UsersShowProgressService {
 		repo.save(progress);
 	}
 
-	public Optional<UsersShowProgress> findByTvShowAndUser(TVShow show, User user){
+	public Optional<UsersShowProgress> findByTvShowAndUser(TvShow show, User user){
 		return repo.findByTvShowAndUser(show, user);
 	}
 }

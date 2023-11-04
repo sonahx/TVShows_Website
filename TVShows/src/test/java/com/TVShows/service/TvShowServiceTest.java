@@ -1,6 +1,6 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.TvShow;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.repo.TVShowRepo;
 import org.junit.jupiter.api.DisplayName;
@@ -20,20 +20,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TVShowServiceTest {
+public class TvShowServiceTest {
 
     @Mock
     private TVShowRepo showRepo;
     @InjectMocks
     private TVShowService showService;
     @Captor
-    private ArgumentCaptor<TVShow> showCaptor;
+    private ArgumentCaptor<TvShow> showCaptor;
 
     @Test
     @DisplayName("Test creating show")
     public void shouldCreateShow() {
         // given
-        TVShow show = createTVShow();
+        TvShow show = createTVShow();
 
         // when
         showService.createShow(show);
@@ -47,11 +47,11 @@ public class TVShowServiceTest {
     @DisplayName("Test finding show with id")
     public void shouldFindShowById() {
         // given
-        TVShow show = createTVShow();
+        TvShow show = createTVShow();
         when(showRepo.findById(1L)).thenReturn(Optional.of(show));
 
         // when
-        Optional<TVShow> result = showService.findShowById(1L);
+        Optional<TvShow> result = showService.findShowById(1L);
 
         // then
         assertTrue(result.isPresent());
@@ -62,11 +62,11 @@ public class TVShowServiceTest {
     @DisplayName("Test finding show by name")
     public void shouldFindShowByName() {
         // given
-        TVShow show = createTVShow();
+        TvShow show = createTVShow();
         when(showRepo.findShowByName("Breaking Bad")).thenReturn(Optional.of(show));
 
         // when
-        Optional<TVShow> result = showService.findShowByName("Breaking Bad");
+        Optional<TvShow> result = showService.findShowByName("Breaking Bad");
 
         // then
         assertEquals(show, result.get());
@@ -76,31 +76,28 @@ public class TVShowServiceTest {
     @DisplayName("Test finding all shows")
     public void shouldFindAllShows() {
         // given
-        List<TVShow> shows = createTVShowList();
+        List<TvShow> shows = createTVShowList();
 
         // when
         when(showRepo.findAll()).thenReturn(shows);
-        List<TVShow> result = showService.findAllShows();
+        List<TvShow> result = showService.findAllShows();
 
         // then
         assertEquals(shows, result);
     }
 
-    private TVShow createTVShow() {
-        TVShow show = new TVShow();
+    private TvShow createTVShow() {
+        TvShow show = new TvShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
-        show.setDirectors("Vince Gilligan");
-        show.setDescription("desc");
+        show.setOverview("desc");
         show.setImageUrl("jpeg");
-        show.setNextEpisode("12.02");
+        show.setLast_air_date("12.02");
         show.setStatus(ShowStatus.AIRING);
-        show.setEpisodeDuration("60m");
-        show.setActors("some actors");
         return show;
     }
 
-    private List<TVShow> createTVShowList() {
+    private List<TvShow> createTVShowList() {
         return List.of(
                 createTVShow(),
                 createTVShow()

@@ -29,7 +29,7 @@ public class ShowProgressController {
     @PostMapping("/addShow")
     public String addShowToUser(@ModelAttribute WatchingStatusRequest request,
                                 @ModelAttribute("authenticatedUser") User user) {
-        TVShow show = showService.findShowById(request.getShowId()).orElse(null);
+        TvShow show = showService.findShowById(request.getShowId()).orElse(null);
         UsersShowProgress existingProgress = usersShowProgressService.findByTvShowAndUser(show, user).orElse(null);
 
         // The show is already in the user's shows, so update the status
@@ -47,7 +47,7 @@ public class ShowProgressController {
     }
 
     @PostMapping("/{show}/{season}/{operation}")
-    public String changeEpisodeProgress(@PathVariable TVShow show,
+    public String changeEpisodeProgress(@PathVariable TvShow show,
                                         @PathVariable Season season,
                                         @PathVariable String operation,
                                         Model model) {

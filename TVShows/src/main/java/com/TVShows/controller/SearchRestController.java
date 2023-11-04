@@ -1,7 +1,7 @@
 package com.TVShows.controller;
 
 import com.TVShows.DTO.TVShowDTO;
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.TvShow;
 import com.TVShows.service.TVShowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -24,7 +24,7 @@ public class SearchRestController {
     @ResponseBody
     public ResponseEntity<List<TVShowDTO>> findShowsByKeyword(@PathVariable String keyword) {
         try {
-            List<TVShow> shows = showService.findShowsByKeyword(keyword);
+            List<TvShow> shows = showService.findShowsByKeyword(keyword);
             List<TVShowDTO> tvShowDTOs = shows.stream()
                     .map(tvShow -> {
                         TVShowDTO tvShowDto = new TVShowDTO();

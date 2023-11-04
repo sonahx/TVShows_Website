@@ -1,6 +1,6 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.TVShow;
+import com.TVShows.domain.TvShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.Role;
@@ -79,17 +79,14 @@ class UsersShowsServiceTest {
         verify(repo).findAll();
     }
 
-    private TVShow createTVShow() {
-        TVShow show = new TVShow();
+    private TvShow createTVShow() {
+        TvShow show = new TvShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
-        show.setDirectors("Vince Gilligan");
-        show.setDescription("desc");
+        show.setOverview("desc");
         show.setImageUrl("jpeg");
-        show.setNextEpisode("12.02");
+        show.setLast_air_date("12.02");
         show.setStatus(ShowStatus.AIRING);
-        show.setEpisodeDuration("60m");
-        show.setActors("some actors");
         return show;
     }
 }

@@ -11,9 +11,9 @@ import org.hibernate.Hibernate;
 import java.util.*;
 
 @Entity
-@Table(name = "TVShow")
+@Table(name = "TvShow")
 @NoArgsConstructor @Getter @Setter
-public class TVShow {
+public class TvShow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -102,7 +102,7 @@ public class TVShow {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        TVShow tvShow = (TVShow) o;
+        TvShow tvShow = (TvShow) o;
         return getId() != null && Objects.equals(getId(), tvShow.getId());
     }
 

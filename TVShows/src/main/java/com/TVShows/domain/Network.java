@@ -22,5 +22,5 @@ public class Network {
     private String origin_country;
 
     @ManyToMany(mappedBy = "networks")
-    private List<TVShow> shows = new ArrayList<>();
+    private List<TvShow> shows = new ArrayList<>();
 }

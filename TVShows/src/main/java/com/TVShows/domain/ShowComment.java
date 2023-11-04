@@ -26,12 +26,12 @@ public class ShowComment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tv_show_id")
-    private TVShow tvShow;
+    private TvShow tvShow;
 
     @Column
     private LocalDateTime date;
 
-    public ShowComment(String text, User author, TVShow tvShow, LocalDateTime date) {
+    public ShowComment(String text, User author, TvShow tvShow, LocalDateTime date) {
         this.text = text;
         this.author = author;
         this.tvShow = tvShow;

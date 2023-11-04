@@ -57,7 +57,7 @@ public class ShowsInitializer implements CommandLineRunner {
 
                     DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
-                    TVShow show = new TVShow();
+                    TvShow show = new TvShow();
                     List<Genre> genres = showResponse.getGenres();
                     List<Author> authors = showResponse.getCreated_by();
                     List<Network> networks = showResponse.getNetworks();
