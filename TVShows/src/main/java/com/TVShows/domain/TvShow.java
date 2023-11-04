@@ -40,7 +40,7 @@ public class TvShow {
     private ShowStatus status;
 
     @Lob
-    @Column(name = "imageUrl", length = 1000)
+    @Column(name = "imageUrl", length = 1250)
     private String imageUrl;
 
     @Column
