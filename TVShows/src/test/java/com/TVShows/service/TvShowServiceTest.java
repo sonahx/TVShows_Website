@@ -94,6 +94,7 @@ public class TvShowServiceTest {
         show.setImageUrl("jpeg");
         show.setLast_air_date("12.02");
         show.setStatus(ShowStatus.AIRING);
+
         return show;
     }
 
