@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TvShowServiceTest {
+public class TVShowServiceTest {
 
     @Mock
     private TVShowRepo showRepo;
