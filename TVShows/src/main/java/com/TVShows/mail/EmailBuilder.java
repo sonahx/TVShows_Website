@@ -1,4 +1,4 @@
-package com.TVShows.DTO;
+package com.TVShows.mail;
 
 public class EmailBuilder {
 

@@ -3,6 +3,7 @@ package com.TVShows.controller;
 import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.service.AuthService;
 import com.TVShows.service.ConfirmationTokenService;
+import com.mailjet.client.errors.MailjetException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ public class AuthController {
 	private final ConfirmationTokenService tokenService;
 
 	@PostMapping("/register")
-	public String register(@ModelAttribute RegisterRequest request, Model model) {
+	public String register(@ModelAttribute RegisterRequest request, Model model) throws MailjetException {
 		model.addAttribute("user", request);
 		authService.register(request);
 		return "verification";

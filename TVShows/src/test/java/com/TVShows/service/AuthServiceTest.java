@@ -1,10 +1,11 @@
 package com.TVShows.service;
 
-import com.TVShows.DTO.EmailBuilder;
 import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
+import com.TVShows.mail.EmailBuilder;
+import com.TVShows.mail.MailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class AuthServiceTest {
     @Mock
     private ConfirmationTokenService tokenService;
     @Mock
-    private MailSenderService mailSenderService;
+    private MailSender mailSenderService;
     @InjectMocks
     private AuthService authService;
     @Captor

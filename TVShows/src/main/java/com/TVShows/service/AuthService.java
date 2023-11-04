@@ -1,10 +1,11 @@
 package com.TVShows.service;
 
-import com.TVShows.DTO.EmailBuilder;
 import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
+import com.TVShows.mail.EmailBuilder;
+import com.TVShows.mail.MailSender;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final ConfirmationTokenService tokenService;
-    private final MailSenderService mailSenderService;
+    private final MailSender mailSender;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
     @Value("${domain.test.url}")
     private String url;
@@ -60,8 +61,7 @@ public class AuthService {
         // Create and send confirmation link
         ConfirmationToken token = tokenService.generateToken(user);
         String link = url + "/auth/confirm?token=" + token.getToken();
-//        emailSender.send(requestedEmail, EmailBuilder.build(requestedUsername, link));
-        mailSenderService.sendEmail(
+        mailSender.sendEmail(
                 requestedEmail,
                 "confirm your email",
                 EmailBuilder.build(requestedUsername, link)
