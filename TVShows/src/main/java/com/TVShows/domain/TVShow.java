@@ -13,7 +13,7 @@ import java.util.*;
 @Entity
 @Table(name = "TvShow")
 @NoArgsConstructor @Getter @Setter
-public class TvShow {
+public class TVShow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -102,7 +102,7 @@ public class TvShow {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        TvShow tvShow = (TvShow) o;
+        TVShow tvShow = (TVShow) o;
         return getId() != null && Objects.equals(getId(), tvShow.getId());
     }
 

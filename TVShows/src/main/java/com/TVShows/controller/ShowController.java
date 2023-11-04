@@ -27,7 +27,7 @@ public class ShowController {
 
     @GetMapping("/{id}")
     public String singleShow(@PathVariable("id") Long id, Model model) {
-        TvShow tvShow = showService.findShowById(id).orElse(null);
+        TVShow tvShow = showService.findShowById(id).orElse(null);
         User user = (User) model.getAttribute("authenticatedUser");
 
         if (tvShow != null) {
@@ -56,7 +56,7 @@ public class ShowController {
     }
 
     @PostMapping("/add")
-    public String addShow(@ModelAttribute TvShow tvShow, Model model) {
+    public String addShow(@ModelAttribute TVShow tvShow, Model model) {
         showService.createShow(tvShow);
         model.addAttribute("show", tvShow);
         return "redirect:/show/" + tvShow.getId();
@@ -66,7 +66,7 @@ public class ShowController {
     public String addComment(@PathVariable("id") Long id, Model model,
                              @ModelAttribute("ShowComment") ShowComment text) {
         User user = (User) model.getAttribute("authenticatedUser");
-        TvShow show = showService.findShowById(id).orElse(null);
+        TVShow show = showService.findShowById(id).orElse(null);
         if (show != null && user != null && text.getText().trim().length() >= 1) {
             //create and save comment
             ShowComment comment = new ShowComment();

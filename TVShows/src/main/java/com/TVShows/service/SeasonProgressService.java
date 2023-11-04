@@ -34,7 +34,7 @@ public class SeasonProgressService {
                 progress.getSeason().getEpisode_count());
         repo.save(progress);
     }
-    public List<SeasonProgress> findSeasonProgressForShowAndUser(TvShow tvShow, User user){
+    public List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user){
         return repo.findSeasonProgressForShowAndUser(tvShow, user);
     }
 }

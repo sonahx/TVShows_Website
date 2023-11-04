@@ -1,6 +1,6 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.TvShow;
+import com.TVShows.domain.TVShow;
 import com.TVShows.enums.ShowStatus;
 import com.TVShows.repo.TVShowRepo;
 import org.junit.jupiter.api.DisplayName;
@@ -27,13 +27,13 @@ public class TvShowServiceTest {
     @InjectMocks
     private TVShowService showService;
     @Captor
-    private ArgumentCaptor<TvShow> showCaptor;
+    private ArgumentCaptor<TVShow> showCaptor;
 
     @Test
     @DisplayName("Test creating show")
     public void shouldCreateShow() {
         // given
-        TvShow show = createTVShow();
+        TVShow show = createTVShow();
 
         // when
         showService.createShow(show);
@@ -47,11 +47,11 @@ public class TvShowServiceTest {
     @DisplayName("Test finding show with id")
     public void shouldFindShowById() {
         // given
-        TvShow show = createTVShow();
+        TVShow show = createTVShow();
         when(showRepo.findById(1L)).thenReturn(Optional.of(show));
 
         // when
-        Optional<TvShow> result = showService.findShowById(1L);
+        Optional<TVShow> result = showService.findShowById(1L);
 
         // then
         assertTrue(result.isPresent());
@@ -62,11 +62,11 @@ public class TvShowServiceTest {
     @DisplayName("Test finding show by name")
     public void shouldFindShowByName() {
         // given
-        TvShow show = createTVShow();
+        TVShow show = createTVShow();
         when(showRepo.findShowByName("Breaking Bad")).thenReturn(Optional.of(show));
 
         // when
-        Optional<TvShow> result = showService.findShowByName("Breaking Bad");
+        Optional<TVShow> result = showService.findShowByName("Breaking Bad");
 
         // then
         assertEquals(show, result.get());
@@ -76,18 +76,18 @@ public class TvShowServiceTest {
     @DisplayName("Test finding all shows")
     public void shouldFindAllShows() {
         // given
-        List<TvShow> shows = createTVShowList();
+        List<TVShow> shows = createTVShowList();
 
         // when
         when(showRepo.findAll()).thenReturn(shows);
-        List<TvShow> result = showService.findAllShows();
+        List<TVShow> result = showService.findAllShows();
 
         // then
         assertEquals(shows, result);
     }
 
-    private TvShow createTVShow() {
-        TvShow show = new TvShow();
+    private TVShow createTVShow() {
+        TVShow show = new TVShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
         show.setOverview("desc");
@@ -97,7 +97,7 @@ public class TvShowServiceTest {
         return show;
     }
 
-    private List<TvShow> createTVShowList() {
+    private List<TVShow> createTVShowList() {
         return List.of(
                 createTVShow(),
                 createTVShow()

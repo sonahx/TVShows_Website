@@ -2,7 +2,7 @@ package com.TVShows.controller;
 
 import com.TVShows.DTO.ImageEncoder;
 import com.TVShows.domain.NewsArticle;
-import com.TVShows.domain.TvShow;
+import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.enums.ViewerStatus;
 import com.TVShows.service.NewsArticleService;
@@ -31,7 +31,7 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		Page<TvShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
 		Page<NewsArticle> newsPage = newsArticleService.findAllShowsWithPagination(0, 5);
 
 		model.addAttribute("page", page);
@@ -42,21 +42,21 @@ public class MainController {
 
 	@GetMapping("/shows")
 	public String shows(Model model) {
-		Page<TvShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
 		model.addAttribute("page", page);
 		return "redirect:/page?page=0&size=10";
 	}
 
 	@GetMapping("/page")
 	public String switchPage(@RequestParam int page, @RequestParam int size, Model model) {
-		Page<TvShow> pageAttr = TVshowService.findAllShowsWithPagination(page, size);
+		Page<TVShow> pageAttr = TVshowService.findAllShowsWithPagination(page, size);
 		model.addAttribute("page", pageAttr);
 		return "shows";
 	}
 
 	@GetMapping("/tvshowform")
 	public String tvShowForm(Model model) {
-		model.addAttribute("TVShow", new TvShow());
+		model.addAttribute("TVShow", new TVShow());
 		return "tvshowform";
 	}
 

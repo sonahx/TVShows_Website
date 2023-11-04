@@ -1,6 +1,6 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.TvShow;
+import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.Role;
@@ -79,8 +79,8 @@ class UsersShowsServiceTest {
         verify(repo).findAll();
     }
 
-    private TvShow createTVShow() {
-        TvShow show = new TvShow();
+    private TVShow createTVShow() {
+        TVShow show = new TVShow();
         show.setName("Breaking Bad");
         show.setReleaseDate("date");
         show.setOverview("desc");

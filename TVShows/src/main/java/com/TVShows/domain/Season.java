@@ -32,7 +32,7 @@ public class Season {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "show_id")
-    private TvShow tvShow;
+    private TVShow tvShow;
 
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SeasonProgress> seasonProgress = new ArrayList<>();

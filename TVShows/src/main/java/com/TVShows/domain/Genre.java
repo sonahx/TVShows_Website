@@ -18,5 +18,5 @@ public class Genre {
     private String name;
 
     @ManyToMany(mappedBy = "genre")
-    private List<TvShow> shows;
+    private List<TVShow> shows;
 }

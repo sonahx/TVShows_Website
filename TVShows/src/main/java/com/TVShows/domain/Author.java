@@ -22,5 +22,5 @@ public class Author {
     private Integer gender;
 
     @ManyToMany(mappedBy = "authors")
-    private List<TvShow> shows = new ArrayList<>();
+    private List<TVShow> shows = new ArrayList<>();
 }
