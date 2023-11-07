@@ -22,7 +22,7 @@ public class AuthService {
     private final ConfirmationTokenService tokenService;
     private final MailSender mailSender;
     private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
-    @Value("${domain.test.url}")
+    @Value("${domain.url}")
     private String url;
 
     public void register(RegisterRequest request) {
