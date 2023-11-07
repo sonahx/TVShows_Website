@@ -53,3 +53,14 @@ color: white;
 .news-article-title-timestamp{
 color:white;
 }
+.commentButton{
+width: 140px;
+background: #0896ff;
+cursor: pointer;
+border-radius: 20px;
+border: 0px solid;
+color: white;
+font-size: 14px;
+font-weight: bold;
+letter-spacing: 1px;
+}
