@@ -55,24 +55,13 @@ a:hover{
 width: 100%;
 height: 100%;
 object-fit: cover;
+box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
 .item > a {
 width: 100%;
 height: 100%;
 }
 
-.pagination-list{
-display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-justify-content: center;
-list-style-type: none;
-font-size: 24px;
-}
-
-.pagination-list > li >  a, span {
-margin-left: 15px;
-}
 .showsBtn{
 border-radius: 20px;
     border: 0px solid;
@@ -264,9 +253,7 @@ box-shadow: none;
 color: #0896ff;
 font-weight: 700;
 }
-.pagination-list > li > a {
-color: white;
-}
+
 .disabled{
 color: white;
 }

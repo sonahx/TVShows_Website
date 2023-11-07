@@ -12,6 +12,7 @@
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/home.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
+    <link th:href="@{/css/shows.css}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
@@ -34,20 +35,14 @@
               </div>
             </div>
 
-        <div class="pagination">
-          <ul class="pagination-list">
-              <li th:class="${page.number == 0} ? disabled">
-                  <span>&laquo;</span>
-              </li>
-              <li th:class="${pageNumber == 0}? active" th:each="pageNumber : ${#numbers.sequence(0, page.totalPages-1)}">
-                  <a th:if="${pageNumber != page.number}" th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}" th:text="${pageNumber + 1}"></a>
-                  <span th:if="${pageNumber == page.number}" th:text="${pageNumber + 1}"></span>
-              </li>
-              <li th:class="${page.number == page.totalPages - 1} ? disabled">
-                  <span>&raquo;</span>
-              </li>
-          </ul>
-      </div>     
+            <div class="pagination">
+                <ul class="pagination">
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, page.totalPages-1)}">
+                        <a class="pagination:number" th:class="${pageNumber == page.number}? active : ''" th:if="${pageNumber != page.number}" th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}" th:text="${pageNumber + 1}"></a>
+                        <span th:if="${pageNumber == page.number}" th:class="${pageNumber == page.number}? active : ''" th:text="${pageNumber + 1}"></span>
+                    </li>
+                </ul>
+            </div> 
  </article>
 
     <footer th:insert="~{footer :: footer}"></footer>

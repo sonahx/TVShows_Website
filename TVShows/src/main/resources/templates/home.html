@@ -39,7 +39,7 @@
                 </div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
-               <div class="item item-1 item-shadow">
+               <div class="item item-1">
                 <a th:href="@{'/show/' + ${show.id}}">
                 <img th:src="${show.imageUrl}" class="show-img"></img>
               </a>
