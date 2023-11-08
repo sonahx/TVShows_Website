@@ -13,6 +13,7 @@
     <link th:href="@{/css/header.css}" rel="stylesheet">
     <link th:href="@{/css/footer.css}" rel="stylesheet">
     <link th:href="@{/css/home.css}" rel="stylesheet">
+    <link th:href="@{/css/home-modal.css}" rel="stylesheet">
     <link th:href="@{/css/body.css}" rel="stylesheet">
 </head>
 
@@ -33,9 +34,7 @@
 
             <div class="block-1">
                 <div class="subheadline"><a href="#">POPULAR</a>
-                  <a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" th:href="@{/tvshowform}">
-                  <button class="modal-button">NEW SHOW</button>
-                </a>
+                <a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" href="#modal" role="button" class="button modal-button">NEW SHOW</a>
                 </div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
@@ -52,73 +51,44 @@
                 <input type="submit" class="showsBtn" value="all shows" />
              </form>
 
+<!-- Modal -->
+<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')" class="modal-wrapper" id="modal">
+  <div class="modal-body modal-card">
+    <div class="modal-header">
+      <h2 class="modal-heading">New show</h2>
+      <a href="#!" role="button" class="close" aria-label="close this modal">
+        <svg viewBox="0 0 24 24">
+          <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+        </svg>
+      </a>
+    </div>
+    <form th:action="@{/show/add}" method="post">
+      <input type="number" name="showId" class="form-control" placeholder="Enter show id" required/> 
+      <input type="submit" name="btnSubmit" class="" value="create" />
+    </form>
+  </div>
+  <a href="#!" class="outside-trigger"></a>
+</div>
+
 
 <!-- NEWS -->
 <div class="block-2">
-    <div class="subheadline"><a href="#">NEWS</a> 
-      <button sec:authorize="hasRole('ROLE_ADMINISTRATOR')" class="modal-button" id="modal-button">NEW ARTICLE</button>
-    </div>
-
-    <div th:if="${newsPage != null}" class="show-container">
-      <div th:each="newsArticle: ${newsPage}">        
-     <div class="item item-1">
-      <a th:href="@{'/news/' + ${newsArticle.id}}">
-      <img th:src="${newsArticle.imageUrl}" class="newsArticle-img"></img>
-      <p class="newsArticle-title" th:text="${newsArticle.name}"></p>
-    </a>
-      </div> 
-  </div>                    
-    </div> 
-</div> 
- </article>
-
-  <!-- NEWS ARTICLE MODAL -->
- <div class="modal-overlay">
-   <div class="modal" sec:authorize="hasRole('ROLE_ADMINISTRATOR')">
-     
-     <a class="close-modal">
-       <svg viewBox="0 0 20 20">
-         <path fill="#000000" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
-       </svg>
-     </a><!-- close modal -->
- 
-     <div class="modal-content">
-      <div class="modal-form-wrapper">
-       <form  th:action="@{/news/create}" th:object="${NewsArticle}" method="post">
-        <h3>New article</h3>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" th:field="*{name}" name="name" class="form-control" placeholder="Name" required minlength="10" />
-                </div>
-
-                <div class="form-group">
-                    <input type="text" th:field="*{relatedTo}" name="relatedTo" class="form-control" placeholder="Related tag" required/> 
-                </div>
-
-                <div class="form-group">
-                    <input type="text" th:field="*{imageUrl}" name="imageUrl" class="form-control" placeholder="Image URL" required maxlength="200"/>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" name="btnSubmit" class="btnContact" value="Create" />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <textarea name="text" th:field="*{text}" class="form-control" placeholder="Text" required minlength="100" maxlength="10000"
-                        style="width: 100%; height: 550px;"></textarea>
-                </div>
-            </div>
-        </div>
-    </form>
+  <div class="subheadline"><a href="#">NEWS</a> 
+    
   </div>
 
-     </div><!-- content -->
-     
-   </div><!-- modal -->
- </div><!-- overlay -->
-
+  <div th:if="${newsPage != null}" class="show-container">
+      <div th:each="newsArticle: ${newsPage}">        
+          <div class="item item-1">
+              <a th:href="@{'/news/' + ${newsArticle.id}}">
+                  <img th:src="${newsArticle.imageUrl}" class="newsArticle-img"></img>
+                  <p class="newsArticle-title" th:text="${newsArticle.name}"></p>
+              </a>
+          </div> 
+      </div>                    
+  </div> 
+</div>
+</article>
 
     <footer th:insert="~{footer :: footer}"></footer>
     <script th:src="@{/js/home.js}"></script>
