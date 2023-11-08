@@ -86,16 +86,6 @@ public class MainController {
 		return "about";
 	}
 
-	@GetMapping("/team")
-	public String team() {
-		return "team";
-	}
-
-	@GetMapping("/contact")
-	public String contact() {
-		return "contact";
-	}
-
 	@GetMapping("/policy")
 	public String policy() {
 		return "policy";

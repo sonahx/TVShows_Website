@@ -145,7 +145,7 @@ height: 50px;
 }
 
 .comment-author-name{
-color: red;
+color: #337ab7;
 }
 
 .comment-body{
@@ -167,6 +167,7 @@ width: 95%;
 .comment-timestamp{
 font-size: 10px;
 display: inline;
+color: white;
 }
 .comment-info{
 display: flex;
