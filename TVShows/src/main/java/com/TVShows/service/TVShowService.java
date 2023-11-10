@@ -25,17 +25,14 @@ public class TVShowService {
     }
 
     public Optional<TVShow> findShowById(Long id) {
-        logger.info("Looking for show with id: {}", id);
         return showRepo.findById(id);
     }
 
     public Optional<TVShow> findShowByName(String name) {
-        logger.info("Looking for show with name: {}", name);
         return showRepo.findShowByName(name);
     }
 
     public List<TVShow> findAllShows() {
-        logger.info("Looking for all the shows");
         return showRepo.findAll();
     }
 
@@ -45,7 +42,6 @@ public class TVShowService {
     }
 
     public Page<TVShow> findAllShowsWithPagination(int page, int size) {
-        logger.info("Looking for all the shows with pagination");
         return showRepo.findAll(PageRequest.of(page,size));
     }
 

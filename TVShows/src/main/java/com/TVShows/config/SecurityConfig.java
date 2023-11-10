@@ -21,10 +21,12 @@ public class SecurityConfig {
 		  http
 				  .authorizeHttpRequests().requestMatchers(
 						  "/show/{id}/comment",
+						  "/show/{showId}/comment/delete/{commentId}",
 						  "/user/{id}/decrement",
 						  "/user/{id}/increment",
 						  "/user/addShow",
 						  "/user/image/upload")
+
 				  .hasAnyRole("USER", "ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(

@@ -42,7 +42,7 @@
  <div class="show-comments">
   <div class="subheadline">COMMENTS</div>
 
-  <div th:each="comment: ${NewsArticle.comments}" class="comments-wrapper">
+  <div th:each="comment: ${Comments}" class="comments-wrapper">
     <div class="comment-header">
       <div class="comment-info">
         <img th:if="${comment.author.image != null}"
@@ -53,6 +53,11 @@
           <a class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
             th:text="${comment.author.name}">author username</a>
           <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
+        </div>
+        <div sec:authorize="isAuthenticated()" th:if="${comment.author.id == authenticatedUser.id}" class="delete-comment">
+          <form id="deleteCommentForm" th:action="@{'/news/' + ${NewsArticle.id} + '/comment/delete/' + ${comment.id}}" method="post">
+            <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
+          </form>
         </div>
       </div>
       <div class="comment-body">

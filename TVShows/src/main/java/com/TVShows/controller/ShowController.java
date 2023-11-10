@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -23,6 +24,7 @@ public class ShowController {
     private final UsersShowProgressService usersShowsService;
     private final SeasonProgressService seasonProgressService;
     private final MovieDbService movieDbService;
+    private final SeasonService seasonService;
 
     @GetMapping("/{id}")
     public String singleShow(@PathVariable("id") Long id, Model model) {
@@ -33,6 +35,7 @@ public class ShowController {
             model.addAttribute("show", tvShow);
             model.addAttribute("ShowComment", new ShowComment());
             model.addAttribute("Comments", commentService.findAllCommentsByShowId(tvShow.getId()));
+            model.addAttribute("Seasons", seasonService.findAllSeasonsByTvShowId(tvShow.getId()));
 
             if (user != null) {
 
@@ -58,7 +61,7 @@ public class ShowController {
     @PostMapping("/add")
     public String addShow(@RequestParam int showId, Model model) {
         try {
-            TVShow show =  movieDbService.createShowWithId(showId);
+            TVShow show = movieDbService.createShowWithId(showId);
             model.addAttribute("show", show);
             return "redirect:/show/" + show.getId();
         } catch (Exception e) {
@@ -81,5 +84,20 @@ public class ShowController {
             commentService.save(comment);
         }
         return "redirect:/show/" + id;
+    }
+
+    @PostMapping("/{showId}/comment/delete/{commentId}")
+    public String removeComment(@PathVariable("showId")Long showId, @PathVariable("commentId") long commentId, Model model) {
+        ShowComment comment = commentService.findShowCommentById(commentId);
+        Optional<TVShow> show = showService.findShowById(showId);
+        User user = (User) model.getAttribute("authenticatedUser");
+
+        if (show.isPresent() && user != null && Objects.equals(user.getId(), comment.getAuthor().getId())) {
+            commentService.delete(commentId);
+            show.get().getComments().remove(comment);
+            showService.updateShow(show.get());
+            return "redirect:/show/" + showId;
+        }
+        return "error";
     }
 }

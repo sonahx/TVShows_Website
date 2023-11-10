@@ -39,6 +39,6 @@ public class NewsArticle {
     @Column(name = "imageUrl", length = 200, nullable = false)
     private String imageUrl;
 
-    @OneToMany(mappedBy = "newsArticle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "newsArticle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<NewsArticleComment> comments = new ArrayList<>();
 }

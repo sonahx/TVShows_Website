@@ -10,4 +10,6 @@ import java.util.List;
 public interface ShowCommentRepo extends JpaRepository<ShowComment, Long>{
 
     List<ShowComment> findAllShowCommentsByTvShowId(Long showId);
+
+    ShowComment findShowCommentById(long id);
 }
