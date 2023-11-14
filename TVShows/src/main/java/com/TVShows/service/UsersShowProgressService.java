@@ -16,38 +16,46 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UsersShowProgressService {
 
-	private final UsersShowProgressRepo repo;
-	private final static Logger logger = LoggerFactory.getLogger(UsersShowProgressService.class);
-	
-	public void save(UsersShowProgress progress) {
-		logger.info("User {} added to his list - {} - {}",
+    private final UsersShowProgressRepo repo;
+    private final static Logger logger = LoggerFactory.getLogger(UsersShowProgressService.class);
+
+    public void save(UsersShowProgress progress) {
+        logger.info("User {} added to his list - {} - {}",
+                progress.getUser().getName(),
+                progress.getTvShow().getName(),
+                progress.getStatus());
+        repo.save(progress);
+    }
+
+    public List<UsersShowProgress> findAll() {
+        return repo.findAll();
+    }
+
+    public List<UsersShowProgress> findByUser(User user) {
+        return repo.findByUser(user);
+    }
+
+    public Optional<UsersShowProgress> findByShowAndUser(TVShow tvShow, User user) {
+        return repo.findByTvShowAndUser(tvShow, user);
+    }
+
+    public void update(UsersShowProgress progress) {
+        logger.info("User {} updated - {} - {} ",
+                progress.getUser().getName(),
+                progress.getTvShow().getName(),
+                progress.getStatus());
+        repo.save(progress);
+    }
+
+    public Optional<UsersShowProgress> findByTvShowAndUser(TVShow show, User user) {
+        return repo.findByTvShowAndUser(show, user);
+    }
+
+    public void setPersonalScore(UsersShowProgress progress, int score) {
+        logger.info("User {} setting personal score for {} - {}",
 				progress.getUser().getName(),
 				progress.getTvShow().getName(),
-				progress.getStatus());
-		repo.save(progress);
-	}
-
-	public List<UsersShowProgress> findAll() {
-		return repo.findAll();
-	}
-
-	public List<UsersShowProgress> findByUser(User user) {
-		return repo.findByUser(user);
-	}
-
-	public Optional<UsersShowProgress> findByShowAndUser(TVShow tvShow, User user){
-		return repo.findByTvShowAndUser(tvShow, user);
-	}
-
-	public void update(UsersShowProgress progress) {
-		logger.info("User {} updated - {} - {} ",
-				progress.getUser().getName(),
-				progress.getTvShow().getName(),
-				progress.getStatus());
-		repo.save(progress);
-	}
-
-	public Optional<UsersShowProgress> findByTvShowAndUser(TVShow show, User user){
-		return repo.findByTvShowAndUser(show, user);
-	}
+				score);
+        progress.setPersonalScore(score);
+    }
 }

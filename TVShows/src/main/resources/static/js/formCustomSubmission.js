@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Register form submit event handler for forms with the id 'custom-submission-id'
   const forms = document.querySelectorAll('form.custom-submission-class');
   if (forms) {
     forms.forEach(f => {

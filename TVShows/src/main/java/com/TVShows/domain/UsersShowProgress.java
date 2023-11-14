@@ -12,7 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "users_shows")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsersShowProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +31,8 @@ public class UsersShowProgress {
 
     private Integer totalProgress;
 
+    private Integer personalScore;
+
     @OneToMany(mappedBy = "usersShowProgress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SeasonProgress> seasonProgress = new ArrayList<>();
 
@@ -40,11 +45,17 @@ public class UsersShowProgress {
         this.status = status;
     }
 
-    public Integer getTotalProgress(){
+    public Integer getTotalProgress() {
         int summedSeasonProgresses = 0;
         for (SeasonProgress progress : seasonProgress) {
             summedSeasonProgresses = summedSeasonProgresses + progress.getProgress();
         }
         return summedSeasonProgresses;
+    }
+
+    public void setPersonalScore(Integer score) {
+        if (score >= 1 && score <= 10) {
+             this.personalScore = score;
+        }
     }
 }

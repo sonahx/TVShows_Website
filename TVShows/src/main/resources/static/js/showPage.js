@@ -21,6 +21,29 @@ document.getElementById("viewerStatus").addEventListener("change", function() {
     });
 });
 
+//PERSONAL SCORE CHANGING
+document.getElementById("personalScore").addEventListener("change", function() {
+    const form = document.getElementById("viewerPersonalScore");
+    const formData = new FormData(form);
+    const action = form.getAttribute("action");
+    fetch(action, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Accept": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        console.log("Request successfully completed");
+    })
+    .catch(error => {
+        console.error("There has been a problem while contacting server:", error);
+    });
+});
+
 // SEASON TRACKING
 const trackingButtons = document.querySelectorAll(".trackingButton");
 

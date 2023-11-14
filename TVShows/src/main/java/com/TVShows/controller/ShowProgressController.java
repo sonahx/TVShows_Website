@@ -11,10 +11,7 @@ import com.TVShows.service.UsersShowProgressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -44,6 +41,21 @@ public class ShowProgressController {
             usersShowProgressService.save(newUsersShows);
         }
         return "home";
+    }
+
+    @PostMapping("/{show}/score/{score}")
+    public String changePersonalScore(@PathVariable TVShow show,
+                                      @RequestParam(name = "personalScore", defaultValue = "0") Integer personalScore,
+                                      Model model) {
+        User user = (User) model.getAttribute("authenticatedUser");
+        UsersShowProgress showProgress = usersShowProgressService.findByShowAndUser(show, user).orElse(null);
+
+        if (user != null && show != null & showProgress != null) {
+            usersShowProgressService.setPersonalScore(showProgress, personalScore);
+            usersShowProgressService.update(showProgress);
+            return "redirect:/show/" + show.getId();
+        }
+        return "error";
     }
 
     @PostMapping("/{show}/{season}/{operation}")

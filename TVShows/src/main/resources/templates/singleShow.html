@@ -61,6 +61,20 @@
                     value="">Add to list</option>
                 </select>
               </form>
+
+              <!-- Personal score -->
+              <div sec:authorize="isAuthenticated()" class="personal-score-wrapper">
+                <form id="viewerPersonalScore" class="dropdown custom-submission-class" th:action="@{'/user/' + ${show.id} + '/score/' + ${score}}" method="post">
+                  <label for="personalScore" class="dropdown-label">Personal score:</label>
+                  <select name="personalScore" class="status-input" id="personalScore">
+                    <option value="Score" th:unless="${usersShowProgress.isPresent() && usersShowProgress.get().getPersonalScore() != null}">Score</option>
+                    <option th:each="scoreValue : ${#numbers.sequence(1, 10)}"
+                            th:value="${scoreValue}"
+                            th:text="${scoreValue}"
+                            th:selected="${scoreValue == usersShowProgress.get().getPersonalScore()}"></option>
+                </select>
+              </form>
+              </div>
             </div>
 
             <div class="show-info">
@@ -181,8 +195,10 @@
                       th:text="${comment.author.name}">author username</a>
                     <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
                   </div>
-                  <div sec:authorize="isAuthenticated()" th:if="${comment.author.id == authenticatedUser.id}" class="delete-comment">
-                    <form id="deleteCommentForm" th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
+                  <div sec:authorize="isAuthenticated()" th:if="${comment.author.id == authenticatedUser.id}"
+                    class="delete-comment">
+                    <form id="deleteCommentForm"
+                      th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
                       <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
                     </form>
                   </div>
@@ -212,7 +228,6 @@
   <div th:insert="~{footer :: footer}"></div>
 
   <script th:src="@{/js/formCustomSubmission.js}"></script>
-  <script th:src="@{/js/comment.js}"></script>
   <script th:src="@{/js/showPage.js}"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

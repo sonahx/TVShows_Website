@@ -25,7 +25,9 @@ public class SecurityConfig {
 						  "/user/{id}/decrement",
 						  "/user/{id}/increment",
 						  "/user/addShow",
-						  "/user/image/upload")
+						  "/user/image/upload",
+						  "/user/{show}/score/{score}"
+						  )
 
 				  .hasAnyRole("USER", "ADMINISTRATOR")
 
