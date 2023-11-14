@@ -46,7 +46,7 @@ public class ShowController {
                 model.addAttribute("usersShowProgress", usersShowProgress);
 
                 if (seasonProgressService.findSeasonProgressForShowAndUser(tvShow, user).isEmpty() && usersShowProgress.isPresent()) {
-                    tvShow.getSeasons().forEach(s -> {
+                    seasonService.findAllSeasonsByTvShowId(tvShow.getId()).forEach(s -> {
                         SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress.get(), s);
                         seasonProgressService.save(newProgress);
                     });
