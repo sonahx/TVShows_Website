@@ -37,14 +37,15 @@
 
                             <li>
                                 <!-- SEARCH START -->
-                                <form action="" class="navbar-form">
+                                <form th:action="@{'/search/' + ${keyword}}" method="get" class="navbar-form">
                                     <div class="form-group">
                                         <div class="input-group search-box">
-                                            <input type="search" name="search" id="search"
-                                                placeholder="Search for a show..." class="form-control">
+                                            <input type="search" name="keyword" id="keyword" minlength="3"
+                                                placeholder="Search for a show..." class="form-control">     
                                         </div>
                                     </div>     
-                                    <div id="search-results" class="dropdown search-results"></div>  
+                                    <!-- <div id="search-results" class="dropdown search-results"></div>   -->
+                                    <button type="submit" class="hidden"></button>
                                 </form>
                                  <!-- SEARCH END -->
                             </li>

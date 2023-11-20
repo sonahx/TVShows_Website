@@ -28,18 +28,17 @@ public class SecurityConfig {
 						  "/user/image/upload",
 						  "/user/{show}/score/{score}"
 						  )
-
 				  .hasAnyRole("USER", "ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(
-						  "/tvshowform", "/news/create")
+						   "/news/create")
 				  .hasRole("ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(
 					"/home", "/page", "/shows", "/",
 					"/auth", "/auth/**",  "/login", "/verification", "/show/search/**","/news", "/news/**",
-					"/success","/profile", "/show/**","/search/**","/search", "", "/login?logout",
-					"/pictures/**", "/css/**", "/js/**", "/about", "/team", "/contact", "/policy")
+					"/success","/profile", "/show/**","/search/**","/search" ,"", "/login?logout",
+					"/pictures/**", "/css/**", "/js/**", "/about", "/policy")
 				  .permitAll()
 
 
