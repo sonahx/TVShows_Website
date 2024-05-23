@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/peles-taras/TVShows_Website', branch: 'main'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Copy Config') {
+            steps {
+                sh 'cp whatepisode/config/application.properties src/main/resources/'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'scp target/tvshows.jar root@85.215.154.108:/whatepisode'
+                sh 'ssh root@85.215.154.108 "cd whatepisode && nohup java -jar tvshows.jar &"'
+            }
+        }
+    }
+}
