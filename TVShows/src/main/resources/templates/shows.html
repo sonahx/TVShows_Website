@@ -23,7 +23,7 @@
         <div class="body-wrapper">
 
             <div class="block-1">
-                <div class="subheadline"><a href="#">CURRENTLY AIRING</a></div>
+                <div class="subheadline"><a href="#">SHOWS</a></div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
                <div class="item item-1">
@@ -37,12 +37,21 @@
 
             <div class="pagination">
                 <ul class="pagination">
-                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, page.totalPages-1)}">
-                        <a class="pagination:number" th:class="${pageNumber == page.number}? active : ''" th:if="${pageNumber != page.number}" th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}" th:text="${pageNumber + 1}"></a>
-                        <span th:if="${pageNumber == page.number}" th:class="${pageNumber == page.number}? active : ''" th:text="${pageNumber + 1}"></span>
+                    <li class="page-item"
+                        th:each="pageNumber : ${#numbers.sequence(
+                            page.number > 0 ? page.number - 1 : 0,
+                            page.totalPages - 1 < page.number + 5 ? page.totalPages - 1 : page.number + 5)}">
+                        <a class="pagination:number"
+                            th:class="${pageNumber == page.number} ? 'active' : ''"
+                            th:if="${pageNumber != page.number}"
+                            th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}"
+                            th:text="${pageNumber + 1}"></a>
+                        <span th:if="${pageNumber == page.number}"
+                            th:class="${pageNumber == page.number} ? 'active' : ''"
+                            th:text="${pageNumber + 1}"></span>
                     </li>
                 </ul>
-            </div> 
+            </div>
  </article>
 
     <footer th:insert="~{footer :: footer}"></footer>
