@@ -158,6 +158,13 @@ width: 100%;
 color:white;
 font-size: 22px;
 }
+
+.comment-text-empty{
+  width: 100%;
+  color:white;
+  font-size: 22px;
+}
+
 .comment-form{
 padding: 20px 0 50px 0;
 margin: 0 auto;
@@ -178,7 +185,7 @@ flex-direction: column;
 margin-left: 10px;
 }
 .modal {
-  display: none; /
+  display: none; 
   position: fixed;
   z-index: 1;
   left: 0;

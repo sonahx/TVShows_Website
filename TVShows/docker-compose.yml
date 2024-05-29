@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 654321
+      MYSQL_DATABASE: TVShows
+    networks:
+      - whatepisode-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  whatepisode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: whatepisode-container
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/TVShows
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 654321
+    networks:
+      - whatepisode-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  whatepisode-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

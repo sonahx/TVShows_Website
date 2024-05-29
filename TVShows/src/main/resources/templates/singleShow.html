@@ -209,8 +209,10 @@
               </div>
             </div>
 
-            <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comment-body">
+            <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
+              <div class="comment-body">
               <p class="comment-text">No comments posted yet.</p>
+            </div>
             </div>
 
             <div sec:authorize="isAuthenticated()" class="comment-form">

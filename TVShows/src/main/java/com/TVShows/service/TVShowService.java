@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class TVShowService {
 
     public Page<TVShow> findAllShowsWithPagination(int page, int size) {
         return showRepo.findAll(PageRequest.of(page,size));
+    }
+
+    public Page<TVShow> findAllShowsWithPaginationAndSort(int page, int size, String sortField, Sort.Direction sortDirection) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortField));
+        return showRepo.findAll(pageRequest);
     }
 
     public void updateShow(TVShow show) {

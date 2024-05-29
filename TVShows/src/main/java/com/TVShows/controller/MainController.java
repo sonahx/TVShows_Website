@@ -10,6 +10,7 @@ import com.TVShows.service.TVShowService;
 import com.TVShows.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 15);
+		Page<TVShow> page = TVshowService.findAllShowsWithPaginationAndSort(0, 15, "popularity", Sort.Direction.DESC);
 		Page<NewsArticle> newsPage = newsArticleService.findAllShowsWithPagination(0, 5);
 
 		model.addAttribute("page", page);
