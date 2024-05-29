@@ -39,8 +39,8 @@
                 <ul class="pagination">
                     <li class="page-item"
                         th:each="pageNumber : ${#numbers.sequence(
-                            page.number > 0 ? page.number - 1 : 0,
-                            page.totalPages - 1 < page.number + 5 ? page.totalPages - 1 : page.number + 5)}">
+                            (page.number - 3 >= 0) ? page.number - 3 : 0,
+                            (page.number + 3 <= page.totalPages - 1) ? page.number + 3 : page.totalPages - 1)}">
                         <a class="pagination:number"
                             th:class="${pageNumber == page.number} ? 'active' : ''"
                             th:if="${pageNumber != page.number}"
@@ -51,7 +51,7 @@
                             th:text="${pageNumber + 1}"></span>
                     </li>
                 </ul>
-            </div>
+            </div>            
  </article>
 
     <footer th:insert="~{footer :: footer}"></footer>
