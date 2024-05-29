@@ -32,4 +32,5 @@ public class ShowResponse {
     private Double vote_average;
     private Integer vote_count;
     private String original_name;
+    private Double popularity;
 }

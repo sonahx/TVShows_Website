@@ -31,7 +31,7 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home(Model model) {
-		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 15);
 		Page<NewsArticle> newsPage = newsArticleService.findAllShowsWithPagination(0, 5);
 
 		model.addAttribute("page", page);
@@ -42,9 +42,9 @@ public class MainController {
 
 	@GetMapping("/shows")
 	public String shows(Model model) {
-		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 10);
+		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 50);
 		model.addAttribute("page", page);
-		return "redirect:/page?page=0&size=10";
+		return "redirect:/page?page=0&size=50";
 	}
 
 	@GetMapping("/page")

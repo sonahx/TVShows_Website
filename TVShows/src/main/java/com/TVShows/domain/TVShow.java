@@ -70,6 +70,9 @@ public class TVShow {
     @Column
     private String trailerUrl;
 
+    @Column
+    private Double popularity;
+
     @Lob
     @Column(name = "overview", length = 1000)
     private String overview;
