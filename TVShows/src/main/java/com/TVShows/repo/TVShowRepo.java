@@ -14,6 +14,6 @@ public interface TVShowRepo extends JpaRepository<TVShow, Long>{
 	
 	Optional<TVShow> findShowByName(String name);
 
-	@Query(value = "SELECT DISTINCT s.* FROM TVShow s WHERE s.name LIKE %:keyword% LIMIT 6", nativeQuery = true)
+	@Query(value = "SELECT DISTINCT s.* FROM tvshow s WHERE s.name LIKE %:keyword% LIMIT 6", nativeQuery = true)
 	List<TVShow> findShowsByKeyword(@Param("keyword") String keyword);
 }
