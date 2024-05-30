@@ -40,6 +40,7 @@
                 <div th:each="show: ${page}">        
                <div class="item item-1">
                 <a th:href="@{'/show/' + ${show.id}}">
+                <p class="show-name" th:text="${show.name}">Show name</p>
                 <img th:src="${show.imageUrl}" class="show-img"></img>
               </a>
                 </div> 

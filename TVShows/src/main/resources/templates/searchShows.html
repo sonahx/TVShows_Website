@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Search</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link th:href="@{/css/header.css}" rel="stylesheet">
@@ -30,9 +30,10 @@
                     <div th:each="show: ${Shows}">
                         <div class="item item-1">
                             <a th:href="@{'/show/' + ${show.id}}">
-                                <img th:src="${show.imageUrl}" class="show-img"></img>
-                            </a>
-                        </div>
+                            <p class="show-name" th:text="${show.name}">Show name</p>
+                            <img th:src="${show.imageUrl}" class="show-img"></img>
+                          </a>
+                            </div> 
                     </div>
                 </div>
             </div>

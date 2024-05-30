@@ -95,6 +95,9 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
+                                    </div>
+                                    <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
                                     </div>
                                 </div>
@@ -105,6 +108,9 @@
                                     th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
                                     <div class="col-md-6">
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
@@ -120,6 +126,9 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
+                                    </div>
+                                    <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
                                     </div>
                                 </div>
@@ -132,6 +141,9 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
+                                    </div>
+                                    <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
                                     </div>
                                 </div>
@@ -142,6 +154,9 @@
                                     class="row">
                                     <div class="col-md-6">
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
@@ -157,6 +172,9 @@
                                         <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
                                     </div>
                                     <div class="col-md-6">
+                                        <p th:text="${show.personalScore}">Score</p>
+                                    </div>
+                                    <div class="col-md-6">
                                         <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
                                     </div>
                                 </div>
@@ -170,12 +188,6 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <!-- <div class="profile-work">
-                            <p>SCORES</p>
-                            <a href="">Website Link</a><br />
-                            <a href="">Bootsnipp Profile</a><br />
-                            <a href="">Bootply Profile</a>
-                        </div> -->
                     </div>
                 </div>
             </div>

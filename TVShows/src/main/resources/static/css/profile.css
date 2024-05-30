@@ -101,3 +101,6 @@ text-align: center;
     font-weight: 600;
     color: #0062cc;
 }
+.tab-pane > .row > .col-md-6 {
+    width: 33%;
+}
