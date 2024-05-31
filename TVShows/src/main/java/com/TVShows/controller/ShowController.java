@@ -46,19 +46,9 @@ public class ShowController {
             }
 
             if (user != null) {
-
-                if (usersShowsService.findByShowAndUser(tvShow, user).isEmpty()) {
-                    usersShowsService.save(new UsersShowProgress(user, tvShow, ViewerStatus.DEFAULT));
-                }
-                Optional<UsersShowProgress> usersShowProgress = usersShowsService.findByShowAndUser(tvShow, user);
+                Optional<UsersShowProgress> usersShowProgress = usersShowsService.createDefaultShowProgress(tvShow, user);
                 model.addAttribute("usersShowProgress", usersShowProgress);
-
-                if (seasonProgressService.findSeasonProgressForShowAndUser(tvShow, user).isEmpty() && usersShowProgress.isPresent()) {
-                    seasonService.findAllSeasonsByTvShowId(tvShow.getId()).forEach(s -> {
-                        SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress.get(), s);
-                        seasonProgressService.save(newProgress);
-                    });
-                }
+                seasonProgressService.createDefaultSeasonProgress(tvShow, user, usersShowProgress);
                 List<SeasonProgress> seasonProgressList = seasonProgressService.findSeasonProgressForShowAndUser(tvShow, user);
                 model.addAttribute("seasonProgressList", seasonProgressList);
             }

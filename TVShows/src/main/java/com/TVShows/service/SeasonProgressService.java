@@ -15,13 +15,14 @@ import java.util.Optional;
 public class SeasonProgressService {
 
     private final SeasonProgressRepo repo;
+    private final SeasonService seasonService;
     private final static Logger logger = LoggerFactory.getLogger(SeasonProgressService.class);
 
-    public Optional<SeasonProgress> findByUsersShowProgressAndSeason(UsersShowProgress progress, Season season){
+    public Optional<SeasonProgress> findByUsersShowProgressAndSeason(UsersShowProgress progress, Season season) {
         return repo.findByUsersShowProgressAndSeason(progress, season);
     }
 
-    public SeasonProgress save(SeasonProgress progress){
+    public SeasonProgress save(SeasonProgress progress) {
         return repo.save(progress);
     }
 
@@ -34,7 +35,17 @@ public class SeasonProgressService {
                 progress.getSeason().getEpisode_count());
         repo.save(progress);
     }
-    public List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user){
+
+    public List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user) {
         return repo.findSeasonProgressForShowAndUser(tvShow, user);
+    }
+
+    public void createDefaultSeasonProgress(TVShow tvShow, User user, Optional<UsersShowProgress> usersShowProgress) {
+        if (findSeasonProgressForShowAndUser(tvShow, user).isEmpty() && usersShowProgress.isPresent()) {
+            seasonService.findAllSeasonsByTvShowId(tvShow.getId()).forEach(season -> {
+                SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress.get(), season);
+                save(newProgress);
+            });
+        }
     }
 }

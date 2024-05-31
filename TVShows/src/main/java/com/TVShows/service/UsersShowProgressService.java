@@ -3,6 +3,7 @@ package com.TVShows.service;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
+import com.TVShows.enums.ViewerStatus;
 import com.TVShows.repo.UsersShowProgressRepo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -57,5 +58,12 @@ public class UsersShowProgressService {
 				progress.getTvShow().getName(),
 				score);
         progress.setPersonalScore(score);
+    }
+
+    public Optional<UsersShowProgress> createDefaultShowProgress(TVShow tvShow, User user){
+        if (findByShowAndUser(tvShow, user).isEmpty()) {
+            save(new UsersShowProgress(user, tvShow, ViewerStatus.DEFAULT));
+        }
+        return findByShowAndUser(tvShow, user);
     }
 }
