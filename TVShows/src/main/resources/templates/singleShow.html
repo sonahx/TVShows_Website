@@ -81,12 +81,10 @@
               <!-- INFO LEFT -->
               <div class="info-left">
                 <div class="score-wrapper">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </div>
+                  <span th:each="i : ${#numbers.sequence(1, starRating.fullStars)}" class="fa fa-star checked"></span>
+                  <span th:if="${starRating.halfStars == 1}" class="fa fa-star-half-o checked"></span>
+                  <span th:each="i : ${#numbers.sequence(1, starRating.emptyStars)}" class="fa fa-star"></span>
+              </div>
 
                 <div th:if="${show.show_status != null}" class="info-column"><label>STATUS: </label>
                   <p th:text="${show.show_status}"></p>

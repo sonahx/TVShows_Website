@@ -25,6 +25,7 @@ public class ShowController {
     private final SeasonProgressService seasonProgressService;
     private final MovieDbService movieDbService;
     private final SeasonService seasonService;
+    private final StarRatingService starRatingService;
 
     @GetMapping("/{id}")
     public String singleShow(@PathVariable("id") Long id, Model model) {
@@ -36,6 +37,13 @@ public class ShowController {
             model.addAttribute("ShowComment", new ShowComment());
             model.addAttribute("Comments", commentService.findAllCommentsByShowId(tvShow.getId()));
             model.addAttribute("Seasons", seasonService.findAllSeasonsByTvShowId(tvShow.getId()));
+            try {
+                double voteAverage = Double.parseDouble(tvShow.getVoteAverage());
+                StarRating starRating = starRatingService.calculateStarRating(voteAverage);
+                model.addAttribute("starRating", starRating);
+            } catch (NumberFormatException e) {
+                model.addAttribute("starRating", new StarRating(0, 0, 10)); // Default to 0 stars
+            }
 
             if (user != null) {
 
@@ -87,7 +95,7 @@ public class ShowController {
     }
 
     @PostMapping("/{showId}/comment/delete/{commentId}")
-    public String removeComment(@PathVariable("showId")Long showId, @PathVariable("commentId") long commentId, Model model) {
+    public String removeComment(@PathVariable("showId") Long showId, @PathVariable("commentId") long commentId, Model model) {
         ShowComment comment = commentService.findShowCommentById(commentId);
         Optional<TVShow> show = showService.findShowById(showId);
         User user = (User) model.getAttribute("authenticatedUser");
