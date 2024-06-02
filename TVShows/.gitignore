@@ -1,6 +1,9 @@
+### CUSTOM ###
 /src/main/resources/application.properties
 /src/main/resources/application-dev.properties
 /src/main/resources/application-prod.properties
+secret.env
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
