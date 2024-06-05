@@ -69,17 +69,19 @@ public class MainController {
 	
 	@GetMapping("/profile")
 	public String profile(@RequestParam("user") String name, Model model) {
-		User profileUser = userService.findByUsername(name).orElseThrow(()->
-		new UsernameNotFoundException("username not found"));
+		User profileUser = userService.findByUsername(name).orElse(null);
 
-		long nonDefaultProgressCount = profileUser.getShowProgresses().stream()
-				.filter(progress -> progress.getStatus() != ViewerStatus.DEFAULT)
-				.count();
+		if(profileUser != null) {
+			long nonDefaultProgressCount = profileUser.getShowProgresses().stream()
+					.filter(progress -> progress.getStatus() != ViewerStatus.DEFAULT)
+					.count();
 
-		model.addAttribute("nonDefaultProgressCount", nonDefaultProgressCount);
-		model.addAttribute("user", profileUser);
-		model.addAttribute("image", new ImageEncoder());
-		return "profile";
+			model.addAttribute("nonDefaultProgressCount", nonDefaultProgressCount);
+			model.addAttribute("user", profileUser);
+			model.addAttribute("image", new ImageEncoder());
+			return "profile";
+		}
+		return "error";
 	}
 
 	@GetMapping("/about")

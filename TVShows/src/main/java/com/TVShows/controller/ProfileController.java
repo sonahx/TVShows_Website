@@ -20,13 +20,6 @@ public class ProfileController {
 
     private final UserService userService;
 
-    @GetMapping("/get/{id}")
-    public void getUserInfo(@PathVariable Long id, Model model) {
-        User user = userService.findUserById(id);
-
-        model.addAttribute("user", user);
-    }
-
     @PostMapping("/{id}/image/upload")
     public void uploadImage(@ModelAttribute("image") ImageEncoder image, @PathVariable Long id,
                             Model model, HttpServletResponse response, HttpServletRequest request) throws IOException {

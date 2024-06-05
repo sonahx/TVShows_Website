@@ -53,6 +53,9 @@ public class ShowController {
                 model.addAttribute("seasonProgressList", seasonProgressList);
             }
         }
+        else{
+            return "error";
+        }
         return "singleShow";
     }
 
