@@ -35,7 +35,7 @@ public class SecurityConfig {
 				  .hasRole("ADMINISTRATOR")
 
 				  .and().authorizeHttpRequests().requestMatchers(
-					"/home", "/page", "/shows", "/",
+					"/home", "/page", "/shows", "/", "/error",
 					"/auth", "/auth/**",  "/login", "/verification", "/show/search/**","/news", "/news/**",
 					"/success","/profile", "/show/**","/search/**","/search" ,"", "/login?logout",
 					"/pictures/**", "/css/**", "/js/**", "/about", "/policy")

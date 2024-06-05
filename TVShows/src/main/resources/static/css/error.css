@@ -1,0 +1,93 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css";
+
+#notfound {
+    position: relative;
+}
+
+#notfound .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%)
+}
+
+.notfound {
+    max-width: 520px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center
+}
+
+.notfound .notfound-404 {
+    position: relative;
+    height: 240px
+}
+
+.notfound .notfound-404 .error-code {
+    font-family: montserrat,sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    font-size: 170px;
+    font-weight: 900;
+    margin: 0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -40px;
+    margin-left: -20px
+}
+
+.notfound .notfound-404 .error-code>span {
+    text-shadow: -8px 0 0 #000
+}
+
+.notfound .notfound-404 .top-text {
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 3px;
+    padding-left: 6px
+}
+
+.notfound .bottom-text {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 25px
+}
+
+@media only screen and (max-width: 767px) {
+    .notfound .notfound-404 {
+        height:200px
+    }
+
+    .notfound .notfound-404 .error-code {
+        font-size: 155px
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .notfound .notfound-404 {
+        height:162px
+    }
+
+    .notfound .notfound-404 .error-code {
+        font-size: 140px;
+        height: 150px;
+        line-height: 162px
+    }
+
+    .notfound .bottom-text {
+        font-size: 16px
+    }
+}
