@@ -21,16 +21,6 @@ public class NewsArticleController {
     private final NewsArticleService newsArticleService;
     private final NewsArticleCommentService newsArticleCommentService;
 
-//    @GetMapping("/{id}")
-//    public String newsArticle(@PathVariable Long id, Model model) {
-//        newsArticleService.findById(id).ifPresent(newsArticle -> {
-//            model.addAttribute("NewsArticle", newsArticle);
-//            model.addAttribute("NewsArticleComment", new NewsArticleComment());
-//            model.addAttribute("Comments", newsArticleCommentService.findAllByNewsArticleId(id));
-//        });
-//        return "newsArticle";
-//    }
-
     @GetMapping("/{id}")
     public String newsArticle(@PathVariable Long id, Model model) {
         NewsArticle newsArticle = newsArticleService.findById(id).orElse(null);
