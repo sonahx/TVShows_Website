@@ -4,6 +4,9 @@ import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
+import com.TVShows.exceptions.EmailAlreadyTakenException;
+import com.TVShows.exceptions.UsernameAlreadyTakenException;
+import com.TVShows.exceptions.WrongCredentialsException;
 import com.TVShows.mail.EmailBuilder;
 import com.TVShows.mail.MailSender;
 import org.junit.jupiter.api.BeforeEach;
@@ -90,7 +93,7 @@ class AuthServiceTest {
         when(userService.findByUsername(registerRequest.getUsername())).thenReturn(Optional.of(new User()));
 
         // When/Then
-        assertThrows(IllegalArgumentException.class, () -> authService.register(registerRequest));
+        assertThrows(UsernameAlreadyTakenException.class, () -> authService.register(registerRequest));
 
         // Verify that no user was created
         verify(userService, never()).createUser(any());
@@ -105,7 +108,7 @@ class AuthServiceTest {
         when(userService.findByEmail(registerRequest.getEmail())).thenReturn(Optional.of(new User()));
 
         // When/Then
-        assertThrows(IllegalArgumentException.class, () -> authService.register(registerRequest));
+        assertThrows(EmailAlreadyTakenException.class, () -> authService.register(registerRequest));
 
         // Verify that no user was created
         verify(userService, never()).createUser(any());

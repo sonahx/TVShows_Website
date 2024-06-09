@@ -222,6 +222,10 @@ button.ghost {
 .form-check-input{
 visibility: hidden;
 }
+.alert { 
+    position: absolute;
+    top: 400px;
+}
 
 
 

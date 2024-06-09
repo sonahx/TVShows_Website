@@ -4,6 +4,9 @@ import com.TVShows.DTO.RegisterRequest;
 import com.TVShows.domain.ConfirmationToken;
 import com.TVShows.domain.User;
 import com.TVShows.enums.Role;
+import com.TVShows.exceptions.EmailAlreadyTakenException;
+import com.TVShows.exceptions.UsernameAlreadyTakenException;
+import com.TVShows.exceptions.WrongCredentialsException;
 import com.TVShows.mail.EmailBuilder;
 import com.TVShows.mail.MailSender;
 import lombok.RequiredArgsConstructor;
@@ -35,17 +38,17 @@ public class AuthService {
                 || requestedEmail.length() < 6
                 || !requestedEmail.contains("@")
                 || requestedPassword.length() < 6) {
-            throw new IllegalArgumentException("Registration credentials doesn't meet the requirements");
+            throw new WrongCredentialsException("Registration credentials doesn't meet the requirements");
         }
 
         // Check if user with requested username already exists
         if (userService.findByUsername(requestedUsername).isPresent()) {
-            throw new IllegalArgumentException("Username is already taken");
+            throw new UsernameAlreadyTakenException("Username is already taken");
         }
 
         // Check if user with requested email already exists
         if (userService.findByEmail(requestedEmail).isPresent()) {
-            throw new IllegalArgumentException("Email is already taken");
+            throw new EmailAlreadyTakenException("Email is already taken");
         }
 
         // Create new user
