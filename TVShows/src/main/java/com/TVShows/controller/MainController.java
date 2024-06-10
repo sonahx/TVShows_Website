@@ -42,10 +42,11 @@ public class MainController {
 	}
 
 	@GetMapping("/shows")
-	public String shows(Model model) {
-		Page<TVShow> page = TVshowService.findAllShowsWithPagination(0, 50);
+	public String shows(Model model, @RequestParam(defaultValue = "popularity") String sortField) {
+		Page<TVShow> page = TVshowService.findAllShowsWithPaginationAndSort(0, 50, sortField, Sort.Direction.DESC);
 		model.addAttribute("page", page);
-		return "redirect:/page?page=0&size=50";
+		model.addAttribute("sortField", sortField);
+		return "shows";
 	}
 
 	@GetMapping("/page")

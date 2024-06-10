@@ -57,15 +57,34 @@ text-decoration: none;
 background-color: #333;
 border: 1px solid #0896ff;
 }
+
 .pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
 z-index: 2;
 color: #ffffff;
 background-color: #0896ff;
 border-color: #0896ff;
 }
+
 .pagination .active {
     background-color: #0896ff;
 }
+
 .subheadline{
 margin-top: 50px;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: space-between;
+}
+
+.sort-select{
+border: 0px solid;
+background: #0896ff;
+color: white;
+cursor: pointer;
+border-radius: 20px;
+font-size: 14px;
+text-align: center;
+font-weight: bold;
+letter-spacing: 1px;
 }

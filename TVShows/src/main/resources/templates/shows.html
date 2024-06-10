@@ -24,7 +24,15 @@
         <div class="body-wrapper">
 
             <div class="block-1">
-                <div class="subheadline"><a href="#">SHOWS</a></div>
+                <div class="subheadline">
+                    <a href="#">SHOWS</a>
+                    <form id="sortForm" action="/shows" method="get">
+                        <select name="sortField" class="sort-select" onchange="document.getElementById('sortForm').submit();"> 
+                            <option value="popularity" th:selected="${sortField == 'popularity'}">Popularity</option>
+                            <option value="voteAverage" th:selected="${sortField == 'voteAverage'}">Score</option>
+                        </select>
+                    </form>
+                </div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
                     <div class="item item-1">
