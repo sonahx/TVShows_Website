@@ -186,9 +186,9 @@
             <div th:each="comment: ${Comments}" class="comments-wrapper">
               <div class="comment-header">
                 <div class="comment-info">
-                  <img th:if="${comment.author.image != null}"
+                  <img loading="lazy" th:if="${comment.author.image != null}"
                     th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img"> </img>
-                  <img th:if="${comment.author.image == null}" class="comment-author-img"
+                  <img loading="lazy" th:if="${comment.author.image == null}" class="comment-author-img"
                     src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png"></img>
                   <div class="comment-author-info">
                     <a class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"

@@ -38,7 +38,7 @@
                     <div class="item item-1">
                         <a th:href="@{'/show/' + ${show.id}}">
                         <p class="show-name" th:text="${show.name}">Show name</p>
-                        <img th:src="${show.imageUrl == 'https://image.tmdb.org/t/p/originalnull' ? 'https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=' 
+                        <img loading="lazy" th:src="${show.imageUrl == 'https://image.tmdb.org/t/p/originalnull' ? 'https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=' 
                         : show.imageUrl}" class="show-img"></img>
                       </a>
                         </div> 
