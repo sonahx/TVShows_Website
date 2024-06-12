@@ -41,7 +41,7 @@
                 <div th:each="show: ${page}">        
                <div class="item item-1">
                 <a th:href="@{'/show/' + ${show.id}}">
-                <p class="show-name" th:text="${show.name}">Show name</p>
+                <p class="show-name" th:text="${show.name}" th:title="${show.name}">Show name</p>
                 <img loading="lazy" th:src="${show.imageUrl == 'https://image.tmdb.org/t/p/originalnull' ? 'https://media.istockphoto.com/id/1472933890/vector/no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-placeholder.jpg?s=612x612&w=0&k=20&c=Rdn-lecwAj8ciQEccm0Ep2RX50FCuUJOaEM8qQjiLL0=' 
                 : show.imageUrl}" class="show-img"></img>
               </a>
@@ -67,7 +67,7 @@
     </div>
     <form th:action="@{/show/add}" method="post">
       <input type="number" name="showId" class="form-control" placeholder="Enter show id" required/> 
-      <input type="submit" name="btnSubmit" class="" value="create" />
+      <input type="submit" name="btnSubmit" class="modalSubmit" value="create" />
     </form>
   </div>
   <a href="#!" class="outside-trigger"></a>
@@ -85,7 +85,7 @@
           <div class="item item-1">
               <a th:href="@{'/news/' + ${newsArticle.id}}">
                   <img loading="lazy" th:src="${newsArticle.imageUrl}" class="newsArticle-img"></img>
-                  <p class="newsArticle-title" th:text="${newsArticle.name}"></p>
+                  <p class="newsArticle-title" th:text="${newsArticle.name}" th:title="${newsArticle.name}"></p>
               </a>
           </div> 
       </div>                    
