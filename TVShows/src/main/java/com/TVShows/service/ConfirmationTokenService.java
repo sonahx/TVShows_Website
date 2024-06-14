@@ -31,7 +31,7 @@ public class ConfirmationTokenService {
     }
 
     @Transactional
-    public void confirmToken(String token) {
+    public User confirmRegisterToken(String token) {
         ConfirmationToken confirmationToken = findByToken(token)
                 .orElseThrow(() -> new IllegalStateException("Token not found"));
 
@@ -47,6 +47,25 @@ public class ConfirmationTokenService {
 
         setConfirmedAt(token);
         userService.enableUser(confirmationToken.getUser().getEmail());
+        return confirmationToken.getUser();
+    }
+
+    @Transactional
+    public User confirmResetToken(String token) {
+        ConfirmationToken confirmationToken = findByToken(token)
+                .orElseThrow(() -> new IllegalStateException("Token not found"));
+
+        if (confirmationToken.getConfirmedAt() != null) {
+            throw new IllegalStateException("Token has been already used");
+        }
+
+        LocalDateTime expiresAt = confirmationToken.getExpiresAt();
+
+        if (expiresAt.isBefore(LocalDateTime.now())) {
+            throw new IllegalStateException("Token expired");
+        }
+        setConfirmedAt(token);
+        return confirmationToken.getUser();
     }
 
     public ConfirmationToken generateToken(User user){

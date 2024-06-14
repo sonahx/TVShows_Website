@@ -227,6 +227,29 @@ visibility: hidden;
     top: 400px;
 }
 
+.forgot-password{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modalSubmit{
+    border: 0px solid;
+    background: #0896ff;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: column;
+    }
+
 
 
 

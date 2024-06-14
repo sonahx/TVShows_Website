@@ -14,9 +14,9 @@ margin-top: 15px;
 }
 
 .show-container {
-  display: grid;
-    grid-gap: 20px 10px;
-    grid-template-columns: repeat(5, 1fr);
+display: grid;
+grid-gap: 20px 10px;
+grid-template-columns: repeat(5, 1fr);
 width: 100%;
 overflow: hidden;
 justify-items: center;

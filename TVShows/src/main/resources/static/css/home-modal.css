@@ -53,6 +53,7 @@
 }
 
 #modal {
+  z-index: 999;
   opacity: 0;
   transition: opacity 0.25s ease-in-out;
   visibility: hidden;
@@ -102,3 +103,4 @@
   padding: 32px;
   margin: 40px;
   max-width: 400px;
+}

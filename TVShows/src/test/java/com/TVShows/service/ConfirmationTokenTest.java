@@ -49,7 +49,7 @@ public class ConfirmationTokenTest {
                 .thenReturn(Optional.of(confirmationToken));
 
         // when
-        confirmationTokenService.confirmToken("valid_token");
+        confirmationTokenService.confirmRegisterToken("valid_token");
 
         // then
         verify(userService).enableUser(stringCaptor.capture());
@@ -71,7 +71,7 @@ public class ConfirmationTokenTest {
 
         // when and then
         assertThrows(IllegalStateException.class,
-                () -> confirmationTokenService.confirmToken("expired_token"));
+                () -> confirmationTokenService.confirmRegisterToken("expired_token"));
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ConfirmationTokenTest {
 
         // when and then
         assertThrows(IllegalStateException.class,
-                () -> confirmationTokenService.confirmToken("confirmed_token"));
+                () -> confirmationTokenService.confirmRegisterToken("confirmed_token"));
     }
 
     @Test
@@ -102,6 +102,6 @@ public class ConfirmationTokenTest {
 
         // when and then
         assertThrows(IllegalStateException.class,
-                () -> confirmationTokenService.confirmToken("invalid_token"));
+                () -> confirmationTokenService.confirmRegisterToken("invalid_token"));
     }
 }

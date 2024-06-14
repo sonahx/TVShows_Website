@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -69,5 +71,22 @@ public class AuthService {
                 "confirm your email",
                 EmailBuilder.build(requestedUsername, link)
                 );
+    }
+
+    public void forgotPassword (String email){
+        Optional<User> user = userService.findByEmail(email);
+        if(user.isPresent()){
+            ConfirmationToken token = tokenService.generateToken(user.get());
+            String link = url + "/auth/passwordReset?token=" + token.getToken();
+            mailSender.sendEmail(
+                    email,
+                    "password reset",
+                    EmailBuilder.forgotPassword(user.get().getName(), link)
+            );
+            logger.info("Password reset link has been sent to {}", email);
+        }
+        else {
+            logger.info("User with email: {} doesn't exist", email);
+        }
     }
 }

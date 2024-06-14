@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email verification</title>
+    <title>Email sent</title>
     <link rel="icon" type="image/ico" th:href="@{../static/favicon.ico}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link type="text/css" th:href="@{/css/header.css}" rel="stylesheet">
@@ -18,8 +18,8 @@
     <div th:insert="~{header :: header}"></div> 
 	<div class="container" id="container">
         <div class="content">
-        <h1>Email has been sent to <span th:text="${user.email}"></span></h1> 
-        <h1>Please, follow the link in a letter to activate your account</span></h1>
+        <h1>Email has been sent to  <span th:text="${#strings.defaultString(user?.email, email != null ? email : 'unknown')}"></span></h1> 
+        <h1>Please, follow the link in a letter</span></h1>
     </div>
     </div>
 
