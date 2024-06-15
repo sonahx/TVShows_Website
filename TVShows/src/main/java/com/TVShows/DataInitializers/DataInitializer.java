@@ -6,6 +6,7 @@
 //import com.TVShows.service.NewsArticleService;
 //import com.TVShows.service.UserService;
 //import lombok.RequiredArgsConstructor;
+//import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.stereotype.Component;
@@ -19,6 +20,14 @@
 //    private final UserService userService;
 //    private final NewsArticleService newsArticleService;
 //    private final PasswordEncoder encoder;
+//    @Value("${data.initializer.test-email}")
+//    private String TEST_EMAIL;
+//    @Value("${data.initializer.test-password}")
+//    private String TEST_PASS;
+//    @Value("${data.initializer.admin-email}")
+//    private String ADMIN_EMAIL;
+//    @Value("${data.initializer.admin-password}")
+//    private String ADMIN_PASS;
 //
 //    @Override
 //    public void run(String... args) throws Exception{
@@ -27,8 +36,8 @@
 //        User user1 = User.builder()
 //                .id(1L)
 //                .name("A Random User")
-//                .email("test@gmail.com")
-//                .password(encoder.encode("pass"))
+//                .email(TEST_EMAIL)
+//                .password(encoder.encode(TEST_PASS))
 //                .roles(Role.USER)
 //                .enabled(true)
 //                .build();
@@ -36,8 +45,8 @@
 //        User user2 = User.builder()
 //                .id(2L)
 //                .name("Administrator account")
-//                .email("admin@gmail.com")
-//                .password(encoder.encode("pass"))
+//                .email(ADMIN_EMAIL)
+//                .password(encoder.encode(ADMIN_PASS))
 //                .roles(Role.ADMINISTRATOR)
 //                .enabled(true)
 //                .build();
