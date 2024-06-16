@@ -12,12 +12,15 @@
 	<link type="text/css" th:href="@{/css/auth.css}" rel="stylesheet">
 	<link type="text/css" th:href="@{/css/body.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/home-modal.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/alert.css}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script th:src="@{/js/analytics.js}"></script>
 </head>
 <body>
     <div th:insert="~{header :: header}"></div> 
-	<div class="wrapper" id="wrapper">
+
+    <div class="wrapper" id="wrapper">
+
         <div class="form-container sign-up-container">
             <form th:action="@{/auth/register}" method="post">
                 <h1>Create Account</h1>
@@ -26,15 +29,6 @@
                 <input type="email" name="email" placeholder="Email" required="" minlength="6"/>
                 <input type="password"  name="password" placeholder="Password" required="" minlength="6"/>
                 <button>Sign Up</button>
-                <div th:if="${param.error == 'username'}" class="alert alert-danger" role="alert">
-                    Username is already taken.
-                </div>
-                <div th:if="${param.error == 'email'}" class="alert alert-danger" role="alert">
-                    Email is already taken.
-                </div>
-                <div th:if="${param.error == 'wrong'}" class="alert alert-danger" role="alert">
-                    Registration credentials don't meet the requirements.
-                </div>
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -46,9 +40,6 @@
                 <input type="checkbox" class="form-check-input" id="checkRememberMe" name="checkRememberMe" checked>
                 <button>Sign In</button>
                 <a href="#modal" role="button" id="modal-button" class="button modal-button forgot-password">Forgot your password?</a>
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                    Invalid username or password.
-                </div>
             </form>
 
         </div>
@@ -88,7 +79,29 @@
 
     </div>
 
+    <div th:if="${param.error}" class="alert alert-danger alert-dismissible show" role="alert">
+      <strong>
+          <span th:if="${#strings.equals(param.error, 'username')}">Username is already taken</span>
+          <span th:if="${#strings.equals(param.error, 'email')}">Email is already taken</span>
+          <span th:if="${#strings.equals(param.error, 'wrong')}">Wrong registration credentials</span>
+          <span th:if="${#strings.equals(param.error, 'invalid')}">Wrong email or password</span>
+      </strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
+  <div th:if="${param.success}" class="alert alert-success alert-dismissible show" role="alert">
+    <strong>
+        <span th:if="${#strings.equals(param.success, 'register')}">Email has been sent to  <span th:text="${email != null ? email : 'your email'}"></span>. Please, follow the link in a letter</span>
+        <span th:if="${#strings.equals(param.success, 'confirmRegister')}">Account has been activated successfully</span>
+        <span th:if="${#strings.equals(param.success, 'forgotPassword')}">Email has been sent to  <span th:text="${email != null ? email : 'your email'}"></span>. Please, follow the link in a letter</span>
+        <span th:if="${#strings.equals(param.success, 'passwordChanged')}">Password have been changed successfully</span>
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 
     <div th:insert="~{footer :: footer}"></div>
 

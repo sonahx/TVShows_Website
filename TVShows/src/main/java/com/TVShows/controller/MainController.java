@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+
 @Controller
 @RequiredArgsConstructor
 public class MainController {
@@ -63,8 +65,11 @@ public class MainController {
 	}
 
 	@GetMapping("/auth")
-	public String auth(Model model) {
+	public String auth(@RequestParam(name="error", required=false) String error, Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("param", new HashMap<String, Object>() {{
+			put("error", error);
+		}});
 		return "auth";
 	}
 	

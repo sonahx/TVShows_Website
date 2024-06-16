@@ -16,12 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-@SessionAttributes("user")
+@SessionAttributes({"user", "email"})
 public class AuthController {
 
     private final AuthService authService;
@@ -42,14 +43,14 @@ public class AuthController {
         } catch (WrongCredentialsException e) {
             return "redirect:/auth?error=wrong";
         }
-        return "verification";
+        return "redirect:/auth?success=register";
     }
 
     @GetMapping("/confirm")
     public String confirm(@RequestParam("token") String token) {
         if (token != null) {
             tokenService.confirmRegisterToken(token);
-            return "success";
+            return "redirect:/auth?success=confirmRegister";
         }
         return "error";
     }
@@ -60,7 +61,7 @@ public class AuthController {
 		if(email != null) {
 			authService.forgotPassword(email);
             model.addAttribute("email", email);
-			return "verification";
+			return "redirect:/auth?success=forgotPassword";
 		}
 		return "error";
     }
@@ -82,7 +83,7 @@ public class AuthController {
             user.setPassword(passwordEncoder.encode(newPassword));
             userService.updateUser(user);
             sessionStatus.setComplete();
-            return "auth";
+            return "redirect:/auth?success=passwordChanged";
         }
         return "error";
     }

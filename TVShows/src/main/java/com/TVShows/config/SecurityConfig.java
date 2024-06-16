@@ -20,7 +20,7 @@ public class SecurityConfig {
 	@Bean
 	public SimpleUrlAuthenticationFailureHandler customAuthenticationFailureHandler() {
 		SimpleUrlAuthenticationFailureHandler handler = new SimpleUrlAuthenticationFailureHandler();
-		handler.setDefaultFailureUrl("/auth?error=true");
+		handler.setDefaultFailureUrl("/auth?error=invalid");
 		return handler;
 	}
 
