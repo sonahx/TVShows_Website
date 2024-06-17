@@ -79,7 +79,7 @@ public class AuthController {
     public String newPassword(@RequestParam String newPassword, Model model, SessionStatus sessionStatus) {
         User user = (User) model.getAttribute("user");
 
-        if (newPassword.length() >= 6 && !user.getPassword().equals(newPassword)) {
+        if (user != null && newPassword.length() >= 6) {
             user.setPassword(passwordEncoder.encode(newPassword));
             userService.updateUser(user);
             sessionStatus.setComplete();

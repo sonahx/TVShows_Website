@@ -2,7 +2,6 @@ package com.TVShows.controller;
 
 import com.TVShows.DTO.ImageEncoder;
 import com.TVShows.domain.User;
-import com.TVShows.enums.ViewerStatus;
 import com.TVShows.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,5 +29,15 @@ public class ProfileController {
             userService.updateUser(toUpdate);
             response.sendRedirect(request.getHeader("Referer"));
         }
+    }
+
+    @PostMapping("/deleteUser")
+    public String deleteUser(Model model){
+        User authenticatedUser = (User) model.getAttribute("authenticatedUser");
+
+        if (authenticatedUser != null) {
+            userService.removeUser(authenticatedUser);
+        }
+        return "auth";
     }
 }
