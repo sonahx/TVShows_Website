@@ -31,27 +31,31 @@
                             <img th:if="${user.image == null}"
                                 src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png">
                         </div>
-                            <!-- Photo upload -->
-                            <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}" class="fileupload fileupload-new" data-provides="fileupload">
-                                <form id="uploadForm" th:action="@{'/user/' + ${user.id} + '/image/upload'}" th:object="${ImageEncoder}"
-                                    method="post" enctype="multipart/form-data">
-                                    <span class="btn btn-primary btn-file"><span class="fileupload-new">Select
-                                            file</span>
-                                        <span class="fileupload-exists">Change</span>
-                                        <input id="fileInput" type="file" name="image" />
-                                    </span>
-                                    <span class="fileupload-preview"></span>
-                                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload"
-                                        style="float: none">×</a>
-                                </form>
-                            </div>
-                            <!-- Photo upload END-->
+                        <!-- Photo upload -->
+                        <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}"
+                            class="fileupload fileupload-new" data-provides="fileupload">
+                            <form id="uploadForm" th:action="@{'/user/' + ${user.id} + '/image/upload'}"
+                                th:object="${ImageEncoder}" method="post" enctype="multipart/form-data">
+                                <span class="btn btn-primary btn-file"><span class="fileupload-new">Select
+                                        file</span>
+                                    <span class="fileupload-exists">Change</span>
+                                    <input id="fileInput" type="file" name="image" />
+                                </span>
+                                <span class="fileupload-preview"></span>
+                                <a href="#" class="close fileupload-exists" data-dismiss="fileupload"
+                                    style="float: none">×</a>
+                            </form>
+                        </div>
+                        <!-- Photo upload END-->
 
-                            <!-- Account disable  -->
-                            <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}" class="fileupload fileupload-new" data-provides="fileupload">
-                                    <span class="btn btn-primary btn-file account-disable-button"><a href="#modal" role="button" id="modal-button" class="button modal-button fileupload-new">Delete account</a></span>
-                            </div>
-                            <!-- Account disable end -->
+                        <!-- Account disable  -->
+                        <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}"
+                            class="fileupload fileupload-new" data-provides="fileupload">
+                            <span class="btn btn-primary btn-file account-disable-button"><a href="#modal" role="button"
+                                    id="modal-button" class="button modal-button fileupload-new">Delete
+                                    account</a></span>
+                        </div>
+                        <!-- Account disable end -->
 
                     </div>
                     <div class="col-md-6">
@@ -60,13 +64,13 @@
                                 profile username
                             </h5>
 
-                            <p class="collection-size"> In collection: 
+                            <p class="collection-size"> In collection:
                                 <span th:text="${nonDefaultProgressCount}"></span>
                             </p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link" id="watching-tab" data-toggle="tab" href="#watching"
-                                        role="tab" aria-controls="watching" aria-selected="true">Watching</a>
+                                    <a class="nav-link" id="watching-tab" data-toggle="tab" href="#watching" role="tab"
+                                        aria-controls="watching" aria-selected="true">Watching</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="planned-tab" data-toggle="tab" href="#planned" role="tab"
@@ -93,20 +97,37 @@
                     </div>
 
                     <vdi class="col-md-8">
+                        <!-- show headings tabpanels-->
+                        <div class="tab-pane show tab-panel-header" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>name:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>score:</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>progress:</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="tab-content profile-tab" id="myTabContent">
                             <!-- watching tab -->
                             <div class="tab-pane show active" id="watching" role="tabpanel"
                                 aria-labelledby="watching-tab">
-                                <div th:each="show: ${user.showProgresses}" th:if="${show.status.toString() == 'WATCHING'}"
-                                    class="row">
+                                <div th:each="show: ${user.showProgresses}"
+                                    th:if="${show.status.toString() == 'WATCHING'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
@@ -115,108 +136,120 @@
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- completed tab -->
                             <div class="tab-pane" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-                                <div th:each="show: ${user.showProgresses}" th:if="${show.status.toString() == 'COMPLETED'}"
-                                    class="row">
+                                <div th:each="show: ${user.showProgresses}"
+                                    th:if="${show.status.toString() == 'COMPLETED'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- rewatching tab -->
                             <div class="tab-pane" id="rewatching" role="tabpanel" aria-labelledby="rewatching-tab">
-                                <div th:each="show: ${user.showProgresses}" th:if="${show.status.toString() == 'REWATCHING'}"
-                                    class="row">
+                                <div th:each="show: ${user.showProgresses}"
+                                    th:if="${show.status.toString() == 'REWATCHING'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- on-hold tab -->
                             <div class="tab-pane" id="onhold" role="tabpanel" aria-labelledby="onhold-tab">
-                                <div th:each="show: ${user.showProgresses}" th:if="${show.status.toString() == 'ON_HOLD'}"
-                                    class="row">
+                                <div th:each="show: ${user.showProgresses}"
+                                    th:if="${show.status.toString() == 'ON_HOLD'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- dropped tab -->
                             <div class="tab-pane" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
-                                <div th:each="show: ${user.showProgresses}" th:if="${show.status.toString() == 'DROPPED'}"
-                                    class="row">
+                                <div th:each="show: ${user.showProgresses}"
+                                    th:if="${show.status.toString() == 'DROPPED'}" class="row">
                                     <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show name</a>
+                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                            name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">Show status</p>
+                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                            Show status</p>
                                     </div>
                                 </div>
                             </div>
                             <!-- end of profile widget -->
 
                         </div>
-                    </div>
-
                 </div>
 
-                <div class="row">
-                    <div class="col-md-4">
-                    </div>
-                </div>
             </div>
 
-                    <!-- Modal -->
-<div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}" class="modal-wrapper" id="modal">
-    <div class="modal-body modal-card">
-      <div class="modal-header">
-        <h2 class="modal-heading">Your account will be deleted permanently, are you sure?</h2>
-        <a href="#!" role="button" class="close" aria-label="close this modal">
-            <svg viewBox="0 0 24 24">
-              <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
-            </svg>
-          </a>
-      </div>
-      <form th:action="@{/user/deleteUser}" method="post">
-        <input type="submit" name="btnSubmit" class="modalSubmit" value="confirm" />
-      </form>
-    </div>
-    <a href="#!" class="outside-trigger"></a>
-  </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div sec:authorize="isAuthenticated()" th:if="${authenticatedUser.getId().equals(user.getId())}"
+            class="modal-wrapper" id="modal">
+            <div class="modal-body modal-card">
+                <div class="modal-header">
+                    <h2 class="modal-heading">Your account will be deleted permanently, are you sure?</h2>
+                    <a href="#!" role="button" class="close" aria-label="close this modal">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                        </svg>
+                    </a>
+                </div>
+                <form th:action="@{/user/deleteUser}" method="post">
+                    <input type="submit" name="btnSubmit" class="modalSubmit" value="confirm" />
+                </form>
+            </div>
+            <a href="#!" class="outside-trigger"></a>
+        </div>
 
         </div>
     </article>
@@ -227,4 +260,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
+
 </html>
