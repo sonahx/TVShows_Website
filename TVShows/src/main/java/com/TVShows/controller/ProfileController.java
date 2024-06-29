@@ -38,6 +38,6 @@ public class ProfileController {
         if (authenticatedUser != null) {
             userService.removeUser(authenticatedUser);
         }
-        return "auth";
+        return "redirect:/logout";
     }
 }
