@@ -179,35 +179,36 @@
             </div>
           </div>
 
-          <!-- USERS COMMENTS -->
-          <div class="show-comments">
-            <div class="subheadline">COMMENTS</div>
+<div class="show-comments">
+  <div class="subheadline">COMMENTS</div>
 
-            <div th:each="comment: ${Comments}" class="comments-wrapper">
-              <div class="comment-header">
-                <div class="comment-info">
-                  <img loading="lazy" th:if="${comment.author.image != null}"
-                    th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img"> </img>
-                  <img loading="lazy" th:if="${comment.author.image == null}" class="comment-author-img"
-                    src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png"></img>
-                  <div class="comment-author-info">
-                    <a class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
-                      th:text="${comment.author.name}">author username</a>
-                    <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
-                  </div>
-                  <div sec:authorize="isAuthenticated()" th:if="${comment.author.id == authenticatedUser.id}"
-                    class="delete-comment">
-                    <form id="deleteCommentForm"
-                      th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
-                      <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
-                    </form>
-                  </div>
-                </div>
-                <div class="comment-body">
-                  <p class="comment-text" th:text="${comment.text}">comment text...</p>
-                </div>
-              </div>
-            </div>
+  <div th:each="comment: ${Comments}" class="comments-wrapper">
+    <div class="comment-header">
+      <div class="comment-info">
+        <img loading="lazy" th:if="${comment.author != null and comment.author.image != null}"
+          th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img" />
+        <img loading="lazy" th:if="${comment.author == null or comment.author.image == null}" class="comment-author-img"
+          src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png" />
+        <div class="comment-author-info">
+          <a th:if="${comment.author != null}" class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
+            th:text="${comment.author.name}">author username</a>
+          <span th:if="${comment.author == null}" class="comment-author-name">Deleted user</span>
+          <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
+        </div>
+        <div sec:authorize="isAuthenticated()" th:if="${comment.author != null and comment.author.id == authenticatedUser.id}"
+          class="delete-comment">
+          <form id="deleteCommentForm"
+            th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
+            <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
+          </form>
+        </div>
+      </div>
+      <div class="comment-body">
+        <p class="comment-text" th:text="${comment.text}">comment text...</p>
+      </div>
+    </div>
+  </div>
+</div>
 
             <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
               <div class="comment-body">
