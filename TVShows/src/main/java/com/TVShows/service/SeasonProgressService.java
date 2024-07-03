@@ -1,6 +1,8 @@
 package com.TVShows.service;
 
+import com.TVShows.DTO.WatchingStatusRequest;
 import com.TVShows.domain.*;
+import com.TVShows.enums.ViewerStatus;
 import com.TVShows.repo.SeasonProgressRepo;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -46,6 +48,12 @@ public class SeasonProgressService {
                 SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress.get(), season);
                 save(newProgress);
             });
+        }
+    }
+
+    public void setProgressToMaximum(WatchingStatusRequest request, UsersShowProgress progress) {
+        if (request.getStatus().equals(ViewerStatus.COMPLETED)) {
+            progress.getSeasonProgress().forEach(s -> s.setProgress(s.getSeason().getEpisode_count()));
         }
     }
 }

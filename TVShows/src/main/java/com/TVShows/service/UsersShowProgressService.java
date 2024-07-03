@@ -1,5 +1,6 @@
 package com.TVShows.service;
 
+import com.TVShows.DTO.WatchingStatusRequest;
 import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
@@ -54,16 +55,22 @@ public class UsersShowProgressService {
 
     public void setPersonalScore(UsersShowProgress progress, int score) {
         logger.info("User {} setting personal score for {} - {}",
-				progress.getUser().getName(),
-				progress.getTvShow().getName(),
-				score);
+                progress.getUser().getName(),
+                progress.getTvShow().getName(),
+                score);
         progress.setPersonalScore(score);
     }
 
-    public Optional<UsersShowProgress> createDefaultShowProgress(TVShow tvShow, User user){
+    public Optional<UsersShowProgress> createDefaultShowProgress(TVShow tvShow, User user) {
         if (findByShowAndUser(tvShow, user).isEmpty()) {
             save(new UsersShowProgress(user, tvShow, ViewerStatus.DEFAULT));
         }
         return findByShowAndUser(tvShow, user);
+    }
+
+    public void createUsersShowProgress(User user, TVShow show, WatchingStatusRequest request) {
+        UsersShowProgress newUsersShows = new UsersShowProgress(user, show, request.getStatus());
+        user.getShowProgresses().add(newUsersShows);
+        save(newUsersShows);
     }
 }

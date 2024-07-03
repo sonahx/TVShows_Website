@@ -9,6 +9,7 @@ import com.TVShows.service.SeasonProgressService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UsersShowProgressService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Slf4j
 public class ShowProgressController {
 
     private final TVShowService showService;
@@ -31,14 +33,15 @@ public class ShowProgressController {
 
         // The show is already in the user's shows, so update the status
         if (existingProgress != null) {
+            // complete progress if request status = COMPLETED
+            seasonProgressService.setProgressToMaximum(request, existingProgress);
+
             existingProgress.setStatus(request.getStatus());
             usersShowProgressService.update(existingProgress);
         }
         // The show is not yet in the user's shows, so make a new one
         else {
-            UsersShowProgress newUsersShows = new UsersShowProgress(user, show, request.getStatus());
-            user.getShowProgresses().add(newUsersShows);
-            usersShowProgressService.save(newUsersShows);
+            usersShowProgressService.createUsersShowProgress(user, show, request);
         }
         return "home";
     }
