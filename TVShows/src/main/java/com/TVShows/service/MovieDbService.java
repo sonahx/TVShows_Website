@@ -3,6 +3,7 @@ package com.TVShows.service;
 import com.TVShows.DataInitializers.LocalDateTimeAdapter;
 import com.TVShows.apiResponse.ShowResponse;
 import com.TVShows.domain.*;
+import com.TVShows.exceptions.ShowAlreadyExistsException;
 import com.TVShows.exceptions.ShowNotFoundException;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -42,7 +43,7 @@ public class MovieDbService {
 
             ShowResponse showResponse = adapter.fromJson(response.body().source());
             if (showResponse != null) {
-                return setValuesFromResponse(showResponse);
+                return setValuesAndSave(showResponse);
             } else {
                 throw new ShowNotFoundException("TV show with ID " + id + " not found");
             }
@@ -61,45 +62,48 @@ public class MovieDbService {
                 .build();
     }
 
-    public TVShow setValuesFromResponse(ShowResponse showResponse) {
+    public TVShow setValuesAndSave(ShowResponse showResponse) {
         DecimalFormat decimalFormat = new DecimalFormat("#.0");
         TVShow show = new TVShow();
+        if (showService.findShowByName(showResponse.getName()).isPresent()) {
+            throw new ShowAlreadyExistsException("Show " + showResponse.getName() + " already exists.");
+        } else {
+            try {
+                List<Genre> genres = showResponse.getGenres();
+                List<Author> authors = showResponse.getCreated_by();
+                List<Network> networks = showResponse.getNetworks();
+                List<Season> seasons = showResponse.getSeasons();
+                show.setOverview(showResponse.getOverview());
+                show.setName(showResponse.getName());
+                show.setNumber_of_episodes(showResponse.getNumber_of_episodes());
+                show.setNumber_of_seasons(showResponse.getNumber_of_seasons());
+                show.setImageUrl("https://image.tmdb.org/t/p/original" + showResponse.getPoster_path());
+                show.setReleaseDate(showResponse.getFirst_air_date());
+                show.setOrigin_country(showResponse.getOrigin_country().toString().substring(1, showResponse.getOrigin_country().toString().length() - 1));
+                show.setOriginalName(showResponse.getOriginal_name());
+                show.setVoteAverage(decimalFormat.format(showResponse.getVote_average()));
+                show.setVoteCount(showResponse.getVote_count());
+                show.setAdult(showResponse.getAdult());
+                show.setHomepage(showResponse.getHomepage());
+                show.setIn_production(showResponse.getIn_production());
+                show.setLanguages(showResponse.getLanguages());
+                show.setLast_air_date(showResponse.getLast_air_date());
+                show.setShow_status(showResponse.getStatus());
+                show.setNetworks(networks);
+                show.setAuthors(authors);
+                show.setGenre(genres);
 
-        try {
-            List<Genre> genres = showResponse.getGenres();
-            List<Author> authors = showResponse.getCreated_by();
-            List<Network> networks = showResponse.getNetworks();
-            List<Season> seasons = showResponse.getSeasons();
-            show.setOverview(showResponse.getOverview());
-            show.setName(showResponse.getName());
-            show.setNumber_of_episodes(showResponse.getNumber_of_episodes());
-            show.setNumber_of_seasons(showResponse.getNumber_of_seasons());
-            show.setImageUrl("https://image.tmdb.org/t/p/original" + showResponse.getPoster_path());
-            show.setReleaseDate(showResponse.getFirst_air_date());
-            show.setOrigin_country(showResponse.getOrigin_country().toString().substring(1, showResponse.getOrigin_country().toString().length() - 1));
-            show.setOriginalName(showResponse.getOriginal_name());
-            show.setVoteAverage(decimalFormat.format(showResponse.getVote_average()));
-            show.setVoteCount(showResponse.getVote_count());
-            show.setAdult(showResponse.getAdult());
-            show.setHomepage(showResponse.getHomepage());
-            show.setIn_production(showResponse.getIn_production());
-            show.setLanguages(showResponse.getLanguages());
-            show.setLast_air_date(showResponse.getLast_air_date());
-            show.setShow_status(showResponse.getStatus());
-            show.setNetworks(networks);
-            show.setAuthors(authors);
-            show.setGenre(genres);
+                showService.createShow(show);
 
-            showService.createShow(show);
-
-            for (Season season : seasons) {
-                season.setTvShow(show);
-                seasonService.save(season);
+                for (Season season : seasons) {
+                    season.setTvShow(show);
+                    seasonService.save(season);
+                }
+            } catch (Exception e) {
+                logger.error("Error while setting values from response", e);
             }
-        } catch (Exception e) {
-            logger.error("Error while setting values from response", e);
-        }
 
-        return show;
+            return show;
+        }
     }
 }
