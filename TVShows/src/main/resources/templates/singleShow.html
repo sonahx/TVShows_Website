@@ -66,16 +66,18 @@
 
               <!-- Personal score -->
               <div sec:authorize="isAuthenticated()" class="personal-score-wrapper">
-                <form id="viewerPersonalScore" class="dropdown custom-submission-class" th:action="@{'/user/' + ${show.id} + '/score/' + ${score}}" method="post">
+                <form id="viewerPersonalScore" class="dropdown custom-submission-class"
+                  th:action="@{'/user/' + ${show.id} + '/score/' + ${score}}" method="post">
                   <label for="personalScore" class="dropdown-label">Personal score:</label>
                   <select name="personalScore" class="status-input" id="personalScore">
-                    <option value="Score" th:unless="${usersShowProgress.isPresent() && usersShowProgress.get().getPersonalScore() != null}">Score</option>
-                    <option th:each="scoreValue : ${#numbers.sequence(1, 10)}"
-                            th:value="${scoreValue}"
-                            th:text="${scoreValue}"
-                            th:selected="${scoreValue == usersShowProgress.get().getPersonalScore()}"></option>
-                </select>
-              </form>
+                    <option value="Score"
+                      th:unless="${usersShowProgress.isPresent() && usersShowProgress.get().getPersonalScore() != null}">
+                      Score</option>
+                    <option th:each="scoreValue : ${#numbers.sequence(1, 10)}" th:value="${scoreValue}"
+                      th:text="${scoreValue}" th:selected="${scoreValue == usersShowProgress.get().getPersonalScore()}">
+                    </option>
+                  </select>
+                </form>
               </div>
             </div>
 
@@ -86,7 +88,7 @@
                   <span th:each="i : ${#numbers.sequence(1, starRating.fullStars)}" class="fa fa-star checked"></span>
                   <span th:if="${starRating.halfStars == 1}" class="fa fa-star-half-o checked"></span>
                   <span th:each="i : ${#numbers.sequence(1, starRating.emptyStars)}" class="fa fa-star"></span>
-              </div>
+                </div>
 
                 <div th:if="${show.show_status != null}" class="info-column"><label>STATUS: </label>
                   <p th:text="${show.show_status}"></p>
@@ -164,11 +166,6 @@
                   </button>
                 </div>
 
-
-
-
-
-
               </div>
             </div>
           </div>
@@ -179,54 +176,57 @@
             </div>
           </div>
 
-<div class="show-comments">
-  <div class="subheadline">COMMENTS</div>
+          <div class="show-comments">
+            <div class="subheadline">COMMENTS</div>
 
-  <div th:each="comment: ${Comments}" class="comments-wrapper">
-    <div class="comment-header">
-      <div class="comment-info">
-        <img loading="lazy" th:if="${comment.author != null and comment.author.image != null}"
-          th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img" />
-        <img loading="lazy" th:if="${comment.author == null or comment.author.image == null}" class="comment-author-img"
-          src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png" />
-        <div class="comment-author-info">
-          <a th:if="${comment.author != null}" class="comment-author-name" th:href="@{/profile(user=${comment.author.name})}"
-            th:text="${comment.author.name}">author username</a>
-          <span th:if="${comment.author == null}" class="comment-author-name">Deleted user</span>
-          <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
-        </div>
-        <div sec:authorize="isAuthenticated()" th:if="${comment.author != null and comment.author.id == authenticatedUser.id}"
-          class="delete-comment">
-          <form id="deleteCommentForm"
-            th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
-            <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
-          </form>
-        </div>
-      </div>
-      <div class="comment-body">
-        <p class="comment-text" th:text="${comment.text}">comment text...</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-            <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
-              <div class="comment-body">
-              <p class="comment-text">No comments posted yet.</p>
-            </div>
-            </div>
-
-            <div sec:authorize="isAuthenticated()" class="comment-form">
-              <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
-                <div class="form-group">
-                  <textarea required th:field="${ShowComment.text}" name="text" class="form-control"
-                    placeholder="Enter your comment here.."></textarea>
+            <div th:each="comment: ${Comments}" class="comments-wrapper">
+              <div class="comment-header">
+                <div class="comment-info">
+                  <img loading="lazy" th:if="${comment.author != null and comment.author.image != null}"
+                    th:src="@{'data:image/jpeg;base64,' + ${comment.author.image}}" class="comment-author-img" />
+                  <img loading="lazy" th:if="${comment.author == null or comment.author.image == null}"
+                    class="comment-author-img"
+                    src="https://www.refugee-action.org.uk/wp-content/uploads/2016/10/anonymous-user.png" />
+                  <div class="comment-author-info">
+                    <a th:if="${comment.author != null}" class="comment-author-name"
+                      th:href="@{/profile(user=${comment.author.name})}" th:text="${comment.author.name}">author
+                      username</a>
+                    <span th:if="${comment.author == null}" class="comment-author-name">Deleted user</span>
+                    <p class="comment-timestamp" th:text="${#temporals.format(comment.date, 'dd-MM-yyyy HH:mm')}"></p>
+                  </div>
+                  <div sec:authorize="isAuthenticated()"
+                    th:if="${comment.author != null and comment.author.id == authenticatedUser.id}"
+                    class="delete-comment">
+                    <form id="deleteCommentForm"
+                      th:action="@{'/show/' + ${show.id} + '/comment/delete/' + ${comment.id}}" method="post">
+                      <button id="delete-comment-button" class="delete-comment-button" type="submit">Delete</button>
+                    </form>
+                  </div>
                 </div>
-                <button id="commentButton" class="comment-button" type="submit">Submit</button>
-              </form>
+                <div class="comment-body">
+                  <p class="comment-text" th:text="${comment.text}">comment text...</p>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
+            <div class="comment-body">
+              <p class="comment-text">No comments posted yet.</p>
+            </div>
+          </div>
+
+          <div sec:authorize="isAuthenticated()" class="comment-form">
+            <form th:action="@{'/show/' + ${show.id} + '/comment'}" th:object="${ShowComment}" method="post">
+              <div class="form-group">
+                <textarea required th:field="${ShowComment.text}" name="text" class="form-control"
+                  placeholder="Enter your comment here.."></textarea>
+              </div>
+              <button id="commentButton" class="comment-button" type="submit">Submit</button>
+            </form>
+          </div>
         </div>
+      </div>
   </article>
   <div th:insert="~{footer :: footer}"></div>
 
