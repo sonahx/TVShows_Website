@@ -2,14 +2,12 @@ package com.TVShows.controller;
 
 import com.TVShows.DTO.WatchingStatusRequest;
 import com.TVShows.domain.*;
-import com.TVShows.enums.ViewerStatus;
 import com.TVShows.exceptions.WrongOperationException;
 import com.TVShows.repo.SeasonProgressRepo;
 import com.TVShows.service.SeasonProgressService;
 import com.TVShows.service.TVShowService;
 import com.TVShows.service.UsersShowProgressService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-@Slf4j
 public class ShowProgressController {
 
     private final TVShowService showService;
@@ -72,38 +69,10 @@ public class ShowProgressController {
 
         switch (operation) {
             case "increment" -> {
-                //create show progress if its null
-                if (showProgress == null && user != null) {
-                    UsersShowProgress newUsersShowProgress = new UsersShowProgress(user, show, ViewerStatus.WATCHING);
-                    user.getShowProgresses().add(newUsersShowProgress);
-                    showProgress = newUsersShowProgress;
-                    usersShowProgressService.save(newUsersShowProgress);
-                }
-                //create season progress if its null
-                if (seasonProgress == null & user != null) {
-                    SeasonProgress newSeasonProgress = new SeasonProgress(showProgress, season);
-                    seasonProgress = newSeasonProgress;
-                    seasonProgressRepo.save(newSeasonProgress);
-                }
-                //increment
-                if (showProgress != null && seasonProgress != null && seasonProgress.getProgress() < season.getEpisode_count()) {
-                    seasonProgress.setProgress(seasonProgress.getProgress() + 1);
-                    seasonProgressService.update(seasonProgress);
-
-                    //set status to WATCHING
-                    showProgress.setStatus(ViewerStatus.WATCHING);
-                    usersShowProgressService.update(showProgress);
-                } else {
-                    throw new WrongOperationException("Wrong operation credentials for increment");
-                }
+                usersShowProgressService.increment(showProgress, seasonProgress, user, show, season);
             }
             case "decrement" -> {
-                if (showProgress != null && seasonProgress != null && seasonProgress.getProgress() > 0) {
-                    seasonProgress.setProgress(seasonProgress.getProgress() - 1);
-                    seasonProgressService.update(seasonProgress);
-                } else {
-                    throw new WrongOperationException("Wrong operation credentials for decrement");
-                }
+                usersShowProgressService.decrement(showProgress, seasonProgress);
             }
             default -> throw new WrongOperationException("Wrong operation credentials");
         }

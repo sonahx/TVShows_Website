@@ -1,8 +1,6 @@
 package com.TVShows.controller;
 
 import com.TVShows.domain.*;
-import com.TVShows.enums.ViewerStatus;
-import com.TVShows.exceptions.ShowNotFoundException;
 import com.TVShows.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -76,7 +74,6 @@ public class ShowController {
         User user = (User) model.getAttribute("authenticatedUser");
         TVShow show = showService.findShowById(id).orElse(null);
         if (show != null && user != null && !text.getText().trim().isEmpty()) {
-
             ShowComment comment = new ShowComment();
             comment.setText(text.getText());
             comment.setAuthor(user);

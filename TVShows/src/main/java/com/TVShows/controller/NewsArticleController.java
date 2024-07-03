@@ -1,6 +1,8 @@
 package com.TVShows.controller;
 
-import com.TVShows.domain.*;
+import com.TVShows.domain.NewsArticle;
+import com.TVShows.domain.NewsArticleComment;
+import com.TVShows.domain.User;
 import com.TVShows.service.NewsArticleCommentService;
 import com.TVShows.service.NewsArticleService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
