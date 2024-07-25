@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&family=Permanent+Marker&display=swap');
+
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -165,8 +167,11 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-brand {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
     color: #0896ff;
+    font-size: 35px;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -247,8 +252,10 @@ fieldset[disabled] .btn-xl.active {
     }
 
     .navbar-default.navbar-shrink .navbar-brand {
-        font-size: 1.5em;
-        font-weight: bold;
+        font-size: 45px;
+        font-family: "Permanent Marker", cursive;
+        font-weight: 400;
+        font-style: normal;
     }
 }
 
@@ -266,8 +273,8 @@ header {
 }
 
 header .intro-text {
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 140px;
+    padding-bottom: 80px;
 }
 
 header .intro-text .intro-lead-in {
@@ -289,8 +296,8 @@ header .intro-text .intro-heading {
 
 @media(min-width:768px) {
     header .intro-text {
-        padding-top: 100px;
-        padding-bottom: 50px;
+        padding-top: 140px;
+        padding-bottom: 80px;
     }
 
     header .intro-text .intro-lead-in {
@@ -850,6 +857,7 @@ body {
 }
 .quicklinks > li > a {
 color: #0896ff;
+font-weight: bold;
 }
 
 
