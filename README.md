@@ -1,4 +1,4 @@
-## <h1 align="center" style="font-color: red;">Welcome to [whatepisode.online](https://whatepisode.online/home)! </h1>
+## <h1 align="center" style="font-color: red;">Welcome to [whatepisode](https://whatepisode.site/home)! </h1>
 
 <h1 align="center">About this project</h1>
 As a fan of TV shows myself, I understand the excitement and challenge of keeping up with multiple series. This website was born out of the desire to make tracking TV show progress a seamless experience. Whether you're juggling numerous shows simultaneously or just looking for a convenient way to manage your viewing, this platform is designed with you in mind.
@@ -20,14 +20,15 @@ Front-end: Spring MVC, Thymeleaf, HTML, CSS, JS
   <img src="https://github.com/peles-taras/TVShows_Website/assets/92885035/e673b544-4685-4e6c-9116-1d2070912e43" alt="db">
 </p>
 
-## <h1 align="center">Accessable at [whatepisode.online](https://whatepisode.online/home)</h1>
+## <h1 align="center">Accessable at [whatepisode.site](https://whatepisode.site/home)</h1>
 
-![ui](https://github.com/peles-taras/TVShows_Website/assets/92885035/b534c97b-3fb8-4728-8e6b-c0b3723afe35)
+![image](https://github.com/user-attachments/assets/d0bb1e49-d52d-4836-81e2-3b16f2888f10)
+
 
 ## <h1 align="center">Features</h1>
-Effortlessly monitor the advancement of each season, evaluate shows, seamlessly integrate a show into your curated library with a personalized status, stay updated with relevant TV show news, contribute insightful comments, take control of your profile, and unlock a myriad of additional features! Try it out at [whatepisode.online](https://whatepisode.online/home)
+Effortlessly monitor the advancement of each season, evaluate shows, seamlessly integrate a show into your curated library with a personalized status, stay updated with relevant TV show news, contribute insightful comments, take control of your profile, and unlock a myriad of additional features! Try it out at [whatepisode.site](https://whatepisode.site/home)
 
-![tracking](https://github.com/peles-taras/TVShows_Website/assets/92885035/f48529ce-374b-4389-8319-6fd21949f092)
+![image](https://github.com/user-attachments/assets/581c654f-0fdf-407e-b70b-c6b671577e78)
 
 ![comments](https://github.com/peles-taras/TVShows_Website/assets/92885035/a353f80f-f7d5-4e33-aac8-b14bd8be5d2f)
 
