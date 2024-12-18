@@ -1,10 +1,8 @@
 package com.TVShows.service;
 
-import com.TVShows.domain.TVShow;
 import com.TVShows.domain.User;
 import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.Role;
-import com.TVShows.enums.ShowStatus;
 import com.TVShows.enums.ViewerStatus;
 import com.TVShows.repo.UsersShowProgressRepo;
 import org.junit.jupiter.api.DisplayName;
@@ -40,7 +38,7 @@ class UsersShowsServiceTest {
         UsersShowProgress usersShows = new UsersShowProgress();
         usersShows.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
-        usersShows.setTvShow(createTVShow());
+        usersShows.setShowId(1);
         usersShows.setStatus(ViewerStatus.WATCHING);
 
         // When
@@ -59,13 +57,13 @@ class UsersShowsServiceTest {
         UsersShowProgress usersShows1 = new UsersShowProgress();
         usersShows1.setUser(User.builder().name("JohnDoe").email("johndoe@example.com")
                 .password("password").roles(Role.USER).build());
-        usersShows1.setTvShow(createTVShow());
+        usersShows1.setShowId(1);
         usersShows1.setStatus(ViewerStatus.WATCHING);
 
         UsersShowProgress usersShows2 = new UsersShowProgress();
         usersShows2.setUser(User.builder().name("LanaDoe").email("lanadoe@example.com")
                 .password("securepassword").roles(Role.USER).build());
-        usersShows2.setTvShow(createTVShow());
+        usersShows2.setShowId(1);
         usersShows2.setStatus(ViewerStatus.DROPPED);
 
         List<UsersShowProgress> usersShowsList = Arrays.asList(usersShows1, usersShows2);
@@ -77,17 +75,5 @@ class UsersShowsServiceTest {
         // Then
         assertEquals(usersShowsList, result);
         verify(repo).findAll();
-    }
-
-    private TVShow createTVShow() {
-        TVShow show = new TVShow();
-        show.setName("Breaking Bad");
-        show.setReleaseDate("date");
-        show.setOverview("desc");
-        show.setImageUrl("jpeg");
-        show.setLast_air_date("12.02");
-        show.setStatus(ShowStatus.AIRING);
-
-        return show;
     }
 }

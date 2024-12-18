@@ -7,31 +7,30 @@ import lombok.Setter;
 
 @Entity
 @Table
-@NoArgsConstructor @Getter @Setter
+@NoArgsConstructor
+@Getter
+@Setter
 public class SeasonProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column
+    private Integer id;
     private Integer progress = 0;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Season_id")
-    private Season season;
+    private Integer seasonId;
+    private Integer SeasonNumber;
+    private Integer maxProgress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UsersShowProgress_id")
     private UsersShowProgress usersShowProgress;
 
-    public SeasonProgress (UsersShowProgress usersShowProgress, Season season){
+    public SeasonProgress(UsersShowProgress usersShowProgress, Integer seasonId) {
         this.usersShowProgress = usersShowProgress;
-        this.season = season;
+        this.seasonId = seasonId;
     }
 
-    public SeasonProgress (Integer progress, UsersShowProgress usersShowProgress, Season season){
+    public SeasonProgress(Integer progress, UsersShowProgress usersShowProgress, Integer seasonId) {
         this.progress = progress;
         this.usersShowProgress = usersShowProgress;
-        this.season = season;
+        this.seasonId = seasonId;
     }
 }

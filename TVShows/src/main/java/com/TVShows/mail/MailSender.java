@@ -9,12 +9,14 @@ import com.mailjet.client.transactional.TrackOpens;
 import com.mailjet.client.transactional.TransactionalEmail;
 import com.mailjet.client.transactional.response.SendEmailsResponse;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class MailSender {
 
     @Value("${mj.apiKey}")
@@ -23,10 +25,7 @@ public class MailSender {
     private String secretKey;
     @Value("${mj.sender}")
     private String sender;
-
     private MailjetClient client;
-
-    private final static Logger logger = LoggerFactory.getLogger(MailSender.class);
 
     @PostConstruct
     private void initializeMailClient() {
@@ -56,7 +55,7 @@ public class MailSender {
         try {
             SendEmailsResponse response = request.sendWith(client);
         } catch (MailjetException exception) {
-            logger.error("There was an error sending email, " + exception.getMessage());
+            log.error("There was an error sending email: {}", exception.getMessage());
         }
     }
 }

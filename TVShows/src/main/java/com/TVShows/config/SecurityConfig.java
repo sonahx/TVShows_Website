@@ -32,7 +32,7 @@ public class SecurityConfig {
 						"/show/{id}/comment",
 						"/show/{showId}/comment/delete/{commentId}",
 						"/user/{id}/decrement",
-						"/user/{id}/increment",
+						"/user/{id}/{number}/increment",
 						"/user/addShow",
 						"/user/image/upload",
 						"/user/{show}/score/{score}"
@@ -48,7 +48,7 @@ public class SecurityConfig {
 						"/home", "/page", "/shows", "/", "/error", "/reset/**", "/passwordReset",
 						"/auth", "/auth/**",  "/login", "/verification", "/show/search/**","/news", "/news/**",
 						"/success","/profile", "/show/**","/search/**","/search" ,"", "/login?logout",
-						"/pictures/**", "/css/**", "/js/**", "/about", "/policy"
+						"/pictures/**", "/css/**", "/js/**", "/about", "/policy", "/api/**", "/api"
 				)
 				.permitAll()
 				.anyRequest()
@@ -71,7 +71,7 @@ public class SecurityConfig {
 				.accessDeniedPage("/error")
 				.and()
 				.rememberMe()
-				.tokenValiditySeconds(2592000)
+				.tokenValiditySeconds(60 * 15)
 				.rememberMeParameter("checkRememberMe");
 
 		return http.build();

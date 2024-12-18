@@ -139,7 +139,7 @@
                       <p class="season-name" th:text="${'Season ' + season.season_number + ' - '}"></p>
                       <input type="hidden" id="episodeMaxValue" th:value="${season.episode_count}" />
                       <p class="progressValue" th:each="seasonProgress: ${seasonProgressList}"
-                        th:if="${seasonProgress.season.id == season.id}">
+                        th:if="${seasonProgress.seasonId == season.id}">
                         <span id="progressValue" class="progressValue" th:text="${seasonProgress.progress + '/'}"
                           data-progress="${seasonProgress.progress}"></span>
                       </p>
@@ -147,12 +147,12 @@
 
                       <!-- TRACKING BUTTONS -->
                       <form sec:authorize="isAuthenticated()" class="custom-submission-class"
-                        th:action="@{'/user/' + ${show.id} +'/'+ ${season.id} +'/increment'}" method="post">
+                        th:action="@{'/user/' + ${show.id} +'/'+ ${season.id} +'/' + ${season.season_number} +'/increment'}" method="post">
                         <button type="submit" class="trackingButton" id="increment">+</button>
                       </form>
 
                       <form sec:authorize="isAuthenticated()" class="custom-submission-class"
-                        th:action="@{'/user/' + ${show.id} +'/' + ${season.id} + '/decrement'}" method="post">
+                        th:action="@{'/user/' + ${show.id} +'/'+ ${season.id} +'/' + ${season.season_number} + '/decrement'}" method="post">
                         <button type="submit" class="trackingButton" id="decrement">-</button>
                       </form>
                     </div>
@@ -210,7 +210,7 @@
             </div>
           </div>
 
-          <div th:if="${show.comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
+          <div th:if="${Comments.isEmpty()}" sec:authorize="isAnonymous()" class="comments-wrapper">
             <div class="comment-body">
               <p class="comment-text">No comments posted yet.</p>
             </div>

@@ -1,4 +1,4 @@
-.emp-profile{
+.emp-profile {
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
@@ -7,18 +7,22 @@
     width: 100%;
     height: 100%;
 }
-.profile-img-wrapper{
-    display:flex;
+
+.profile-img-wrapper {
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 }
-.profile-img{
+
+.profile-img {
     text-align: center;
 }
-.profile-img img{
+
+.profile-img img {
     width: 70%;
     height: 100%;
 }
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -29,19 +33,23 @@
     font-size: 15px;
     background: #212529b8;
 }
+
 .profile-img .file input {
     position: absolute;
     opacity: 0;
     right: 0;
     top: 0;
 }
-.profile-head h5{
+
+.profile-head h5 {
     color: #333;
 }
-.profile-head h6{
+
+.profile-head h6 {
     color: #0062cc;
 }
-.profile-edit-btn{
+
+.profile-edit-btn {
     border: none;
     border-radius: 1.5rem;
     width: 70%;
@@ -50,61 +58,75 @@
     color: #6c757d;
     cursor: pointer;
 }
-.profile-username{
-text-align: center;
+
+.profile-username {
+    text-align: center;
 }
-.collection-size{
+
+.collection-size {
     font-size: 18px;
     color: #818182;
     margin-top: 5%;
     text-align: center;
 }
-.collection-size span{
+
+.collection-size span {
     color: #495057;
     font-size: 18px;
     font-weight: 600;
 }
-.profile-head .nav-tabs{
-    margin-bottom:5%;
+
+.profile-head .nav-tabs {
+    margin-bottom: 5%;
 }
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
+
+.profile-head .nav-tabs .nav-link {
+    font-weight: 600;
     border: none;
 }
-.profile-head .nav-tabs .nav-link.active{
+
+.profile-head .nav-tabs .nav-link.active {
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom: 2px solid #0062cc;
 }
-.profile-work{
+
+.profile-work {
     padding: 0%;
     margin-top: 0%;
 }
-.profile-work p{
+
+.profile-work p {
     font-size: 12px;
     color: #818182;
     font-weight: 600;
     margin-top: 10%;
 }
-.profile-work a{
+
+.profile-work a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;
     font-size: 14px;
 }
-.profile-work ul{
+
+.profile-work ul {
     list-style: none;
 }
-.profile-tab label{
+
+.profile-tab label {
     font-weight: 600;
 }
-.profile-tab p{
+
+.profile-tab p {
     font-weight: 600;
     color: #0062cc;
 }
-.tab-pane > .row > .col-md-6 {
+
+.tab-pane>.row>.col-md-6 {
     width: 33%;
 }
-.modalSubmit{ 
+
+.modalSubmit {
     border: 0px solid;
     background: #0896ff;
     color: white;
@@ -121,26 +143,36 @@ text-align: center;
     justify-content: center;
     flex-direction: column;
 }
-.modal-button{
-    text-decoration: none;
-    color: white;
-}
-.modal-button:hover{
+
+.modal-button {
     text-decoration: none;
     color: white;
 }
 
-.account-disable-button, .account-disable-button:hover{
+.modal-button:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.account-disable-button,
+.account-disable-button:hover {
     border-color: red;
     background: red;
 }
 
-.account-disable-button:hover{
+.account-disable-button:hover {
     border-color: red;
     background: red;
 }
-.tab-panel-header > div > div > p{
+
+.tab-panel-header>div>div>p {
     font-weight: 600px;
     font-size: 16px;
     color: #009fff;
+}
+
+.show-name {
+    color: #0896ff;
+    font-size: 14px;
+    font-weight: 700;
 }

@@ -8,9 +8,9 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%)
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .notfound {
@@ -26,13 +26,13 @@
 }
 
 .notfound .notfound-404 .error-code {
-    font-family: montserrat,sans-serif;
+    font-family: montserrat, sans-serif;
     position: absolute;
     left: 50%;
     top: 50%;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     font-size: 170px;
     font-weight: 900;
     margin: 0;
@@ -68,7 +68,7 @@
 
 @media only screen and (max-width: 767px) {
     .notfound .notfound-404 {
-        height:200px
+        height: 200px
     }
 
     .notfound .notfound-404 .error-code {
@@ -78,7 +78,7 @@
 
 @media only screen and (max-width: 480px) {
     .notfound .notfound-404 {
-        height:162px
+        height: 162px
     }
 
     .notfound .notfound-404 .error-code {

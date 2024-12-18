@@ -1,33 +1,29 @@
 package com.TVShows.service;
 
 import com.TVShows.domain.Season;
-import com.TVShows.domain.UsersShowProgress;
-import com.TVShows.repo.SeasonRepo;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class SeasonService {
 
-    private final SeasonRepo repo;
+    private final ShowService showService;
+    private final ApiResponseSeasonService apiSeasonResponseService;
 
-    public List<Season> findAllSeasonsByTvShowId(Long id){
-        return repo.findAllSeasonsByShowId(id);
+    public List<Season> findAllSeasonsByTvShowId(int showId) {
+        log.info("Looking for all seasons by show id: {}", showId);
+        return showService.findShowById(showId).orElse(null).getSeasons();
     }
 
-    public void save(Season season){
-        repo.save(season);
+    public Season findSeasonByNumber(int showId, int seasonNumber) {
+        String url = "https://api.themoviedb.org/3/tv/" + showId + "/season/" + seasonNumber + "?language=en-US";
+        return apiSeasonResponseService.sendRequest(url);
     }
-
-    public Optional<Season> findSeasonById(Long id){
-        return repo.findSeasonById(id);
-    };
-    }
+}
 
 

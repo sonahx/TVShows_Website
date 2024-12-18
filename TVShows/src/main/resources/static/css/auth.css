@@ -9,7 +9,7 @@ body {
     background: #f6f5f7;
     height: 100vh;
     margin: -20px 0 50px;
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -29,7 +29,7 @@ span {
     font-size: 12px;
 }
 
-form > a {
+form>a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
@@ -52,7 +52,7 @@ form > a {
     background: #fff;
     display: flex;
     flex-direction: column;
-    padding:  0 50px;
+    padding: 0 50px;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -208,31 +208,33 @@ button.ghost {
 }
 
 .footer {
-	margin-top: 25px;
-	text-align: center;
+    margin-top: 25px;
+    text-align: center;
 }
 
 .icons {
-	display: flex;
-	width: 30px;
-	height: 30px;
-	letter-spacing: 15px;
-	align-items: center;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    letter-spacing: 15px;
+    align-items: center;
 }
-.form-check-input{
-visibility: hidden;
+
+.form-check-input {
+    visibility: hidden;
 }
-.alert { 
+
+.alert {
     position: absolute;
     top: 400px;
 }
 
-.forgot-password{
+.forgot-password {
     text-decoration: none;
     cursor: pointer;
 }
 
-.modalSubmit{
+.modalSubmit {
     border: 0px solid;
     background: #0896ff;
     color: white;
@@ -248,86 +250,4 @@ visibility: hidden;
     flex-wrap: nowrap;
     justify-content: center;
     flex-direction: column;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

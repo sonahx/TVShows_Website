@@ -1,12 +1,13 @@
 package com.TVShows.service;
 
 import com.TVShows.DTO.WatchingStatusRequest;
-import com.TVShows.domain.*;
+import com.TVShows.domain.SeasonProgress;
+import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.ViewerStatus;
 import com.TVShows.repo.SeasonProgressRepo;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,46 +15,51 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SeasonProgressService {
 
     private final SeasonProgressRepo repo;
     private final SeasonService seasonService;
-    private final static Logger logger = LoggerFactory.getLogger(SeasonProgressService.class);
 
-    public Optional<SeasonProgress> findByUsersShowProgressAndSeason(UsersShowProgress progress, Season season) {
-        return repo.findByUsersShowProgressAndSeason(progress, season);
+    public Optional<SeasonProgress> findByUsersShowProgressAndSeasonId(UsersShowProgress progress, int seasonId) {
+        log.info("Looking for season progress by USP: {}, and season: {}", progress.getId(), seasonId);
+        return repo.findByUsersShowProgressAndSeasonId(progress, seasonId);
     }
 
     public SeasonProgress save(SeasonProgress progress) {
+        log.info("Saving new season progress");
         return repo.save(progress);
     }
 
     public void update(SeasonProgress progress) {
-        logger.info("User {}: updated {}, season {} to {}/{}",
-                progress.getUsersShowProgress().getUser().getName(),
-                progress.getUsersShowProgress().getTvShow().getName(),
-                progress.getSeason().getSeason_number(),
-                progress.getProgress(),
-                progress.getSeason().getEpisode_count());
+        log.info("Updating season progress: {}", progress.getId());
         repo.save(progress);
     }
 
-    public List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user) {
-        return repo.findSeasonProgressForShowAndUser(tvShow, user);
+    public List<SeasonProgress> findSeasonProgressForShowAndUser(int showId, User user) {
+        log.info("Looking for season progress by show: {} and user: {}", showId, user.getName());
+        return repo.findSeasonProgressForShowAndUser(showId, user);
     }
 
-    public void createDefaultSeasonProgress(TVShow tvShow, User user, Optional<UsersShowProgress> usersShowProgress) {
-        if (findSeasonProgressForShowAndUser(tvShow, user).isEmpty() && usersShowProgress.isPresent()) {
-            seasonService.findAllSeasonsByTvShowId(tvShow.getId()).forEach(season -> {
-                SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress.get(), season);
+    public void createDefaultSeasonProgresses(int showId, User user, UsersShowProgress usersShowProgress) {
+
+        if (findSeasonProgressForShowAndUser(showId, user).isEmpty() && usersShowProgress != null) {
+            seasonService.findAllSeasonsByTvShowId(showId).forEach(season -> {
+                SeasonProgress newProgress = new SeasonProgress(0, usersShowProgress, season.getId());
+                newProgress.setMaxProgress(season.getEpisodes().size());
                 save(newProgress);
+                log.info("Creating default season progress maxProgress: {}, episode count: {}",
+                        season.getEpisodes().size(), season.getEpisode_count());
             });
         }
     }
 
     public void setProgressToMaximum(WatchingStatusRequest request, UsersShowProgress progress) {
         if (request.getStatus().equals(ViewerStatus.COMPLETED)) {
-            progress.getSeasonProgress().forEach(s -> s.setProgress(s.getSeason().getEpisode_count()));
+            progress.getSeasonProgress().forEach(sp -> {
+                sp.setProgress(sp.getMaxProgress());
+            });
+            log.info("Setting progress to maximum for progress: {}", progress.getId());
         }
     }
 }

@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SeasonProgressRepo extends JpaRepository<SeasonProgress, Long> {
+public interface SeasonProgressRepo extends JpaRepository<SeasonProgress, Integer> {
 
-   Optional<SeasonProgress> findByUsersShowProgressAndSeason(UsersShowProgress showProgress, Season season);
+   Optional<SeasonProgress> findByUsersShowProgressAndSeasonId(UsersShowProgress showProgress, int seasonId);
 
    @Query("SELECT sp FROM SeasonProgress sp " +
            "JOIN sp.usersShowProgress usp " +
-           "JOIN usp.tvShow show " +
-           "WHERE show = :tvShow " +
+           "WHERE usp.showId = :showId " +
            "AND usp.user = :user")
-   List<SeasonProgress> findSeasonProgressForShowAndUser(TVShow tvShow, User user);
+   List<SeasonProgress> findSeasonProgressForShowAndUser(Integer showId, User user);
+
 }

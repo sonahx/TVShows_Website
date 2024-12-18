@@ -11,7 +11,7 @@ public class GenreResponse {
 
     @Getter @Setter
     public static class GenreResponseResult{
-        private Long id;
+        private int id;
         private String name;
     }
 }

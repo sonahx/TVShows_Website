@@ -30,6 +30,7 @@
   justify-content: center;
   cursor: pointer;
   padding: 0 6px;
+
   @media (hover: hover) {
     &:hover {
       background: lighten(#202020, 3%);
@@ -42,50 +43,54 @@
   position: relative;
 }
 
-.pagination{
-margin: 15px auto;
+.pagination {
+  margin: 15px auto;
 }
 
-.pagination>li>a, .pagination>li>span {
-position: relative;
-float: left;
-padding: 6px 12px;
-margin-left: 15px;
-line-height: 1.42857143;
-color: #ffffff;
-text-decoration: none;
-background-color: #333;
-border: 1px solid #0896ff;
+.pagination>li>a,
+.pagination>li>span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: 15px;
+  line-height: 1.42857143;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #333;
+  border: 1px solid #0896ff;
 }
 
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
-z-index: 2;
-color: #ffffff;
-background-color: #0896ff;
-border-color: #0896ff;
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #0896ff;
+  border-color: #0896ff;
 }
 
 .pagination .active {
-    background-color: #0896ff;
+  background-color: #0896ff;
 }
 
-.subheadline{
-margin-top: 50px;
-display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-justify-content: space-between;
+.subheadline {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
-.sort-select{
-border: 0px solid;
-background: #0896ff;
-color: white;
-cursor: pointer;
-border-radius: 20px;
-font-size: 18px;
-padding: 8px;
-text-align: center;
-font-weight: bold;
-letter-spacing: 1px;
+.sort-select {
+  border: 0px solid;
+  background: #0896ff;
+  color: white;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
 }

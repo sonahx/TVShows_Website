@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class NewsArticleComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Lob
     @Column(name = "text", length = 1000, nullable = false)
@@ -30,4 +30,11 @@ public class NewsArticleComment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "NewsArticle_id")
     private NewsArticle newsArticle;
+
+    public NewsArticleComment(String text, User author, LocalDateTime date, NewsArticle newsArticle) {
+        this.text = text;
+        this.author = author;
+        this.date = date;
+        this.newsArticle = newsArticle;
+    }
 }

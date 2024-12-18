@@ -16,7 +16,7 @@ import java.util.List;
 public class NewsArticle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String name;
@@ -41,4 +41,13 @@ public class NewsArticle {
 
     @OneToMany(mappedBy = "newsArticle", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<NewsArticleComment> comments = new ArrayList<>();
+
+    public NewsArticle(String name, String relatedTo, User author, String text, LocalDateTime date, String imageUrl) {
+        this.name = name;
+        this.relatedTo = relatedTo;
+        this.author = author;
+        this.text = text;
+        this.date = date;
+        this.imageUrl = imageUrl;
+    }
 }

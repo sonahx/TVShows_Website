@@ -27,14 +27,16 @@
                 <div class="subheadline">
                     <a href="#">SHOWS</a>
                     <form id="sortForm" action="/shows" method="get">
-                        <select name="sortField" class="sort-select" onchange="document.getElementById('sortForm').submit();"> 
-                            <option value="popularity" th:selected="${sortField == 'popularity'}">Popularity</option>
-                            <option value="voteAverage" th:selected="${sortField == 'voteAverage'}">Score</option>
+                        <select name="category" class="sort-select" onchange="document.getElementById('sortForm').submit();"> 
+                            <option value="top-rated" th:selected="${category == 'top-rated'}">Top Rated</option>
+                            <option value="popular" th:selected="${category == 'popular'}">Popular</option>
+                            <option value="on-the-air" th:selected="${category == 'on-the-air'}">On the air</option>
+                            <option value="airing-today" th:selected="${category == 'airing-today'}">Airing today</option>
                         </select>
                     </form>
                 </div>
             <div th:if="${page != null}" class="show-container">
-                <div th:each="show: ${page}">        
+                <div th:each="show: ${page.content}">        
                     <div class="item item-1">
                         <a th:href="@{'/show/' + ${show.id}}">
                         <p class="show-name" th:text="${show.name}" th:title="${show.name}">Show name</p>
@@ -53,16 +55,16 @@
                             (page.number - 3 >= 0) ? page.number - 3 : 0,
                             (page.number + 3 <= page.totalPages - 1) ? page.number + 3 : page.totalPages - 1)}">
                         <a class="pagination:number"
-                            th:class="${pageNumber == page.number} ? 'active' : ''"
-                            th:if="${pageNumber != page.number}"
-                            th:href="@{'/page?page=' + ${pageNumber} + '&size=' + ${page.size}}"
-                            th:text="${pageNumber + 1}"></a>
-                        <span th:if="${pageNumber == page.number}"
-                            th:class="${pageNumber == page.number} ? 'active' : ''"
-                            th:text="${pageNumber + 1}"></span>
+                           th:class="${pageNumber == (page.number - 1)} ? 'active' : ''"
+                           th:if="${pageNumber != (page.number - 1)}"
+                           th:href="@{'/shows?category=' + ${category} + '&page=' + ${pageNumber + 1}}"
+                           th:text="${pageNumber + 1}"></a>
+                        <span th:if="${pageNumber == (page.number - 1)}"
+                              th:class="${pageNumber == (page.number - 1)} ? 'active' : ''"
+                              th:text="${pageNumber + 1}"></span>
                     </li>
                 </ul>
-            </div>            
+            </div>
  </article>
 
     <footer th:insert="~{footer :: footer}"></footer>

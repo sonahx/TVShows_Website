@@ -1,101 +1,109 @@
 package com.TVShows.service;
 
 import com.TVShows.DTO.WatchingStatusRequest;
-import com.TVShows.domain.*;
+import com.TVShows.domain.Season;
+import com.TVShows.domain.SeasonProgress;
+import com.TVShows.domain.User;
+import com.TVShows.domain.UsersShowProgress;
 import com.TVShows.enums.ViewerStatus;
 import com.TVShows.exceptions.WrongOperationException;
 import com.TVShows.repo.UsersShowProgressRepo;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UsersShowProgressService {
 
     private final UsersShowProgressRepo repo;
+    private final SeasonService seasonService;
     private final SeasonProgressService seasonProgressService;
-    private final static Logger logger = LoggerFactory.getLogger(UsersShowProgressService.class);
 
     public void save(UsersShowProgress progress) {
-        logger.info("User {} added to his list - {} - {}",
-                progress.getUser().getName(),
-                progress.getTvShow().getName(),
-                progress.getStatus());
+        log.info("Saving new USP for show: {}", progress.getShowId());
         repo.save(progress);
     }
 
     public List<UsersShowProgress> findAll() {
+        log.info("Looking for all USP");
         return repo.findAll();
     }
 
     public List<UsersShowProgress> findByUser(User user) {
+        log.info("Looking for all USP by user: {}", user.getName());
         return repo.findByUser(user);
     }
 
-    public Optional<UsersShowProgress> findByShowAndUser(TVShow tvShow, User user) {
-        return repo.findByTvShowAndUser(tvShow, user);
+    public Optional<UsersShowProgress> findByShowAndUser(int showId, User user) {
+        log.info("Looking for USP");
+        return repo.findByShowIdAndUser(showId, user);
     }
 
     public void update(UsersShowProgress progress) {
-        logger.info("User {} updated - {} - {} ",
+        log.info("User {} updated USP for - {} - {}",
                 progress.getUser().getName(),
-                progress.getTvShow().getName(),
+                progress.getShowId(),
                 progress.getStatus());
         repo.save(progress);
     }
 
-    public Optional<UsersShowProgress> findByTvShowAndUser(TVShow show, User user) {
-        return repo.findByTvShowAndUser(show, user);
+    public Optional<UsersShowProgress> findByTvShowAndUser(int showId, User user) {
+        log.info("Looking for USP by show id: {} and user: {}", showId, user.getName());
+        return repo.findByShowIdAndUser(showId, user);
     }
 
     public void setPersonalScore(UsersShowProgress progress, int score) {
-        logger.info("User {} setting personal score for {} - {}",
+        log.info("User {} set personal score for {} - {}",
                 progress.getUser().getName(),
-                progress.getTvShow().getName(),
+                progress.getShowId(),
                 score);
         progress.setPersonalScore(score);
     }
 
-    public Optional<UsersShowProgress> createDefaultShowProgress(TVShow tvShow, User user) {
-        if (findByShowAndUser(tvShow, user).isEmpty()) {
-            save(new UsersShowProgress(user, tvShow, ViewerStatus.DEFAULT));
+    public Optional<UsersShowProgress> createDefaultShowProgress(int showId, String showName,
+                                                                 int totalProgress, User user) {
+        if (findByShowAndUser(showId, user).isEmpty()) {
+            save(new UsersShowProgress(user, showId, showName, totalProgress, ViewerStatus.DEFAULT));
+            log.info("Creating new default USP for show: {} user: {}", showId, user.getName());
         }
-        return findByShowAndUser(tvShow, user);
+        return findByShowAndUser(showId, user);
     }
 
-    public void createUsersShowProgress(User user, TVShow show, WatchingStatusRequest request) {
-        UsersShowProgress newUsersShows = new UsersShowProgress(user, show, request.getStatus());
+    public void createUsersShowProgress(User user, Integer showId, String showName, int totalProgress, WatchingStatusRequest request) {
+        UsersShowProgress newUsersShows = new UsersShowProgress(user, showId, showName, totalProgress, request.getStatus());
         user.getShowProgresses().add(newUsersShows);
         save(newUsersShows);
     }
 
     public void increment(UsersShowProgress showProgress, SeasonProgress seasonProgress,
-                          User user, TVShow show, Season season) {
+                          User user, int showId, int seasonId, int seasonNumber) {
+        Season season = seasonService.findSeasonByNumber(showId, seasonNumber);
+
         if (showProgress == null && user != null) {
-            UsersShowProgress newUsersShowProgress = new UsersShowProgress(user, show, ViewerStatus.WATCHING);
+            UsersShowProgress newUsersShowProgress = new UsersShowProgress(user, showId, ViewerStatus.WATCHING);
             user.getShowProgresses().add(newUsersShowProgress);
             showProgress = newUsersShowProgress;
             save(newUsersShowProgress);
         }
-        //create season progress if its null
-        if (seasonProgress == null & user != null) {
-            SeasonProgress newSeasonProgress = new SeasonProgress(showProgress, season);
+        if (seasonProgress == null & user != null) { //create season progress if its null
+            SeasonProgress newSeasonProgress = new SeasonProgress(showProgress, seasonId);
             seasonProgress = newSeasonProgress;
             seasonProgressService.save(newSeasonProgress);
         }
-        //increment
-        if (showProgress != null && seasonProgress != null && seasonProgress.getProgress() < season.getEpisode_count()) {
+        if (showProgress != null && seasonProgress != null //increment
+                && seasonProgress.getProgress() < season.getEpisodes().size()) {
+            showProgress.setCurrentProgress(seasonProgress.getProgress() + 1);
             seasonProgress.setProgress(seasonProgress.getProgress() + 1);
             seasonProgressService.update(seasonProgress);
 
-            //set status to WATCHING
-            showProgress.setStatus(ViewerStatus.WATCHING);
+            showProgress.setStatus(ViewerStatus.WATCHING); //set status to WATCHING
             update(showProgress);
+
         } else {
             throw new WrongOperationException("Wrong operation credentials for increment");
         }

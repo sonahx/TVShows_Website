@@ -118,15 +118,15 @@
                                 aria-labelledby="watching-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'WATCHING'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6  show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>
@@ -135,15 +135,15 @@
                             <div class="tab-pane" id="planned" role="tabpanel" aria-labelledby="planned-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'PLANNED_TO_WATCH'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6 show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>
@@ -153,15 +153,15 @@
                             <div class="tab-pane" id="completed" role="tabpanel" aria-labelledby="completed-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'COMPLETED'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6 show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>
@@ -170,15 +170,15 @@
                             <div class="tab-pane" id="rewatching" role="tabpanel" aria-labelledby="rewatching-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'REWATCHING'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6 show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>
@@ -187,15 +187,15 @@
                             <div class="tab-pane" id="onhold" role="tabpanel" aria-labelledby="onhold-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'ON_HOLD'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6 show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>
@@ -205,15 +205,15 @@
                             <div class="tab-pane" id="dropped" role="tabpanel" aria-labelledby="dropped-tab">
                                 <div th:each="show: ${user.showProgresses}"
                                     th:if="${show.status.toString() == 'DROPPED'}" class="row">
-                                    <div class="col-md-6">
-                                        <a th:text="${show.tvShow.name}" th:href="@{'/show/' + ${show.tvShow.id}}">Show
+                                    <div class="col-md-6 show-name">
+                                        <a th:text="${show.showName}" th:href="@{'/show/' + ${show.showId}}">Show
                                             name</a>
                                     </div>
                                     <div class="col-md-6">
                                         <p th:text="${show.personalScore}">Score</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p th:text="${show.totalProgress} + ' / ' + ${show.tvShow.number_of_episodes}">
+                                        <p th:text="${show.currentProgress} + ' / ' + ${show.totalProgress}">
                                             Show status</p>
                                     </div>
                                 </div>

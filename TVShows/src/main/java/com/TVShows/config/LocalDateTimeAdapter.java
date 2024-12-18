@@ -1,4 +1,4 @@
-package com.TVShows.DataInitializers;
+package com.TVShows.config;
 
 import com.squareup.moshi.FromJson;
 import com.squareup.moshi.ToJson;

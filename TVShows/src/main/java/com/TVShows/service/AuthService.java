@@ -10,8 +10,7 @@ import com.TVShows.exceptions.WrongCredentialsException;
 import com.TVShows.mail.EmailBuilder;
 import com.TVShows.mail.MailSender;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -26,7 +26,6 @@ public class AuthService {
     private final UserService userService;
     private final ConfirmationTokenService tokenService;
     private final MailSender mailSender;
-    private final static Logger logger = LoggerFactory.getLogger(AuthService.class);
     @Value("${domain.url}")
     private String url;
 
@@ -54,14 +53,14 @@ public class AuthService {
         }
 
         // Create new user
-        logger.info("Registering user {}, {}", requestedUsername, requestedEmail);
+        log.info("Registering user {}, {}", requestedUsername, requestedEmail);
         User user = User.builder()
                 .name(requestedUsername)
                 .email(requestedEmail)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(Role.USER)
                 .build();
-        userService.createUser(user);
+        userService.saveUser(user);
 
         // Create and send confirmation link
         ConfirmationToken token = tokenService.generateToken(user);
@@ -83,10 +82,10 @@ public class AuthService {
                     "password reset",
                     EmailBuilder.forgotPassword(user.get().getName(), link)
             );
-            logger.info("Password reset link has been sent to {}", email);
+            log.info("Password reset link has been sent to {}", email);
         }
         else {
-            logger.info("User with email: {} doesn't exist", email);
+            log.info("User with email: {} doesn't exist", email);
         }
     }
 }

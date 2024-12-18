@@ -1,8 +1,9 @@
-.alert{ 
+.alert {
     position: absolute;
     top: 90px;
     right: 20px;
 }
-.close > span {
+
+.close>span {
     font-size: 26px;
 }

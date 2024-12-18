@@ -33,9 +33,7 @@
         <div class="body-wrapper">
 
             <div class="block-1">
-                <div class="subheadline"><a href="#">POPULAR</a>
-                <a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" href="#modal" role="button" class="button modal-button">NEW SHOW</a>
-                </div>
+                <div class="subheadline"><a href="#">POPULAR</a></div>
             <div th:if="${page != null}" class="show-container">
                 <div th:each="show: ${page}">        
                <div class="item item-1">
@@ -64,8 +62,11 @@
         </svg>
       </a>
     </div>
-    <form th:action="@{/show/add}" method="post">
-      <input type="number" name="showId" class="form-control" placeholder="Enter show id" required/> 
+    <form th:action="@{/news/create}" method="post">
+      <input type="text" name="name" class="form-control" placeholder="Article title" required/> 
+      <input type="text" name="relatedTo" class="form-control" placeholder="Related to show" />
+      <input type="textarea" name="text" class="form-control" placeholder="Article content" required/>
+      <input type="text" name="imageUrl" class="form-control" placeholder="Image URL" required/>
       <input type="submit" name="btnSubmit" class="modalSubmit" value="create" />
     </form>
   </div>
@@ -76,7 +77,7 @@
 <!-- NEWS -->
 <div class="block-2">
   <div class="subheadline"><a href="#">NEWS</a> 
-    
+    <a sec:authorize="hasRole('ROLE_ADMINISTRATOR')" href="#modal" role="button" class="button modal-button">CREATE NEW ARTICLE</a>
   </div>
 
   <div th:if="${newsPage != null}" class="show-container">

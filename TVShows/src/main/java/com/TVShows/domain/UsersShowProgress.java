@@ -19,43 +19,40 @@ import java.util.List;
 public class UsersShowProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
+    private Integer totalProgress;
+    private Integer currentProgress;
+    private Integer showId;
+    private Integer personalScore;
+    private String showName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id")
-    private TVShow tvShow;
-
-    private Integer totalProgress;
-
-    private Integer personalScore;
-
-    @OneToMany(mappedBy = "usersShowProgress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<SeasonProgress> seasonProgress = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
     private ViewerStatus status;
 
-    public UsersShowProgress(User user, TVShow tvShow, ViewerStatus status) {
+    @OneToMany(mappedBy = "usersShowProgress", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<SeasonProgress> seasonProgress = new ArrayList<>();
+
+    public UsersShowProgress(User user, Integer showId, ViewerStatus status) {
         this.user = user;
-        this.tvShow = tvShow;
+        this.showId = showId;
         this.status = status;
     }
 
-    public Integer getTotalProgress() {
-        int summedSeasonProgresses = 0;
-        for (SeasonProgress progress : seasonProgress) {
-            summedSeasonProgresses = summedSeasonProgresses + progress.getProgress();
-        }
-        return summedSeasonProgresses;
+    public UsersShowProgress(User user, Integer showId, String showName, Integer totalProgress, ViewerStatus status) {
+        this.user = user;
+        this.showId = showId;
+        this.showName = showName;
+        this.totalProgress = totalProgress;
+        this.status = status;
     }
 
     public void setPersonalScore(Integer score) {
         if (score >= 1 && score <= 10) {
-             this.personalScore = score;
+            this.personalScore = score;
         }
     }
 }

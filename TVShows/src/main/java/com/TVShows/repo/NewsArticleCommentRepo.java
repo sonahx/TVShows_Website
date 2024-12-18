@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NewsArticleCommentRepo extends JpaRepository<NewsArticleComment, Long> {
+public interface NewsArticleCommentRepo extends JpaRepository<NewsArticleComment, Integer> {
 
-    NewsArticleComment findNewsArticleCommentById(Long id);
+    NewsArticleComment findNewsArticleCommentById(int id);
 
-    List<NewsArticleComment> findAllByNewsArticleId(Long id);
+    List<NewsArticleComment> findAllByNewsArticleId(int id);
 }
